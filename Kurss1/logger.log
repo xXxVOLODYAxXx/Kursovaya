@@ -1,0 +1,499 @@
+
+18:15:29.016 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+18:15:29.019 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+18:15:29.019 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+18:15:29.019 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+18:15:29.019 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+18:15:29.019 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+18:15:29.020 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+18:15:29.020 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+18:15:29.020 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+18:15:29.020 [main] INFO  ru.sfedu.Kurss1.Main - value
+18:15:29.021 [main] INFO  ru.sfedu.Kurss1.Main - 18
+18:15:29.021 [main] INFO  ru.sfedu.Kurss1.Main - 18
+18:25:23.607 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+18:25:23.609 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+18:25:23.609 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+18:25:23.609 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+18:25:23.610 [main] INFO  ru.sfedu.Kurss1.Main - value
+18:25:23.611 [main] INFO  ru.sfedu.Kurss1.Main - 18
+18:25:23.611 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:18:35.724 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:18:35.727 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:18:35.728 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:18:35.728 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:18:35.728 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:18:35.728 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:18:35.728 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:19:07.360 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:19:07.363 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:19:07.363 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:19:07.363 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:19:07.363 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:19:07.364 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:19:07.364 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:19:07.364 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:19:07.365 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:19:07.365 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:19:07.365 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:19:07.366 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:20:02.835 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:20:02.837 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:20:02.838 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:20:02.839 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:20:02.839 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:20:02.839 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:20:02.839 [main] INFO  ru.sfedu.Kurss1.Main - key
+08:28:59.985 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:28:59.987 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:28:59.987 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:28:59.987 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:28:59.988 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:28:59.989 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:28:59.989 [main] INFO  ru.sfedu.Kurss1.Main - key
+08:49:28.691 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:49:28.693 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:49:28.693 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:49:28.693 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:49:28.694 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:49:28.695 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:49:28.695 [main] INFO  ru.sfedu.Kurss1.Main - key
+08:54:54.058 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:54:54.061 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:54:54.062 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:54:54.062 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:54:54.062 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:54:54.062 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:54:54.063 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:54:54.063 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:54:54.063 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:54:54.063 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:54:54.064 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:54:54.064 [main] INFO  ru.sfedu.Kurss1.Main - key
+08:55:05.008 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:55:05.010 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:55:05.010 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:55:05.010 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:55:05.011 [main] INFO  ru.sfedu.Kurss1.Main - null
+08:55:05.012 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:55:05.012 [main] INFO  ru.sfedu.Kurss1.Main - key
+08:55:20.777 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+08:55:20.779 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+08:55:20.779 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+08:55:20.779 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+08:55:20.779 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+08:55:20.779 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+08:55:20.780 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+08:55:20.780 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+08:55:20.780 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+08:55:20.780 [main] INFO  ru.sfedu.Kurss1.Main - value
+08:55:20.781 [main] INFO  ru.sfedu.Kurss1.Main - 18
+08:55:20.781 [main] INFO  ru.sfedu.Kurss1.Main - key
+09:25:50.355 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+09:25:50.357 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+09:25:50.357 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+09:25:50.357 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+09:25:50.357 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+09:25:50.358 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+09:25:50.358 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+09:25:50.358 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+09:25:50.358 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+09:25:50.358 [main] INFO  ru.sfedu.Kurss1.Main - value
+09:25:50.359 [main] INFO  ru.sfedu.Kurss1.Main - 18
+09:25:50.359 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:42:46.972 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:42:46.974 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:42:46.974 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:42:46.974 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:42:46.974 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:42:46.974 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:42:46.975 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:43:18.959 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:43:18.961 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:43:18.961 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:43:18.961 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:43:18.961 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:43:18.961 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:43:18.962 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:43:18.962 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:43:18.962 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:43:18.962 [main] INFO  ru.sfedu.Kurss1.Main - null
+10:43:18.963 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:43:18.963 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:43:46.077 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:43:46.080 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:43:46.080 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:43:46.080 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:43:46.080 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:43:46.080 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:43:46.081 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:47:45.733 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:47:45.735 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:47:45.735 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:47:45.736 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:47:45.737 [main] INFO  ru.sfedu.Kurss1.Main - null
+10:47:45.737 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:47:45.737 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:49:06.566 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:49:06.568 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:49:06.569 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:49:06.570 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:49:06.570 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:49:06.570 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:49:06.570 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:52:06.891 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:52:06.893 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:52:06.893 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:52:06.894 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:52:06.894 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:52:06.894 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:52:06.894 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:52:06.894 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:52:06.895 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:52:06.895 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:52:06.895 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:52:06.895 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:53:56.098 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:53:56.102 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:53:56.103 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:53:56.103 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:53:56.103 [main] INFO  ru.sfedu.Kurss1.Main - null
+10:53:56.103 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:53:56.103 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:54:15.496 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:54:15.498 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:54:15.498 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:54:15.499 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:54:15.500 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:54:15.500 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:58:15.018 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:58:15.021 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:58:15.021 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:58:15.021 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:58:15.021 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:58:15.021 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:58:15.022 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:58:15.022 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:58:15.022 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:58:15.022 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:58:15.023 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:58:15.023 [main] INFO  ru.sfedu.Kurss1.Main - key
+10:59:43.789 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+10:59:43.791 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+10:59:43.791 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+10:59:43.792 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+10:59:43.792 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+10:59:43.792 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+10:59:43.792 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+10:59:43.792 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+10:59:43.793 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+10:59:43.793 [main] INFO  ru.sfedu.Kurss1.Main - value
+10:59:43.793 [main] INFO  ru.sfedu.Kurss1.Main - 18
+10:59:43.793 [main] INFO  ru.sfedu.Kurss1.Main - key
+11:04:05.249 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+11:04:05.252 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+11:04:05.252 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+11:04:05.252 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+11:04:05.252 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+11:04:05.252 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+11:04:05.253 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+11:04:05.253 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+11:04:05.253 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+11:04:05.253 [main] INFO  ru.sfedu.Kurss1.Main - value
+11:04:05.254 [main] INFO  ru.sfedu.Kurss1.Main - 18
+11:04:05.254 [main] INFO  ru.sfedu.Kurss1.Main - key
+12:21:11.105 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+12:21:11.108 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+12:21:11.108 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+12:21:11.108 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+12:21:11.108 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+12:21:11.108 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+12:21:11.109 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+12:21:11.109 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+12:21:11.109 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+12:21:11.109 [main] INFO  ru.sfedu.Kurss1.Main - value
+12:21:11.110 [main] INFO  ru.sfedu.Kurss1.Main - 18
+12:21:11.110 [main] INFO  ru.sfedu.Kurss1.Main - key
+12:24:57.358 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+12:24:57.361 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+12:24:57.362 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+12:24:57.362 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+12:24:57.362 [main] INFO  ru.sfedu.Kurss1.Main - value
+12:24:57.362 [main] INFO  ru.sfedu.Kurss1.Main - 18
+12:24:57.362 [main] INFO  ru.sfedu.Kurss1.Main - key
+12:30:35.309 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+12:30:35.312 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+12:30:35.312 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+12:30:35.312 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+12:30:35.312 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+12:30:35.312 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+12:30:35.313 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+12:30:35.313 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+12:30:35.313 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+12:30:35.313 [main] INFO  ru.sfedu.Kurss1.Main - value
+12:30:35.313 [main] INFO  ru.sfedu.Kurss1.Main - 18
+12:30:35.314 [main] INFO  ru.sfedu.Kurss1.Main - key
+12:35:37.454 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+12:35:37.457 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+12:35:37.457 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+12:35:37.457 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+12:35:37.457 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+12:35:37.457 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+12:35:37.458 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+12:35:37.458 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+12:35:37.458 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+12:35:37.458 [main] INFO  ru.sfedu.Kurss1.Main - value
+12:35:37.459 [main] INFO  ru.sfedu.Kurss1.Main - 18
+12:35:37.459 [main] INFO  ru.sfedu.Kurss1.Main - key
+00:34:57.694 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+00:34:57.697 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+00:34:57.697 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+00:34:57.698 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+00:34:57.698 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\com\opencsv\opencsv\5.5.2\opencsv-5.5.2.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-text\1.9\commons-text-1.9.jar;C:\Users\sidor\.m2\repository\commons-beanutils\commons-beanutils\1.9.4\commons-beanutils-1.9.4.jar;C:\Users\sidor\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\sidor\.m2\repository\commons-collections\commons-collections\3.2.2\commons-collections-3.2.2.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+00:34:57.698 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - value
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - 18
+00:34:57.699 [main] INFO  ru.sfedu.Kurss1.Main - key
+00:35:59.214 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+00:35:59.217 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+00:35:59.217 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+00:35:59.217 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+00:35:59.217 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: C:\Users\sidor\IdeaProjects\Kurss1\target\classes;C:\Users\sidor\.m2\repository\com\opencsv\opencsv\5.5.2\opencsv-5.5.2.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-text\1.9\commons-text-1.9.jar;C:\Users\sidor\.m2\repository\commons-beanutils\commons-beanutils\1.9.4\commons-beanutils-1.9.4.jar;C:\Users\sidor\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\sidor\.m2\repository\commons-collections\commons-collections\3.2.2\commons-collections-3.2.2.jar;C:\Users\sidor\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\Users\sidor\.m2\repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar
+00:35:59.218 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+00:35:59.218 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+00:35:59.219 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1
+00:35:59.219 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+00:35:59.219 [main] INFO  ru.sfedu.Kurss1.Main - value
+00:35:59.219 [main] INFO  ru.sfedu.Kurss1.Main - 18
+00:35:59.219 [main] INFO  ru.sfedu.Kurss1.Main - key
+00:41:16.314 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 1 MELEE 1 2 1 1 1
+00:41:16.316 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2 MARKSMAN 2 1 1 1 1
+00:41:16.316 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3 TANK 3 3 2 2 2
+22:51:03.752 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ru.sfedu.Kurss1.utils.CSVDataProvider$1@78123e82
+22:51:32.681 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 0
+22:54:11.644 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 0
+22:54:36.803 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3
+23:17:56.361 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [[Ljava.lang.String;@6d4e5011, [Ljava.lang.String;@57d7f8ca, [Ljava.lang.String;@76c3e77a]
+23:40:01.273 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 0
+23:40:01.277 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - null
+00:40:02.583 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2 MARKSMAN 2 1 1 1 1
+00:40:26.064 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1 MELEE 1 2 1 1 1, 2 MARKSMAN 2 1 1 1 1, 3 TANK 3 3 2 2 2]
+01:11:37.646 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:13:48.060 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:14:33.324 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:15:33.857 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:16:03.555 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:17:49.330 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+01:19:06.390 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:19:16.348 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3
+01:31:00.584 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:36:56.268 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:37:28.227 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:42:00.677 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - java.util.stream.ReferencePipeline$2@6d4e5011
+01:42:00.686 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:44:15.066 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:48:09.499 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:51:43.166 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:52:17.493 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:53:31.683 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+01:57:22.740 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+02:08:30.411 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 3;TANK;3;3;2;2;2
+02:08:30.415 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:08:52.368 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+02:08:52.372 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:09:22.902 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+02:09:22.906 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:09:33.193 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+02:09:33.198 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2
+02:09:43.042 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+02:09:43.047 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:12:45.690 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:12:45.701 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:12:53.608 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;MELEE;1;2;1;1;1, 2;MARKSMAN;2;1;1;1;1, 3;TANK;3;3;2;2;2]
+02:12:53.614 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - 2;MARKSMAN;2;1;1;1;1
+02:31:10.846 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:31:48.069 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:37:19.973 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:39:28.768 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:39:42.184 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:41:48.487 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;me;2;1;1;1;1, 3;t;3;3;3;3;3]
+02:44:17.694 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [[Ljava.lang.String;@48f278eb, [Ljava.lang.String;@2f217633, [Ljava.lang.String;@a530d0a]
+02:44:17.707 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;me;2;1;1;1;1, 3;t;3;3;3;3;3]
+02:46:10.513 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:49:18.783 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:54:24.883 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+02:56:39.758 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:04:47.101 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:19:43.186 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:20:40.564 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:20:56.080 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:22:15.453 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:22:48.664 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:24:06.256 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:24:06.259 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:28:42.735 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:28:42.738 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:33:00.012 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:33:34.242 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:33:34.248 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:33:34.257 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:34:10.979 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:34:10.981 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 3;t;3;3;3;3;3]
+03:34:10.990 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [1;m;1;2;1;1;1, 2;ma;2;1;1;1;1, 3;t;3;3;3;3;3]
+03:37:49.016 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+03:38:41.913 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+17:40:22.935 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type
+17:47:15.400 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type
+17:54:24.455 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type
+17:57:40.735 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:31:10.821 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:37:34.531 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:38:01.021 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:38:45.201 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:38:49.707 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:42:22.030 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:42:33.994 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:42:51.789 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:43:37.723 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:43:49.320 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:47:00.260 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:47:48.439 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:49:05.181 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:49:28.552 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:49:45.594 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:51:15.184 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:51:29.923 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:51:58.293 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+20:59:48.324 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+21:01:32.858 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+21:02:45.191 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+21:02:51.282 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+21:03:04.557 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+21:03:42.116 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+14:29:33.647 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+14:43:40.042 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+14:43:40.046 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type:
+14:43:40.046 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Attack Power:
+14:43:40.046 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Health Points:
+14:43:40.046 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Gold Required:
+14:43:40.046 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Metal Required:
+14:43:40.047 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Food Required:
+14:44:03.449 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+14:44:03.452 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type:
+14:44:03.452 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Attack Power:
+14:44:03.452 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Health Points:
+14:44:03.453 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Gold Required:
+14:44:03.453 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Metal Required:
+14:44:03.453 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Food Required:
+16:13:21.642 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - [Unit{id=1, unitType='p', unitAttackPoints=3, unitHealthPoints=2, goldRequired=2, metalRequired=2, foodRequired=2}, Unit{id=2, unitType='p', unitAttackPoints=3, unitHealthPoints=2, goldRequired=2, metalRequired=2, foodRequired=2}, Unit{id=3, unitType='m', unitAttackPoints=1, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}, Unit{id=4, unitType='m', unitAttackPoints=1, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}, Unit{id=5, unitType='m', unitAttackPoints=1, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}]
+16:15:42.689 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+16:15:42.691 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type:
+16:15:42.691 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Attack Power:
+16:15:42.691 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Health Points:
+16:15:42.691 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Gold Required:
+16:15:42.691 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Metal Required:
+16:15:42.692 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Food Required:
+16:18:07.164 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+16:18:07.167 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type:
+16:18:07.168 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Attack Power:
+16:18:07.168 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Health Points:
+16:18:07.168 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Gold Required:
+16:18:07.168 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Metal Required:
+16:18:07.168 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Food Required:
+16:18:41.369 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit
+16:18:41.373 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Type:
+16:18:41.374 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Attack Power:
+16:18:41.374 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Unit Health Points:
+16:18:41.374 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Gold Required:
+16:18:41.374 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Metal Required:
+16:18:41.374 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Enter Food Required:
+16:28:55.711 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+08:08:39.676 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+11:11:12.355 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+11:11:12.361 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+11:13:46.156 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+11:16:03.224 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+02:08:02.293 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+02:08:25.297 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+08:47:30.835 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+08:53:08.988 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+08:54:06.421 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+08:55:03.753 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+08:55:03.757 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+08:56:48.081 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+09:07:21.866 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - ERROR:Unit does not exist
+09:16:49.227 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+09:21:43.165 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit does not exist
+11:28:02.883 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - []
+15:47:39.306 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit{id=1, unitType='MARKSMAN', unitAttackPoints=1, unitHealthPoints=2, goldRequired=1, metalRequired=1, foodRequired=1}
+15:49:45.428 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit{id=null, unitType='null', unitAttackPoints=0, unitHealthPoints=0, goldRequired=0, metalRequired=0, foodRequired=0}
+15:50:14.519 [main] INFO  ru.sfedu.Kurss1.utils.CSVDataProvider - Unit{id=2, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}

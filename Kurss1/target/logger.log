@@ -1,0 +1,12 @@
+12:35:44.246 [main] INFO  ru.sfedu.Kurss1.Main - Launching the application...
+12:35:44.249 [main] INFO  ru.sfedu.Kurss1.Main - Operating System: Windows 10 10.0
+12:35:44.249 [main] INFO  ru.sfedu.Kurss1.Main - JRE: 16.0.2
+12:35:44.249 [main] INFO  ru.sfedu.Kurss1.Main - Java Launched From: C:\Program Files\Java\jdk-16.0.2
+12:35:44.249 [main] INFO  ru.sfedu.Kurss1.Main - Class Path: Kurss1-1.0-SNAPSHOT-jar-with-dependencies.jar
+12:35:44.250 [main] INFO  ru.sfedu.Kurss1.Main - Library Path: C:\Program Files\Java\jdk-16.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sidor\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;;.
+12:35:44.250 [main] INFO  ru.sfedu.Kurss1.Main - User Home Directory: C:\Users\sidor
+12:35:44.251 [main] INFO  ru.sfedu.Kurss1.Main - User Working Directory: C:\Users\sidor\IdeaProjects\Kurss1\target
+12:35:44.251 [main] INFO  ru.sfedu.Kurss1.Main - Test INFO logging.
+12:35:44.251 [main] INFO  ru.sfedu.Kurss1.Main - null
+12:35:44.252 [main] INFO  ru.sfedu.Kurss1.Main - 18
+12:35:44.252 [main] INFO  ru.sfedu.Kurss1.Main - key
