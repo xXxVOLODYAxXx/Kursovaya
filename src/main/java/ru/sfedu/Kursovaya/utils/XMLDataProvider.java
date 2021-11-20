@@ -2,8 +2,8 @@ package ru.sfedu.Kursovaya.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.Kursovaya.entityBeans.Unit;
-import ru.sfedu.Kursovaya.entityBeans.XMLList;
+import ru.sfedu.Kursovaya.Beans.Unit;
+import ru.sfedu.Kursovaya.Beans.XMLList;
 import javax.xml.bind.*;
 import java.io.File;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package ru.sfedu.Kursovaya.utils;
 
-import ru.sfedu.Kursovaya.entityBeans.Unit;
+import ru.sfedu.Kursovaya.Beans.Unit;
 
 import java.sql.*;
 

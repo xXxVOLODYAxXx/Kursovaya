@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.entityBeans;
+package ru.sfedu.Kursovaya.Beans;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

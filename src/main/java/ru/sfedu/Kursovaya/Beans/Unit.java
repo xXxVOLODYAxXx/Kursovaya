@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.entityBeans;
+package ru.sfedu.Kursovaya.Beans;
 
 import com.opencsv.bean.CsvBindByName;
 
