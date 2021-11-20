@@ -7,19 +7,22 @@ import ru.sfedu.Kursovaya.Beans.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
     public BaseTest() throws JAXBException, IOException {}
 
-    Unit unit=new Unit();
-    Building building=new Building();
-    PlayerPlanet playerPlanet=new PlayerPlanet();
-    EnemyPlanet enemyPlanet=new EnemyPlanet();
-    XMLList xl=new XMLList();
-    XMLDataProvider x=new XMLDataProvider();
-    CSVDataProvider c=new CSVDataProvider();
+    Unit unit = new Unit();
+    Building building = new Building();
+    PlayerPlanet playerPlanet = new PlayerPlanet();
+    EnemyPlanet enemyPlanet = new EnemyPlanet();
+    HistoryContent historyContent = new HistoryContent();
+    XMLList xl = new XMLList();
+    XMLDataProvider x = new XMLDataProvider();
+    CSVDataProvider c = new CSVDataProvider();
 
-    public JDBCDataProvider j=new JDBCDataProvider();
+    public JDBCDataProvider j = new JDBCDataProvider();
     Logger log = LogManager.getLogger(CSVDataProvider.class);
     String createTableSQL = "create table users (\r\n"
             + "  id  int(3) primary key,\r\n"
@@ -32,7 +35,19 @@ public class BaseTest {
             + "  (id, name, email, country, password) VALUES "
             + " (3, ?, ?, ?, ?);";
 
+    public HistoryContent initHistoryContent(){
+        historyContent.setActor("dadad");
+        historyContent.setClassName("dfdssfds");
+        historyContent.setCreatedDate("dfgdsfgdf");
+        historyContent.setId(1L);
+        historyContent.setMethodName("dgdfgdf");
+        historyContent.setStatus("fgfdgd");
+        Map<String,Object> object = new HashMap<>();
+        object.put("Unit",initUnit());
+        historyContent.setObject(object);
 
+        return historyContent;
+    }
     public Unit initUnit(){
         unit.setUnitId(1L);
         unit.setUnitType("MELEE");
