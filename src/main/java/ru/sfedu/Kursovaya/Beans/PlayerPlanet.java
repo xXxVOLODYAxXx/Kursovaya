@@ -1,8 +1,11 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.Objects;
 
 public class PlayerPlanet extends Planet{
+    @CsvBindByName
     private int buildingLimit;
 
     public PlayerPlanet() {}

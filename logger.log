@@ -497,3 +497,9 @@
 15:47:39.306 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=1, unitType='MARKSMAN', unitAttackPoints=1, unitHealthPoints=2, goldRequired=1, metalRequired=1, foodRequired=1}
 15:49:45.428 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=null, unitType='null', unitAttackPoints=0, unitHealthPoints=0, goldRequired=0, metalRequired=0, foodRequired=0}
 15:50:14.519 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=2, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+22:12:28.476 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit does not exist
+22:12:28.495 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - []
+22:12:28.559 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
+22:13:04.460 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit does not exist
+22:13:04.480 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - []
+22:13:04.549 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist

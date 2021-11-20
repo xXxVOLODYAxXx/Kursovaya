@@ -20,9 +20,9 @@ class CSVDataProviderTest extends BaseTest {
 
     @Test
     void createUnit() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        c.createUnit(initializeUnit());
+        c.createUnit(initUnit());
         Assertions.assertEquals(unit,c.getUnitById(unit.getUnitId()));
-        Assertions.assertNotEquals(initializeUnit(), null);
+        Assertions.assertNotEquals(initUnit(), null);
     }
 
     @Test
@@ -40,7 +40,7 @@ class CSVDataProviderTest extends BaseTest {
 
     @Test
     void updateUnitById() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        c.updateUnitById(initializeUnit());
+        c.updateUnitById(initUnit());
     }
     @Test
     void getBuildingList() throws IOException {

@@ -52,7 +52,7 @@ public class Building {
         return this.foodRequired;
     }
 
-    public void setUnitId(Long id){
+    public void setBuildingId(Long id){
         this.id=id;
     }
     public void setBuildingType(String buildingType) {

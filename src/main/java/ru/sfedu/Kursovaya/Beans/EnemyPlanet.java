@@ -1,9 +1,13 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.Objects;
 
 public class EnemyPlanet extends Planet{
+    @CsvBindByName
     private int enemyHealthPoints;
+    @CsvBindByName
     private int enemyAttackPoints;
 
     public EnemyPlanet() {

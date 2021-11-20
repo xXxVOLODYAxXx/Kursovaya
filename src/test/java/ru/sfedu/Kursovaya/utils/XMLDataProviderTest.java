@@ -17,7 +17,7 @@ class XMLDataProviderTest extends BaseTest {
 
     @Test
     void createUnit() throws JAXBException, IOException {
-        x.createUnit(initializeUnit());
+        x.createUnit(initUnit());
         Assertions.assertEquals(unit,x.getUnitById(unit.getUnitId()));
         unit.setFoodRequired(6);
         Assertions.assertNotEquals(unit, x.getUnitById(unit.getUnitId()));
@@ -26,7 +26,7 @@ class XMLDataProviderTest extends BaseTest {
     @Test
     void getUnitById() throws JAXBException {
         System.out.println(x.getUnitById(5L));
-        Assertions.assertEquals(x.getUnitById(5L),initializeUnit());
+        Assertions.assertEquals(x.getUnitById(5L),initUnit());
         assertNull(x.getUnitById(6L));
     }
 
@@ -37,6 +37,6 @@ class XMLDataProviderTest extends BaseTest {
 
     @Test
     void updateUnitById() throws JAXBException, IOException {
-        x.updateUnitById(initializeUnit());
+        x.updateUnitById(initUnit());
     }
 }

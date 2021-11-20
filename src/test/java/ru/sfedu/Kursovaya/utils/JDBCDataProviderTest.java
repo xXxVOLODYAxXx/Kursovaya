@@ -17,7 +17,7 @@ class JDBCDataProviderTest extends BaseTest {
     }
     @Test
     void insertRecord() throws SQLException {
-        initializeUnit();
+        initUnit();
         j.insertUnit(unit);
     }
     @Test
@@ -26,7 +26,7 @@ class JDBCDataProviderTest extends BaseTest {
     }
     @Test
     void updateUnit() throws SQLException {
-        initializeUnit();
+        initUnit();
         j.updateUnitById(unit);
     }
     @Test

@@ -3,8 +3,7 @@ package ru.sfedu.Kursovaya.utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import ru.sfedu.Kursovaya.Beans.Unit;
-import ru.sfedu.Kursovaya.Beans.XMLList;
+import ru.sfedu.Kursovaya.Beans.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -13,6 +12,9 @@ public class BaseTest {
     public BaseTest() throws JAXBException, IOException {}
 
     Unit unit=new Unit();
+    Building building=new Building();
+    PlayerPlanet playerPlanet=new PlayerPlanet();
+    EnemyPlanet enemyPlanet=new EnemyPlanet();
     XMLList xl=new XMLList();
     XMLDataProvider x=new XMLDataProvider();
     CSVDataProvider c=new CSVDataProvider();
@@ -31,7 +33,7 @@ public class BaseTest {
             + " (3, ?, ?, ?, ?);";
 
 
-    public Unit initializeUnit(){
+    public Unit initUnit(){
         unit.setUnitId(1L);
         unit.setUnitType("MELEE");
         unit.setUnitAttackPoints(2);
@@ -41,10 +43,36 @@ public class BaseTest {
         unit.setGoldRequired(1);
         return unit;
     }
+    public Building initBuilding(){
+        building.setBuildingId(1L);
+        building.setBuildingType("FARM");
+        building.setFoodBuff(10);
+        building.setGoldBuff(0);
+        building.setMetalBuff(0);
+        building.setFoodRequired(0);
+        building.setGoldRequired(5);
+        building.setMetalRequired(5);
+        return building;
+    }
+    public PlayerPlanet initPlayerPlanet(){
+        playerPlanet.setPlanetId(1L);
+        playerPlanet.setPlanetName("A");
+        playerPlanet.setBuildingLimit(10);
+        playerPlanet.setType("PLAYER");
+        return playerPlanet;
+    }
+    public EnemyPlanet initEnemyPlanet(){
+        enemyPlanet.setPlanetId(1L);
+        enemyPlanet.setPlanetName("B");
+        enemyPlanet.setType("ENEMY");
+        enemyPlanet.setEnemyAttackPoints(50);
+        enemyPlanet.setEnemyHealthPoints(50);
+        return enemyPlanet;
+    }
 
     @Test
     public void readUnit(){
-        initializeUnit();
+        initUnit();
         System.out.println(unit.getUnitId());
         System.out.println(unit.getUnitType());
         System.out.println(unit.getUnitAttackPoints());

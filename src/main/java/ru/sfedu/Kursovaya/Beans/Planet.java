@@ -1,10 +1,15 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.Objects;
 
 public class Planet {
+    @CsvBindByName
     private Long id;
+    @CsvBindByName
     private String planetName;
+    @CsvBindByName
     private String type;
     public Planet() {super();}
 
