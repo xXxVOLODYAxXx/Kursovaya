@@ -5,3 +5,9 @@
 02:27:24.767 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - null
 02:28:59.260 [main] ERROR ru.sfedu.Kursovaya.utils.CSVDataProvider - state should be: open
 02:31:10.690 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - [Document{{_id=61997b075c59731dde774c25, id=1, className=dfdssfds, createdDate=dfgdsfgdf, actor=dadad, methodName=dgdfgdf, object=Document{{Unit=Document{{unitType=MELEE, unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1, unitId=1}}}}, status=fgfdgd}}]
+15:13:01.890 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+19:58:37.489 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
+19:58:37.493 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
+19:59:11.465 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit does not exist
+19:59:11.500 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
+20:59:21.521 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
