@@ -7,7 +7,9 @@ import ru.sfedu.Kursovaya.Beans.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BaseTest {
@@ -18,6 +20,9 @@ public class BaseTest {
     PlayerPlanet playerPlanet = new PlayerPlanet();
     EnemyPlanet enemyPlanet = new EnemyPlanet();
     HistoryContent historyContent = new HistoryContent();
+    Army army=new Army();
+    List<Unit> unitList=new ArrayList<Unit>();
+    ArmyInfo armyInfo=new ArmyInfo();
     XMLList xl = new XMLList();
     XMLDataProvider x = new XMLDataProvider();
     CSVDataProvider c = new CSVDataProvider();
@@ -84,7 +89,16 @@ public class BaseTest {
         enemyPlanet.setEnemyHealthPoints(50);
         return enemyPlanet;
     }
-
+    public Army initArmy(){
+        army.setArmyId(1L);
+        unitList.add(initUnit());
+        unitList.add(initUnit());
+        armyInfo.setArmyHealthPoints(10);
+        armyInfo.setArmyHealthPoints(10);
+        army.setArmyInfo(armyInfo);
+        army.setUnits(unitList);
+        return army;
+    }
     @Test
     public void readUnit(){
         initUnit();

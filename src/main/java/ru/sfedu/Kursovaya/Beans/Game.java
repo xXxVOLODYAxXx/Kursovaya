@@ -6,8 +6,11 @@ import java.util.Objects;
 public class Game {
     private Long id;
     private String gameName;
+
     private List<EnemyPlanet> enemyPlanetList;
+
     private List<PlayerPlanet> playerPlanetList;
+
     private Resources resources;
 
     public Game() {}

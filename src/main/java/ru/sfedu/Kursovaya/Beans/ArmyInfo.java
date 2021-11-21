@@ -1,9 +1,13 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.Objects;
 
 public class ArmyInfo {
+    @CsvBindByName
     private int armyHealthPoints;
+    @CsvBindByName
     private int armyAttackPoints;
 
     public ArmyInfo() {

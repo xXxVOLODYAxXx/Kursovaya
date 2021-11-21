@@ -1,11 +1,19 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.Kursovaya.utils.ArmyInfoTransformer;
+import ru.sfedu.Kursovaya.utils.UnitTransformer;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Army {
+    @CsvBindByName
     private Long id;
+    @CsvCustomBindByName(required = false, converter = UnitTransformer.class)
     private List<Unit> units;
+    @CsvCustomBindByName(required = false, converter = ArmyInfoTransformer.class)
     private ArmyInfo armyInfo;
 
     public Army() {

@@ -10,10 +10,8 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import ru.sfedu.Kursovaya.Beans.Building;
-import ru.sfedu.Kursovaya.Beans.EnemyPlanet;
-import ru.sfedu.Kursovaya.Beans.PlayerPlanet;
-import ru.sfedu.Kursovaya.Beans.Unit;
+import ru.sfedu.Kursovaya.Beans.*;
+
 import java.util.stream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,6 +60,13 @@ public class CSVDataProvider {
         statefulBeanToCSV.write(eplist);
         this.close();
     }
+    private void writeArmy (List<Army> alist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        this.initWriter("Army");
+        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
+        statefulBeanToCSV.write(alist);
+        this.close();
+    }
+
     private List<Unit> sortUnitList(List<Unit> unitList) throws IOException {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
         return unitList;
@@ -77,6 +82,10 @@ public class CSVDataProvider {
     private List<EnemyPlanet> sortEnemyPlanetList(List<EnemyPlanet> eplist) throws IOException {
         eplist=eplist.stream().sorted((o1, o2)->o1.getPlanetId().compareTo(o2.getPlanetId())).collect(Collectors.toList());
         return eplist;
+    }
+    private List<Army> sortArmyList(List<Army> alist) throws IOException {
+        alist=alist.stream().sorted((o1, o2)->o1.getArmyId().compareTo(o2.getArmyId())).collect(Collectors.toList());
+        return alist;
     }
 
     /**UNIT*/
@@ -265,6 +274,53 @@ public class CSVDataProvider {
             writeEnemyPlanets(enemyPlanetList);
         } catch (NoSuchElementException e){
             log.info("EnemyPlanet does not exist");
+        }
+    }
+    /**ARMY*/
+    public List<Army> getArmyList() throws IOException {
+        this.initReader("Army");
+        CsvToBean<Army> csvToBean=new CsvToBeanBuilder<Army>(this.reader).withType(Army.class).build();
+        List<Army> armyList=csvToBean.parse();
+        armyList=sortArmyList(armyList);
+        return armyList;
+    }
+    public void createArmy(Army Army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Army> armyList=getArmyList();
+        armyList.add(Army);
+        armyList=sortArmyList(armyList);
+        this.writeArmy(armyList);
+    }
+    public Army getArmyById(Long id) throws IOException {
+        List<Army> armyList=getArmyList();
+        Army Army=armyList.stream().filter(x-> id.equals(x.getArmyId())).findAny().orElse(null);
+        if(Army==null){
+            log.info("ERROR:Army does not exist");
+            return Army;
+        } else {
+            return Army;
+        }
+    }
+    public void deleteArmyById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Army> armyList=getArmyList();
+        armyList=armyList.stream().filter(x-> !id.equals(x.getArmyId())).collect(Collectors.toList());
+        this.writeArmy(armyList);
+    }
+    public void clearArmys() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Army> armyList=getArmyList();
+        armyList=armyList.stream().filter(x->null==x.getArmyId()).collect(Collectors.toList());
+        this.writeArmy(armyList);
+    }
+    public void updateArmyById(Army Army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Army> armyList=getArmyList();
+        try{
+            Army.getArmyId().equals(armyList.stream().filter(x -> Army.getArmyId().equals(x.getArmyId())).findFirst().get().getArmyId());
+            armyList=armyList.stream().filter(x-> !Army.getArmyId().equals(x.getArmyId())).collect(Collectors.toList());
+            writeArmy(armyList);
+            armyList.add(Army);
+            armyList=sortArmyList(armyList);
+            writeArmy(armyList);
+        } catch (NoSuchElementException e){
+            log.info("Army does not exist");
         }
     }
 }

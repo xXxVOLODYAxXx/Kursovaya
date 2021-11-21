@@ -31,7 +31,7 @@ class XMLDataProviderTest extends BaseTest {
     }
 
     @Test
-    void deleteUnitById() throws JAXBException {
+    void deleteUnitById() throws JAXBException, IOException {
         x.deleteUnitById(1L);
     }
 

@@ -6,6 +6,8 @@ import ru.sfedu.Kursovaya.Beans.Unit;
 import ru.sfedu.Kursovaya.Beans.XMLList;
 import javax.xml.bind.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,6 +17,7 @@ public class XMLDataProvider {
     public XMLDataProvider() throws IOException, JAXBException {}
     private final String PATH= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_XML)+"Units"+ConfigurationUtil.getConfigurationEntry(Constants.XML_FILE_EXTENSION);
     private final File file=new File(PATH);
+    private FileReader fileReader=null;
     private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
 
     /*СДЕЛАТЬ ИНТЕРФЕЙС ЭТОЙ КРАСОТЫ*/
@@ -23,11 +26,19 @@ public class XMLDataProvider {
     private final JAXBContext unitjaxbContext = JAXBContext.newInstance(XMLList.class);
     private final Marshaller unitMarshaller = unitjaxbContext.createMarshaller();
     private final Unmarshaller unitUnmarshaller = unitjaxbContext.createUnmarshaller();
-    public void unitsToXML(List<Unit> ulist) throws JAXBException {
+    private void initReader () throws FileNotFoundException {
+        this.fileReader=new FileReader(PATH);
+    }
+    private void closeReader () throws IOException {
+        fileReader.close();
+    }
+    public void unitsToXML(List<Unit> ulist) throws JAXBException, IOException {
+        initReader();
         XMLList unitList=new XMLList();
         unitList.setUnits(ulist);
         unitMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         unitMarshaller.marshal(unitList,file);
+        closeReader();
     }
     private List<Unit> unitsFromXML() throws JAXBException {
         XMLList unitList=(XMLList) unitUnmarshaller.unmarshal(file);
@@ -83,7 +94,7 @@ public class XMLDataProvider {
             return unit;
         }
     }
-    public void deleteUnitById(Long id) throws JAXBException {
+    public void deleteUnitById(Long id) throws JAXBException, IOException {
         List<Unit> unitList=unitsFromXML();
         unitList=unitList.stream().filter(x-> !id.equals(x.getUnitId())).collect(Collectors.toList());
         unitsToXML(unitList);

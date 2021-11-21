@@ -8,7 +8,9 @@ public class Resources {
     private int food;
     private int metal;
     private int gold;
+
     private Army army;
+
     private List<Building> buildingList;
     private int operation;
 
