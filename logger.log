@@ -21,3 +21,11 @@
 00:48:24.987 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - class ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider$2
 00:48:24.988 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - public void ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider.createUnit() throws java.lang.Exception
 08:10:00.050 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:13:59.416 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:14:59.494 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:19:01.637 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:20:15.322 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:32:31.281 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+09:32:31.503 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.JDBCDataProvider - org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Нарушение уникального индекса или первичного ключа: "PRIMARY KEY ON PUBLIC.UNITS(ID) [1, 'MELEE', 2, 1, 1, 1, 1]"
+Unique index or primary key violation: "PRIMARY KEY ON PUBLIC.UNITS(ID) [1, 'MELEE', 2, 1, 1, 1, 1]"; SQL statement:
+INSERT INTO units  (id, unitType, unitAttackPoints, unitHealthPoints, goldRequired, metalRequired, foodRequired) VALUES  (?, ?, ?, ?, ?, ?, ?); [23505-199]

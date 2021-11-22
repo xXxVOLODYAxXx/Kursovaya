@@ -5,8 +5,10 @@ public class Constants {
     public static final String PATH_TO_XML="PATH_TO_XML";
     public static final String CSV_FILE_EXTENSION="CSV_FILE_EXTENSION";
     public static final String XML_FILE_EXTENSION="XML_FILE_EXTENSION";
-    public static final String actor = "system";
-
+    public static final String ACTOR = "system";
+    public static final String JDBC_URL="JDBC_URL";
+    public static final String JDBC_USERNAME="JDBC_USERNAME";
+    public static final String JDBC_PASSWORD="JDBC_PASSWORD";
 
 
 

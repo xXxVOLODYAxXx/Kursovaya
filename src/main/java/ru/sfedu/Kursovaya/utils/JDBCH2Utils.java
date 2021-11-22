@@ -1,37 +1,25 @@
 package ru.sfedu.Kursovaya.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCH2Utils {
-    private static String jdbcURL = "jdbc:h2:~/test";
-    private static String jdbcUsername = "sa";
-    private static String jdbcPassword = "";
-
+    private static final Logger log = LogManager.getLogger(JDBCH2Utils.class);
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
+            connection = DriverManager.getConnection(ConfigurationUtil.getConfigurationEntry(Constants.JDBC_URL),
+                    ConfigurationUtil.getConfigurationEntry(Constants.JDBC_USERNAME),
+                    ConfigurationUtil.getConfigurationEntry(Constants.JDBC_PASSWORD));
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
         return connection;
-    }
-
-    public static void printSQLException(SQLException ex) {
-        for (Throwable e: ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
     }
 }

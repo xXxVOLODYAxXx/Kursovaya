@@ -34,16 +34,7 @@ public class BaseTest {
 
     public JDBCDataProvider j = new JDBCDataProvider();
     Logger log = LogManager.getLogger(CSVDataProvider.class);
-    String createTableSQL = "create table users (\r\n"
-            + "  id  int(3) primary key,\r\n"
-            + "  name varchar(20),\r\n"
-            + "  email varchar(20),\r\n"
-            + "  country varchar(20),\r\n"
-            + "  password varchar(20)\r\n"
-            + "  );";
-    String INSERT_USERS_SQL = "INSERT INTO users"
-            + "  (id, name, email, country, password) VALUES "
-            + " (3, ?, ?, ?, ?);";
+
 
     public HistoryContent initHistoryContent(){
         historyContent.setActor("dadad");

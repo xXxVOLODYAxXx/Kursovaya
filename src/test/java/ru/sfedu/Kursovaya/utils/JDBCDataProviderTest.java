@@ -18,8 +18,7 @@ class JDBCDataProviderTest extends BaseTest {
     }*/
     @Test
     void insertRecord() throws SQLException {
-        initUnit();
-        j.insertUnit(unit);
+        j.insertUnit(initUnit());
     }
     @Test
     void readJDBCUnit() throws SQLException {
@@ -29,10 +28,11 @@ class JDBCDataProviderTest extends BaseTest {
     @Test
     void updateUnit() throws SQLException {
         initUnit();
-        j.updateUnitById(unit);
+        j.updateUnitById(initUnit());
     }
     @Test
     void deleteUnit() throws SQLException {
+        j.insertUnit(initUnit());
         j.deleteUnitById(1L);
     }
 

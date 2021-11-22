@@ -1,11 +1,14 @@
 package ru.sfedu.Kursovaya.utils.DataProviders;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.Unit;
 import ru.sfedu.Kursovaya.utils.JDBCH2Utils;
 
 import java.sql.*;
 
 public class JDBCDataProvider {
+    private static final Logger log = LogManager.getLogger(JDBCDataProvider.class);
     private Connection connection=null;
     private static final String createTableSQL = "create table units (\r\n"
             + "  id  Long(1000) primary key,\r\n"
@@ -19,7 +22,7 @@ public class JDBCDataProvider {
     private static final String INSERT_UNITS_SQL = "INSERT INTO units"
             + "  (id, unitType, unitAttackPoints, unitHealthPoints, goldRequired, metalRequired, foodRequired) VALUES "
             + " (?, ?, ?, ?, ?, ?, ?);";
-    private static final String QUERY = "select id,unitType,unitAttackPoints,unitHealthPoints,goldRequired,metalRequired,foodRequired from units where id =";
+    private static final String READ_UNIT_SQL = "select id,unitType,unitAttackPoints,unitHealthPoints,goldRequired,metalRequired,foodRequired from units where id =";
     private static final String UPDATE_UNITS_SQL = "update units set " +
             "unitType = ?," +
             "unitAttackPoints = ?," +
@@ -41,7 +44,7 @@ public class JDBCDataProvider {
         try (Statement statement = initConnection().createStatement();) {
             statement.execute(createTableSQL);
         } catch (SQLException e) {
-            JDBCH2Utils.printSQLException(e);
+            log.info(e);
         }finally {
             closeConnection();
         }
@@ -58,14 +61,14 @@ public class JDBCDataProvider {
                 preparedStatement.setInt(7, unit.getFoodRequired());
                 preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            JDBCH2Utils.printSQLException(e);
+            log.info(e);
         }finally {
             closeConnection();
         }
     }
     public Unit readUnitById(Long id) throws SQLException {
         Unit unit=new Unit();
-        try (PreparedStatement preparedStatement = initConnection().prepareStatement(QUERY+Long.toString(id));) {
+        try (PreparedStatement preparedStatement = initConnection().prepareStatement(READ_UNIT_SQL+Long.toString(id));) {
                 ResultSet rs = preparedStatement.executeQuery();
                 while (rs.next()) {
                     unit.setUnitId(rs.getLong("id"));
@@ -77,7 +80,7 @@ public class JDBCDataProvider {
                     unit.setFoodRequired(rs.getInt("foodRequired"));
                 }
         } catch (SQLException e) {
-            JDBCH2Utils.printSQLException(e);
+            log.info(e);
         }finally {
             closeConnection();
         }
@@ -94,7 +97,7 @@ public class JDBCDataProvider {
             preparedStatement.setLong(7, unit.getUnitId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            JDBCH2Utils.printSQLException(e);
+            log.info(e);
         }finally {
             closeConnection();
         }
@@ -103,7 +106,7 @@ public class JDBCDataProvider {
         try (Statement statement = initConnection().createStatement();) {
             statement.execute(DELETE_UNITS_SQL+id);
         } catch (SQLException e) {
-            JDBCH2Utils.printSQLException(e);
+            log.info(e);
         }finally {
             closeConnection();
         }
