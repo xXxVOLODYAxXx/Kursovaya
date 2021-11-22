@@ -1,10 +1,12 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import ru.sfedu.Kursovaya.Beans.Unit;
+import ru.sfedu.Kursovaya.utils.JDBCH2Utils;
 
 import java.sql.*;
 
 public class JDBCDataProvider {
+    private Connection connection=null;
     private static final String createTableSQL = "create table units (\r\n"
             + "  id  Long(1000) primary key,\r\n"
             + "  unitType varchar(50),\r\n"
@@ -28,19 +30,25 @@ public class JDBCDataProvider {
             "where id = ?;";
     private static final String DELETE_UNITS_SQL = "delete from units where id = ";
 
-
+    private Connection initConnection(){
+        connection = JDBCH2Utils.getConnection();
+        return connection;
+    }
+    private void closeConnection() throws SQLException {
+        connection.close();
+    }
     public void createTable() throws SQLException {
-        try (Connection connection = JDBCH2Utils.getConnection();
-             Statement statement = connection.createStatement();) {
+        try (Statement statement = initConnection().createStatement();) {
             statement.execute(createTableSQL);
         } catch (SQLException e) {
             JDBCH2Utils.printSQLException(e);
+        }finally {
+            closeConnection();
         }
     }
 
     public void insertUnit(Unit unit) throws SQLException {
-        try (Connection connection = JDBCH2Utils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_UNITS_SQL)) {
+        try (PreparedStatement preparedStatement = initConnection().prepareStatement(INSERT_UNITS_SQL)) {
                 preparedStatement.setLong(1, unit.getUnitId());
                 preparedStatement.setString(2, unit.getUnitType());
                 preparedStatement.setInt(3, unit.getUnitAttackPoints());
@@ -51,12 +59,13 @@ public class JDBCDataProvider {
                 preparedStatement.executeUpdate();
         } catch (SQLException e) {
             JDBCH2Utils.printSQLException(e);
+        }finally {
+            closeConnection();
         }
     }
-    public Unit readUnitById(Long id){
+    public Unit readUnitById(Long id) throws SQLException {
         Unit unit=new Unit();
-        try (Connection connection = JDBCH2Utils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(QUERY+Long.toString(id));) {
+        try (PreparedStatement preparedStatement = initConnection().prepareStatement(QUERY+Long.toString(id));) {
                 ResultSet rs = preparedStatement.executeQuery();
                 while (rs.next()) {
                     unit.setUnitId(rs.getLong("id"));
@@ -69,12 +78,13 @@ public class JDBCDataProvider {
                 }
         } catch (SQLException e) {
             JDBCH2Utils.printSQLException(e);
+        }finally {
+            closeConnection();
         }
         return unit;
     }
     public void updateUnitById(Unit unit) throws SQLException {
-        try (Connection connection = JDBCH2Utils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_UNITS_SQL)) {
+        try (PreparedStatement preparedStatement = initConnection().prepareStatement(UPDATE_UNITS_SQL)) {
             preparedStatement.setString(1, unit.getUnitType());
             preparedStatement.setInt(2, unit.getUnitAttackPoints());
             preparedStatement.setInt(3, unit.getUnitHealthPoints());
@@ -85,17 +95,17 @@ public class JDBCDataProvider {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             JDBCH2Utils.printSQLException(e);
+        }finally {
+            closeConnection();
         }
     }
     public void deleteUnitById(Long id) throws SQLException {
-        try (Connection connection = JDBCH2Utils.getConnection();
-             // Step 2:Create a statement using connection object
-             Statement statement = connection.createStatement();) {
+        try (Statement statement = initConnection().createStatement();) {
             statement.execute(DELETE_UNITS_SQL+id);
-
         } catch (SQLException e) {
-            // print SQL exception information
             JDBCH2Utils.printSQLException(e);
+        }finally {
+            closeConnection();
         }
     }
 

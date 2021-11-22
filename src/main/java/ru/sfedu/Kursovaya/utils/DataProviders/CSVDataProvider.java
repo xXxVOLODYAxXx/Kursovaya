@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import java.io.*;
 import java.util.*;
@@ -15,6 +15,8 @@ import ru.sfedu.Kursovaya.Beans.*;
 import java.util.stream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 public class CSVDataProvider {
     public CSVDataProvider() throws IOException {}

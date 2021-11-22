@@ -1,5 +1,6 @@
 package ru.sfedu.Kursovaya.utils;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
@@ -11,18 +12,19 @@ class JDBCDataProviderTest extends BaseTest {
     public JDBCDataProviderTest() throws JAXBException, IOException {
     }
 
-    @Test
+    /**@Test
     void createTable() throws SQLException {
         j.createTable();
-    }
+    }*/
     @Test
     void insertRecord() throws SQLException {
         initUnit();
         j.insertUnit(unit);
     }
     @Test
-    void readJDBCUnit(){
-        log.info(j.readUnitById(2L));
+    void readJDBCUnit() throws SQLException {
+        log.info(j.readUnitById(1L));
+        Assertions.assertTrue(j.readUnitById(1L).equals(initUnit()));
     }
     @Test
     void updateUnit() throws SQLException {

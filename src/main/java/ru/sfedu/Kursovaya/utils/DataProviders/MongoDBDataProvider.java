@@ -1,7 +1,6 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
@@ -11,9 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 import ru.sfedu.Kursovaya.Beans.HistoryContent;
+import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +43,7 @@ public class MongoDBDataProvider {
         this.client.close();
     }
 
-    public void insertRand(HistoryContent historyContent){
+    public void insertRecord(HistoryContent historyContent){
         initConnection();
         MongoCollection<Document> mongoCollection = database.getCollection("test");
         mongoCollection.insertOne(new Document(this.convertEntityToMap(historyContent)));

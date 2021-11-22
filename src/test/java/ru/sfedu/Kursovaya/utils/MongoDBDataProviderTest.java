@@ -1,11 +1,10 @@
 package ru.sfedu.Kursovaya.utils;
 
 import org.junit.jupiter.api.Test;
+import ru.sfedu.Kursovaya.utils.DataProviders.MongoDBDataProvider;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MongoDBDataProviderTest extends BaseTest{
     MongoDBDataProvider m = new MongoDBDataProvider();
@@ -23,7 +22,7 @@ class MongoDBDataProviderTest extends BaseTest{
 
     @Test
     void insertRand() {
-        m.insertRand(initHistoryContent());
+        m.insertRecord(initHistoryContent());
     }
     @Test
     void readAll(){

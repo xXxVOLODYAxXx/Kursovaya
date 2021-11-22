@@ -4,6 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import ru.sfedu.Kursovaya.Beans.*;
+import ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider;
+import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
+import ru.sfedu.Kursovaya.utils.DataProviders.JDBCDataProvider;
+import ru.sfedu.Kursovaya.utils.DataProviders.XMLDataProvider;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -23,6 +27,7 @@ public class BaseTest {
     Army army=new Army();
     List<Unit> unitList=new ArrayList<Unit>();
     ArmyInfo armyInfo=new ArmyInfo();
+    AbstractDataProvider abstractDataProvider=new AbstractDataProvider();
     XMLList xl = new XMLList();
     XMLDataProvider x = new XMLDataProvider();
     CSVDataProvider c = new CSVDataProvider();

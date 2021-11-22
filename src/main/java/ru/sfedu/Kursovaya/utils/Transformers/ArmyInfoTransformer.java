@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.Transformers;
 
 import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;

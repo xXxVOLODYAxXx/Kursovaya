@@ -1,14 +1,23 @@
 
 
-02:26:36.930 [main] ERROR ru.sfedu.Kursovaya.utils.CSVDataProvider - state should be: open
-02:27:24.764 [main] ERROR ru.sfedu.Kursovaya.utils.CSVDataProvider - state should be: open
-02:27:24.767 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - null
-02:28:59.260 [main] ERROR ru.sfedu.Kursovaya.utils.CSVDataProvider - state should be: open
-02:31:10.690 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - [Document{{_id=61997b075c59731dde774c25, id=1, className=dfdssfds, createdDate=dfgdsfgdf, actor=dadad, methodName=dgdfgdf, object=Document{{Unit=Document{{unitType=MELEE, unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1, unitId=1}}}}, status=fgfdgd}}]
-15:13:01.890 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
-19:58:37.489 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
-19:58:37.493 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
-19:59:11.465 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit does not exist
-19:59:11.500 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - ERROR:Unit does not exist
-20:59:21.521 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
-23:44:46.500 [main] INFO  ru.sfedu.Kursovaya.utils.CSVDataProvider - [Army{units=[Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}, Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}], armyInfo=ArmyInfo{armyHealthPoints=10, armyAttackPoints=0}}]
+02:26:36.930 [main] ERROR ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - state should be: open
+02:27:24.764 [main] ERROR ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - state should be: open
+02:27:24.767 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - null
+02:28:59.260 [main] ERROR ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - state should be: open
+02:31:10.690 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - [Document{{_id=61997b075c59731dde774c25, id=1, className=dfdssfds, createdDate=dfgdsfgdf, actor=dadad, methodName=dgdfgdf, object=Document{{Unit=Document{{unitType=MELEE, unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1, unitId=1}}}}, status=fgfdgd}}]
+15:13:01.890 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+19:58:37.489 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - ERROR:Unit does not exist
+19:58:37.493 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - ERROR:Unit does not exist
+19:59:11.465 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit does not exist
+19:59:11.500 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - ERROR:Unit does not exist
+20:59:21.521 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+23:44:46.500 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - [Army{units=[Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}, Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}], armyInfo=ArmyInfo{armyHealthPoints=10, armyAttackPoints=0}}]
+00:13:02.005 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit does not exist
+00:13:02.054 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - ERROR:Unit does not exist
+00:22:12.268 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=2, unitType='MARKSMAN', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+00:24:23.865 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
+00:46:38.470 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - createUnit
+00:48:24.984 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - createUnit
+00:48:24.987 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - class ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider$2
+00:48:24.988 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider - public void ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider.createUnit() throws java.lang.Exception
+08:10:00.050 [main] INFO  ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider - Unit{id=1, unitType='MELEE', unitAttackPoints=2, unitHealthPoints=1, goldRequired=1, metalRequired=1, foodRequired=1}
