@@ -17,8 +17,8 @@ public class Planet {
     public void setPlanetId(Long id) {this.id = id;}
     public String getPlanetName() {return this.planetName;}
     public void setPlanetName(String planetName) {this.planetName = planetName;}
-    public String getType() {return type;}
-    public void setType(String type) {this.type = type;}
+    public String getPlanetType() {return type;}
+    public void setPlanetType(String type) {this.type = type;}
 
     @Override
     public boolean equals(Object o) {

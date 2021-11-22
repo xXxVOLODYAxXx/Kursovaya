@@ -68,6 +68,18 @@ public class CSVDataProvider {
         statefulBeanToCSV.write(alist);
         this.close();
     }
+    private void writeResources (List<Resources> rlist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        this.initWriter("Resources");
+        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
+        statefulBeanToCSV.write(rlist);
+        this.close();
+    }
+    private void writeGame (List<Game> glist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        this.initWriter("Game");
+        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
+        statefulBeanToCSV.write(glist);
+        this.close();
+    }
 
     private List<Unit> sortUnitList(List<Unit> unitList) throws IOException {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
@@ -88,6 +100,14 @@ public class CSVDataProvider {
     private List<Army> sortArmyList(List<Army> alist) throws IOException {
         alist=alist.stream().sorted((o1, o2)->o1.getArmyId().compareTo(o2.getArmyId())).collect(Collectors.toList());
         return alist;
+    }
+    private List<Resources> sortResourcesList(List<Resources> rlist) throws IOException {
+        rlist=rlist.stream().sorted((o1, o2)->o1.getResourcesId().compareTo(o2.getResourcesId())).collect(Collectors.toList());
+        return rlist;
+    }
+    private List<Game> sortGameList(List<Game> glist) throws IOException {
+        glist=glist.stream().sorted((o1, o2)->o1.getGameId().compareTo(o2.getGameId())).collect(Collectors.toList());
+        return glist;
     }
 
     /**UNIT*/
@@ -286,9 +306,9 @@ public class CSVDataProvider {
         armyList=sortArmyList(armyList);
         return armyList;
     }
-    public void createArmy(Army Army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public void createArmy(Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         List<Army> armyList=getArmyList();
-        armyList.add(Army);
+        armyList.add(army);
         armyList=sortArmyList(armyList);
         this.writeArmy(armyList);
     }
@@ -312,17 +332,111 @@ public class CSVDataProvider {
         armyList=armyList.stream().filter(x->null==x.getArmyId()).collect(Collectors.toList());
         this.writeArmy(armyList);
     }
-    public void updateArmyById(Army Army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public void updateArmyById(Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         List<Army> armyList=getArmyList();
         try{
-            Army.getArmyId().equals(armyList.stream().filter(x -> Army.getArmyId().equals(x.getArmyId())).findFirst().get().getArmyId());
-            armyList=armyList.stream().filter(x-> !Army.getArmyId().equals(x.getArmyId())).collect(Collectors.toList());
+            army.getArmyId().equals(armyList.stream().filter(x -> army.getArmyId().equals(x.getArmyId())).findFirst().get().getArmyId());
+            armyList=armyList.stream().filter(x-> !army.getArmyId().equals(x.getArmyId())).collect(Collectors.toList());
             writeArmy(armyList);
-            armyList.add(Army);
+            armyList.add(army);
             armyList=sortArmyList(armyList);
             writeArmy(armyList);
         } catch (NoSuchElementException e){
             log.info("Army does not exist");
+        }
+    }
+    /**RESOURCES*/
+    public List<Resources> getResourcesList() throws IOException {
+        this.initReader("Resources");
+        CsvToBean<Resources> csvToBean=new CsvToBeanBuilder<Resources>(this.reader).withType(Resources.class).build();
+        List<Resources> resourcesList=csvToBean.parse();
+        resourcesList=sortResourcesList(resourcesList);
+        return resourcesList;
+    }
+    public void createResources(Resources resources) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Resources> resourcesList=getResourcesList();
+        resourcesList.add(resources);
+        resourcesList=sortResourcesList(resourcesList);
+        this.writeResources(resourcesList);
+    }
+    public Resources getResourcesById(Long id) throws IOException {
+        List<Resources> resourcesList=getResourcesList();
+        Resources Resources=resourcesList.stream().filter(x-> id.equals(x.getResourcesId())).findAny().orElse(null);
+        if(Resources==null){
+            log.info("ERROR:Resources does not exist");
+            return Resources;
+        } else {
+            return Resources;
+        }
+    }
+    public void deleteResourcesById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Resources> resourcesList=getResourcesList();
+        resourcesList=resourcesList.stream().filter(x-> !id.equals(x.getResourcesId())).collect(Collectors.toList());
+        this.writeResources(resourcesList);
+    }
+    public void clearResourcess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Resources> resourcesList=getResourcesList();
+        resourcesList=resourcesList.stream().filter(x->null==x.getResourcesId()).collect(Collectors.toList());
+        this.writeResources(resourcesList);
+    }
+    public void updateResourcesById(Resources resources) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Resources> resourcesList=getResourcesList();
+        try{
+            resources.getResourcesId().equals(resourcesList.stream().filter(x -> resources.getResourcesId().equals(x.getResourcesId())).findFirst().get().getResourcesId());
+            resourcesList=resourcesList.stream().filter(x-> !resources.getResourcesId().equals(x.getResourcesId())).collect(Collectors.toList());
+            writeResources(resourcesList);
+            resourcesList.add(resources);
+            resourcesList=sortResourcesList(resourcesList);
+            writeResources(resourcesList);
+        } catch (NoSuchElementException e){
+            log.info("Resources does not exist");
+        }
+    }
+    /**GAME*/
+    public List<Game> getGameList() throws IOException {
+        this.initReader("Game");
+        CsvToBean<Game> csvToBean=new CsvToBeanBuilder<Game>(this.reader).withType(Game.class).build();
+        List<Game> gameList=csvToBean.parse();
+        gameList=sortGameList(gameList);
+        return gameList;
+    }
+    public void createGame(Game game) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Game> gameList=getGameList();
+        gameList.add(game);
+        gameList=sortGameList(gameList);
+        this.writeGame(gameList);
+    }
+    public Game getGameById(Long id) throws IOException {
+        List<Game> gameList=getGameList();
+        Game Game=gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().orElse(null);
+        if(Game==null){
+            log.info("ERROR:Game does not exist");
+            return Game;
+        } else {
+            return Game;
+        }
+    }
+    public void deleteGameById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Game> gameList=getGameList();
+        gameList=gameList.stream().filter(x-> !id.equals(x.getGameId())).collect(Collectors.toList());
+        this.writeGame(gameList);
+    }
+    public void clearGames() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Game> gameList=getGameList();
+        gameList=gameList.stream().filter(x->null==x.getGameId()).collect(Collectors.toList());
+        this.writeGame(gameList);
+    }
+    public void updateGameById(Game game) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        List<Game> gameList=getGameList();
+        try{
+            game.getGameId().equals(gameList.stream().filter(x -> game.getGameId().equals(x.getGameId())).findFirst().get().getGameId());
+            gameList=gameList.stream().filter(x-> !game.getGameId().equals(x.getGameId())).collect(Collectors.toList());
+            writeGame(gameList);
+            gameList.add(game);
+            gameList=sortGameList(gameList);
+            writeGame(gameList);
+        } catch (NoSuchElementException e){
+            log.info("Game does not exist");
         }
     }
 }

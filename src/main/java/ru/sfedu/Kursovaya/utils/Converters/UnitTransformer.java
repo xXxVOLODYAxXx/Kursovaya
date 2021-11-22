@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils.Transformers;
+package ru.sfedu.Kursovaya.utils.Converters;
 
 import ru.sfedu.Kursovaya.Beans.Unit;
 
@@ -18,14 +18,14 @@ public class UnitTransformer extends AbstractBeanField {
         List<String> stringList= Arrays.asList(value.split(elemDelimiter));
         stringList.stream().forEach(x-> {
             Unit unit = new Unit();
-            String[] data =x.split(fieldsDelimiter);
-            unit.setUnitId(Long.parseLong(data[0]));
-            unit.setUnitType(data[1]);
-            unit.setUnitAttackPoints(Integer.parseInt(data[2]));
-            unit.setUnitHealthPoints(Integer.parseInt(data[3]));
-            unit.setGoldRequired(Integer.parseInt(data[4]));
-            unit.setMetalRequired(Integer.parseInt(data[5]));
-            unit.setFoodRequired(Integer.parseInt(data[6]));
+            String[] parsedData =x.split(fieldsDelimiter);
+            unit.setUnitId(Long.parseLong(parsedData[0]));
+            unit.setUnitType(parsedData[1]);
+            unit.setUnitAttackPoints(Integer.parseInt(parsedData[2]));
+            unit.setUnitHealthPoints(Integer.parseInt(parsedData[3]));
+            unit.setGoldRequired(Integer.parseInt(parsedData[4]));
+            unit.setMetalRequired(Integer.parseInt(parsedData[5]));
+            unit.setFoodRequired(Integer.parseInt(parsedData[6]));
             unitList.add(unit);
         });
         return unitList;

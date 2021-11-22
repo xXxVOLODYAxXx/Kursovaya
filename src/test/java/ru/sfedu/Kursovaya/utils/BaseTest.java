@@ -25,7 +25,12 @@ public class BaseTest {
     EnemyPlanet enemyPlanet = new EnemyPlanet();
     HistoryContent historyContent = new HistoryContent();
     Army army=new Army();
+    Game game=new Game();
+    Resources resources=new Resources();
+    List<Building> buildingList=new ArrayList<Building>();
     List<Unit> unitList=new ArrayList<Unit>();
+    List<EnemyPlanet> enemyPlanetList=new ArrayList<EnemyPlanet>();
+    List<PlayerPlanet> playerPlanetList=new ArrayList<PlayerPlanet>();
     ArmyInfo armyInfo=new ArmyInfo();
     AbstractDataProvider abstractDataProvider=new AbstractDataProvider();
     XMLList xl = new XMLList();
@@ -74,13 +79,13 @@ public class BaseTest {
         playerPlanet.setPlanetId(1L);
         playerPlanet.setPlanetName("A");
         playerPlanet.setBuildingLimit(10);
-        playerPlanet.setType("PLAYER");
+        playerPlanet.setPlanetType("PLAYER");
         return playerPlanet;
     }
     public EnemyPlanet initEnemyPlanet(){
         enemyPlanet.setPlanetId(1L);
         enemyPlanet.setPlanetName("B");
-        enemyPlanet.setType("ENEMY");
+        enemyPlanet.setPlanetType("ENEMY");
         enemyPlanet.setEnemyAttackPoints(50);
         enemyPlanet.setEnemyHealthPoints(50);
         return enemyPlanet;
@@ -94,6 +99,30 @@ public class BaseTest {
         army.setArmyInfo(armyInfo);
         army.setUnits(unitList);
         return army;
+    }
+    public Resources initResources(){
+        resources.setResourcesId(1L);
+        resources.setArmy(initArmy());
+        resources.setFood(10);
+        resources.setGold(10);
+        resources.setMetal(10);
+        resources.setOperation(1);
+        buildingList.add(initBuilding());
+        buildingList.add(initBuilding());
+        resources.setBuildingList(buildingList);
+        return resources;
+    }
+    public Game initGame(){
+        game.setGameId(1L);
+        game.setGameName("A");
+        enemyPlanetList.add(initEnemyPlanet());
+        enemyPlanetList.add(initEnemyPlanet());
+        game.setEnemyPlanetList(enemyPlanetList);
+        playerPlanetList.add(initPlayerPlanet());
+        playerPlanetList.add(initPlayerPlanet());
+        game.setPlayerPlanetList(playerPlanetList);
+        game.setResources(initResources());
+        return game;
     }
     @Test
     public void readUnit(){

@@ -1,16 +1,25 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.Kursovaya.utils.Converters.BuildingTransformer;
+import ru.sfedu.Kursovaya.utils.Converters.EnemyPlanetTransformer;
+import ru.sfedu.Kursovaya.utils.Converters.PlayerPlanetTransformer;
+import ru.sfedu.Kursovaya.utils.Converters.ResourcesTransformer;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Game {
+    @CsvBindByName
     private Long id;
+    @CsvBindByName
     private String gameName;
-
+    @CsvCustomBindByName(required = false, converter = EnemyPlanetTransformer.class)
     private List<EnemyPlanet> enemyPlanetList;
-
+    @CsvCustomBindByName(required = false, converter = PlayerPlanetTransformer.class)
     private List<PlayerPlanet> playerPlanetList;
-
+    @CsvCustomBindByName(required = false, converter = ResourcesTransformer.class)
     private Resources resources;
 
     public Game() {}

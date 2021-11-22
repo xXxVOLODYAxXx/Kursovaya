@@ -54,4 +54,20 @@ class CSVDataProviderTest extends BaseTest {
     void getArmyList() throws IOException {
         log.info(c.getArmyList());
     }
+    @Test
+    void createResources() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createResources(initResources());
+    }
+    @Test
+    void getResourcesList() throws IOException {
+        log.info(c.getResourcesList());
+    }
+    @Test
+    void createGame() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createGame(initGame());
+    }
+    @Test
+    void getGameList() throws IOException {
+        log.info(c.getGameList());
+    }
 }

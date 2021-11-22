@@ -1,17 +1,10 @@
-package ru.sfedu.Kursovaya.utils.Transformers;
+package ru.sfedu.Kursovaya.utils.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;
-import ru.sfedu.Kursovaya.Beans.Unit;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArmyInfoTransformer extends AbstractBeanField {
-    private String fieldsDelimiter = "@";
-    private String elemDelimiter = "#";
+    private final String fieldsDelimiter = "::";
 
     @Override
     public Object convert(String value){

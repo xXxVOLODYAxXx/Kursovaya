@@ -1,17 +1,27 @@
 package ru.sfedu.Kursovaya.Beans;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import ru.sfedu.Kursovaya.utils.Converters.ArmyTransformer;
+import ru.sfedu.Kursovaya.utils.Converters.BuildingTransformer;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Resources {
+    @CsvBindByName
     private Long id;
+    @CsvBindByName
     private int food;
+    @CsvBindByName
     private int metal;
+    @CsvBindByName
     private int gold;
-
+    @CsvCustomBindByName(required = false, converter = ArmyTransformer.class)
     private Army army;
-
+    @CsvCustomBindByName(required = false, converter = BuildingTransformer.class)
     private List<Building> buildingList;
+    @CsvBindByName
     private int operation;
 
     public Resources() {}
