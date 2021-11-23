@@ -135,6 +135,11 @@ public class BaseTest {
         System.out.println(unit.getGoldRequired());
         System.out.println(unit.getMetalRequired());
     }
-
+    @Test
+    public void ddd(){
+        String string="1L";
+        string=string.substring(0,string.length()-1);
+        log.info(Long.valueOf(string));
+    }
 
 }

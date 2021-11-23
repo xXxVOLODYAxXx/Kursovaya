@@ -27,7 +27,7 @@ class CSVDataProviderTest extends BaseTest {
 
     @Test
     void deleteUnitById() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        c.deleteUnitById(4L);
+        c.deleteUnitById(1L);
     }
     @Test
     void clearUnits() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
@@ -35,7 +35,7 @@ class CSVDataProviderTest extends BaseTest {
     }
     @Test
     void getUnitById() throws IOException {
-        System.out.println(c.getUnitById(3L));
+        System.out.println(c.getUnitById(1L));
     }
 
     @Test
@@ -70,4 +70,5 @@ class CSVDataProviderTest extends BaseTest {
     void getGameList() throws IOException {
         log.info(c.getGameList());
     }
+
 }

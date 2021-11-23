@@ -15,6 +15,7 @@ import ru.sfedu.Kursovaya.Beans.*;
 import java.util.stream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.sfedu.Kursovaya.Main;
 import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.Constants;
 
@@ -37,7 +38,6 @@ public class CSVDataProvider {
         if (reader!=null){this.reader.close();}
         if(writer!=null){this.writer.close();}
     }
-
     private void writeUnits (List<Unit> ulist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         this.initWriter("Units");
         StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Unit>(this.writer).withApplyQuotesToAll(false).build();
@@ -80,7 +80,6 @@ public class CSVDataProvider {
         statefulBeanToCSV.write(glist);
         this.close();
     }
-
     private List<Unit> sortUnitList(List<Unit> unitList) throws IOException {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
         return unitList;
@@ -109,7 +108,7 @@ public class CSVDataProvider {
         glist=glist.stream().sorted((o1, o2)->o1.getGameId().compareTo(o2.getGameId())).collect(Collectors.toList());
         return glist;
     }
-
+    /**CRUD*/
     /**UNIT*/
     public List<Unit> getUnitList() throws IOException {
         this.initReader("Units");
@@ -438,6 +437,202 @@ public class CSVDataProvider {
         } catch (NoSuchElementException e){
             log.info("Game does not exist");
         }
+    }
+    /**CRUD*/
+
+    public Game createUniverse(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        Game game = new Game();
+        Resources resources = new Resources();
+        Army army = new Army();
+        ArmyInfo armyInfo = new ArmyInfo();
+        armyInfo.setArmyAttackPoints(Constants.DEFAULT_ARMY_ATTACK_POINTS);
+        armyInfo.setArmyHealthPoints(Constants.DEFAULT_ARMY_HEALTH_POINTS);
+        army.setArmyId(id);
+        army.setArmyInfo(armyInfo);
+        resources.setResourcesId(id);
+        resources.setFood(Constants.DEFAULT_FOOD);
+        resources.setGold(Constants.DEFAULT_GOLD);
+        resources.setMetal(Constants.DEFAULT_METAL);
+        resources.setArmy(army);
+        game.setGameId(id);
+        game.setResources(resources);
+        game.setPlayerPlanetList(getPlayerPlanetList());
+        game.setEnemyPlanetList(getEnemyPlanetList());
+        createGame(game);
+        createResources(resources);
+        createArmy(army);
+        return game;
+    }
+
+    public void deleteUniverse(Long id) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        deleteGameById(id);
+        deleteArmyById(id);
+        deleteResourcesById(id);
+    }
+
+    public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException {
+        return getGameById(gameId)
+                .getEnemyPlanetList()
+                .get(Math.toIntExact(planetId));
+    }
+    public ArmyInfo getArmyPower(Long gameId) throws IOException {
+        return getGameById(gameId)
+                .getResources()
+                .getArmy()
+                .getArmyInfo();
+    }
+    public Boolean attackPlanet(Long enemyPlanetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        Boolean result = null;
+        Game game = getGameById(gameId);
+        ArmyInfo armyInfo = getArmyPower(gameId);
+        EnemyPlanet enemyPlanet = getEnemyPower(enemyPlanetId,gameId);
+        while (enemyPlanet.getEnemyHealthPoints() > 0){
+        if (armyInfo.getArmyHealthPoints() > 0){
+            armyInfo.setArmyHealthPoints(armyInfo.getArmyHealthPoints() - enemyPlanet.getEnemyAttackPoints());
+            enemyPlanet.setEnemyHealthPoints(enemyPlanet.getEnemyHealthPoints()-armyInfo.getArmyAttackPoints());
+        } else {
+            deleteUniverse(gameId);
+            log.info("Game over");
+            return result = false;
+        }}
+        List<EnemyPlanet> enemyPlanetList = game.getEnemyPlanetList();
+        enemyPlanetList.remove(Math.toIntExact(enemyPlanetId));
+        game.setEnemyPlanetList(enemyPlanetList);
+        PlayerPlanet playerPlanet = new PlayerPlanet();
+        playerPlanet.setPlanetId(enemyPlanet.getPlanetId());
+        playerPlanet.setPlanetName(enemyPlanet.getPlanetName());
+        playerPlanet.setPlanetType("PLAYER");
+        playerPlanet.setBuildingLimit(10);
+        List<PlayerPlanet> playerPlanetList = game.getPlayerPlanetList();
+        playerPlanetList.add(playerPlanet);
+        game.setPlayerPlanetList(playerPlanetList);
+        updateArmyById(game
+                .getResources()
+                .getArmy());
+        updateResourcesById(game
+                .getResources());
+        updateGameById(game);
+        result=true;
+        return result;
+    }
+    public Game hireUnit(Long unitId,Long gameId) throws IOException {
+        Game game = getGameById(gameId);
+        Unit unit = getUnitById(unitId);
+        if (unit == null){
+            return game;
+        }else {
+        game
+                .getResources()
+                .getArmy()
+                .getArmyInfo()
+                .setArmyHealthPoints(game
+                        .getResources()
+                        .getArmy()
+                        .getArmyInfo()
+                        .getArmyHealthPoints() + unit.getUnitHealthPoints());
+        game
+                .getResources()
+                .getArmy()
+                .getArmyInfo()
+                .setArmyAttackPoints(game
+                        .getResources()
+                        .getArmy()
+                        .getArmyInfo()
+                        .getArmyAttackPoints() + unit.getUnitAttackPoints());
+        List<Unit> unitList = game
+                .getResources()
+                .getArmy()
+                .getUnits();
+        unitList.add(unit);
+        game
+                .getResources()
+                .getArmy()
+                .setUnits(unitList);
+        return game;}
+    }
+    public List<Building> getBuildingsInfo(Long gameId) throws IOException {
+        return getGameById(gameId)
+                .getResources()
+                .getBuildingList();
+    }
+    public Game addBuilding(Long buildingId,Long gameId) throws IOException {
+        Game game=getGameById(gameId);
+        Building building=getBuildingById(buildingId);
+        if (building==null){
+            return game;
+        } else {
+        List<Building> buildingList=game.getResources().getBuildingList();
+        buildingList.add(building);
+        game
+                .getResources()
+                .setBuildingList(buildingList);
+        game
+                .getResources()
+                .setGold(game
+                        .getResources()
+                        .getGold()-building.getGoldRequired());
+        game
+                .getResources()
+                .setGold(game
+                        .getResources()
+                        .getGold()+building.getGoldBuff());
+        game
+                .getResources()
+                .setMetal(game
+                        .getResources()
+                        .getMetal()-building.getMetalRequired());
+        game
+                .getResources()
+                .setMetal(game
+                        .getResources()
+                        .getMetal()+building.getMetalBuff());
+        game
+                .getResources()
+                .setFood(game
+                        .getResources()
+                        .getFood()-building.getFoodRequired());
+        game
+                .getResources()
+                .setFood(game
+                        .getResources()
+                        .getFood()+building.getFoodBuff());
+        return game;
+        }
+    }
+    public Game removeBuilding(Long buildingId,Long gameId) throws IOException {
+        Building building = getBuildingById(buildingId);
+        Game game = getGameById(gameId);
+        List<Building> buildingList = game
+                .getResources()
+                .getBuildingList();
+        buildingList.remove(building);
+        game
+                .getResources()
+                .setBuildingList(buildingList);
+        return game;
+    }
+    public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        Game game=new Game();
+        switch (operation) {
+            case (1) -> log.info(getBuildingsInfo(gameId));
+            case (2) -> game = addBuilding(id, gameId);
+            case (3) -> game = removeBuilding(id, gameId);
+            case (4) -> game = hireUnit(id, gameId);
+            default -> log.info("Такого выбора нет");
+        }
+        updateGameById(game);
+        updateResourcesById(game.getResources());
+        updateArmyById(game.getResources().getArmy());
+        return game;
+    }
+    public Game manageResources(Long gameId,int operation) throws IOException {
+        Game game=new Game();
+        if (operation == 1) {
+            log.info(getBuildingsInfo(gameId));
+        } else {
+            log.info("Такого выбора нет");
+        }
+        return game;
     }
 }
 

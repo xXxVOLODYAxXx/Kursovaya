@@ -9,10 +9,11 @@ public class Constants {
     public static final String JDBC_URL="JDBC_URL";
     public static final String JDBC_USERNAME="JDBC_USERNAME";
     public static final String JDBC_PASSWORD="JDBC_PASSWORD";
-
-
-
-
+    public static final int DEFAULT_FOOD=50;
+    public static final int DEFAULT_GOLD=50;
+    public static final int DEFAULT_METAL=50;
+    public static final int DEFAULT_ARMY_HEALTH_POINTS=100;
+    public static final int DEFAULT_ARMY_ATTACK_POINTS=100;
 
 
 
