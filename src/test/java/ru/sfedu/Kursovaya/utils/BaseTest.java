@@ -32,7 +32,6 @@ public class BaseTest {
     List<EnemyPlanet> enemyPlanetList=new ArrayList<EnemyPlanet>();
     List<PlayerPlanet> playerPlanetList=new ArrayList<PlayerPlanet>();
     ArmyInfo armyInfo=new ArmyInfo();
-    AbstractDataProvider abstractDataProvider=new AbstractDataProvider();
     XMLList xl = new XMLList();
     XMLDataProvider x = new XMLDataProvider();
     CSVDataProvider c = new CSVDataProvider();
@@ -56,7 +55,7 @@ public class BaseTest {
     }
     public Unit initUnit(){
         unit.setUnitId(1L);
-        unit.setUnitType("MELEE");
+        unit.setUnitType("MARKSMAN");
         unit.setUnitAttackPoints(2);
         unit.setUnitHealthPoints(1);
         unit.setFoodRequired(1);

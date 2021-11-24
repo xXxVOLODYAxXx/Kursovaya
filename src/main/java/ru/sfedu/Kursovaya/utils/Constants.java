@@ -14,8 +14,18 @@ public class Constants {
     public static final int DEFAULT_METAL=50;
     public static final int DEFAULT_ARMY_HEALTH_POINTS=100;
     public static final int DEFAULT_ARMY_ATTACK_POINTS=100;
-
-
+    public static final String ARMY_INFO_FIELDS_DELIMITER="::";
+    public static final String ARMY_FIELDS_DELIMITER="'";
+    public static final String BUILDING_FIELDS_DELIMITER="@";
+    public static final String BUILDING_ELEMENTS_DELIMITER="#";
+    public static final String ENEMY_PLANET_ELEMENTS_DELIMITER="<";
+    public static final String ENEMY_PLANET_FIELDS_DELIMITER=">";
+    public static final String PLAYER_PLANET_ELEMENTS_DELIMITER="}";
+    public static final String PLAYER_PLANET_FIELDS_DELIMITER="!";
+    public static final String RESOURCES_FIELDS_DELIMITER="&";
+    public static final String UNIT_ELEMENTS_DELIMITER="@";
+    public static final String UNIT_FIELDS_DELIMITER="#";
+    public static final String NULL="null";
 
     public static final int TWO_NUMBER_NINES=9*2;
     public static final long NUMBER_NINE_LARGE=9;

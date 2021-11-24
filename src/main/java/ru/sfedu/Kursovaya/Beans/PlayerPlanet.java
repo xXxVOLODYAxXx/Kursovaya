@@ -13,7 +13,6 @@ public class PlayerPlanet extends Planet{
     public int getBuildingLimit() {
         return this.buildingLimit;
     }
-
     public void setBuildingLimit(int buildingLimit) {
         this.buildingLimit = buildingLimit;
     }
@@ -25,12 +24,10 @@ public class PlayerPlanet extends Planet{
         PlayerPlanet that = (PlayerPlanet) o;
         return buildingLimit == that.buildingLimit;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(buildingLimit);
     }
-
     @Override
     public String toString() {
         return "PlayerPlanet{" +

@@ -16,15 +16,12 @@ public class ArmyInfo {
     public int getArmyHealthPoints() {
         return this.armyHealthPoints;
     }
-
-    public void setArmyHealthPoints(int armyHealthPoints) {
-        this.armyHealthPoints = armyHealthPoints;
-    }
-
     public int getArmyAttackPoints() {
         return this.armyAttackPoints;
     }
-
+    public void setArmyHealthPoints(int armyHealthPoints) {
+        this.armyHealthPoints = armyHealthPoints;
+    }
     public void setArmyAttackPoints(int armyAttackPoints) {
         this.armyAttackPoints = armyAttackPoints;
     }
@@ -36,12 +33,10 @@ public class ArmyInfo {
         ArmyInfo armyInfo = (ArmyInfo) o;
         return armyHealthPoints == armyInfo.armyHealthPoints && armyAttackPoints == armyInfo.armyAttackPoints;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(armyHealthPoints, armyAttackPoints);
     }
-
     @Override
     public String toString() {
         return "ArmyInfo{" +

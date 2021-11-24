@@ -48,12 +48,10 @@ public class Resources {
         Resources resources = (Resources) o;
         return food == resources.food && metal == resources.metal && gold == resources.gold && operation == resources.operation && Objects.equals(id, resources.id) && Objects.equals(army, resources.army) && Objects.equals(buildingList, resources.buildingList);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, food, metal, gold, army, buildingList, operation);
     }
-
     @Override
     public String toString() {
         return "Resources{" +

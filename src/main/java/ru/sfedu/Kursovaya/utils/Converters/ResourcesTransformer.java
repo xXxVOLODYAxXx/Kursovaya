@@ -2,11 +2,12 @@ package ru.sfedu.Kursovaya.utils.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.*;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 import java.util.List;
 
 public class ResourcesTransformer extends AbstractBeanField {
-    private final String fieldsDelimiter = "&";
+    private final String fieldsDelimiter = Constants.RESOURCES_FIELDS_DELIMITER;
     private final BuildingTransformer buildingTransformer=new BuildingTransformer();
     private final ArmyTransformer armyTransformer=new ArmyTransformer();
     @Override
@@ -22,7 +23,6 @@ public class ResourcesTransformer extends AbstractBeanField {
         resources.setOperation(Integer.parseInt(parsedData[6]));
         return resources;
     }
-
     @Override
     public String convertToWrite(Object value){
         Resources resources = (Resources) value;

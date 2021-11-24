@@ -18,55 +18,42 @@ public class HistoryContent {
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getClassName() {
         return className;
     }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
     public String getCreatedDate() {
         return createdDate;
     }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
     public String getActor() {
         return actor;
     }
-
-    public void setActor(String actor) {
-        this.actor = actor;
-    }
-
     public String getMethodName() {
         return methodName;
     }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
     public Map<String, Object> getObject() {
         return object;
     }
-
-    public void setObject(Map<String, Object> object) {
-        this.object = object;
-    }
-
     public String getStatus() {
         return status;
     }
-
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setClassName(String className) {
+        this.className = className;
+    }
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+    public void setActor(String actor) {
+        this.actor = actor;
+    }
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+    public void setObject(Map<String, Object> object) {
+        this.object = object;
+    }
     public void setStatus(String status) {
         this.status = status;
     }
@@ -78,12 +65,10 @@ public class HistoryContent {
         HistoryContent that = (HistoryContent) o;
         return Objects.equals(id, that.id) && Objects.equals(className, that.className) && Objects.equals(createdDate, that.createdDate) && Objects.equals(actor, that.actor) && Objects.equals(methodName, that.methodName) && Objects.equals(object, that.object) && Objects.equals(status, that.status);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, className, createdDate, actor, methodName, object, status);
     }
-
     @Override
     public String toString() {
         return "HistoryContent{" +

@@ -26,10 +26,8 @@ public class Unit {
     @CsvBindByName
     private int foodRequired;
 
-    /**КОНСТРУКТОРЫ*/
-    public Unit(){super();}
+    public Unit(){}
 
-    /**ГЕТТЕРЫ*/
     public Long getUnitId(){
         return this.id;
     }
@@ -51,8 +49,6 @@ public class Unit {
     public int getFoodRequired(){
         return this.foodRequired;
     }
-
-    /**СЕТТЕРЫ*/
     public void setUnitId(Long id){
         this.id=id;
     }
@@ -88,17 +84,15 @@ public class Unit {
                 && foodRequired == unit.foodRequired
                 && unitType.equals(unit.unitType);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, unitType, unitAttackPoints, unitHealthPoints, goldRequired, metalRequired, foodRequired);
     }
-
     @Override
     public String toString() {
         return "Unit{" +
                 "id=" + id +
-                ", unitType='" + unitType + '\'' +
+                ", unitType='" + unitType +
                 ", unitAttackPoints=" + unitAttackPoints +
                 ", unitHealthPoints=" + unitHealthPoints +
                 ", goldRequired=" + goldRequired +

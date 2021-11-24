@@ -16,15 +16,12 @@ public class EnemyPlanet extends Planet{
     public int getEnemyHealthPoints() {
         return this.enemyHealthPoints;
     }
-
-    public void setEnemyHealthPoints(int enemyHealthPoints) {
-        this.enemyHealthPoints = enemyHealthPoints;
-    }
-
     public int getEnemyAttackPoints() {
         return this.enemyAttackPoints;
     }
-
+    public void setEnemyHealthPoints(int enemyHealthPoints) {
+        this.enemyHealthPoints = enemyHealthPoints;
+    }
     public void setEnemyAttackPoints(int enemyAttackPoints) {
         this.enemyAttackPoints = enemyAttackPoints;
     }
@@ -36,12 +33,10 @@ public class EnemyPlanet extends Planet{
         EnemyPlanet that = (EnemyPlanet) o;
         return enemyHealthPoints == that.enemyHealthPoints && enemyAttackPoints == that.enemyAttackPoints;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(enemyHealthPoints, enemyAttackPoints);
     }
-
     @Override
     public String toString() {
         return "EnemyPlanet{" +

@@ -14,14 +14,12 @@ public class XMLList {
     @XmlElement(name="Building")
     private List<Building> buildingList=null;
 
-
     public List<Unit> getUnits(){
         return unitList;
     }
     public List<Building> getBuilings(){
         return buildingList;
     }
-
     public void setUnits(List<Unit> unitList){
         this.unitList=unitList;
     }

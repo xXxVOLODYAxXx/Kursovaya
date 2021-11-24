@@ -4,11 +4,12 @@ import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.Army;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;
 import ru.sfedu.Kursovaya.Beans.Unit;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 import java.util.List;
 
 public class ArmyTransformer extends AbstractBeanField {
-    private final String fieldsDelimiter = "'";
+    private final String fieldsDelimiter = Constants.ARMY_FIELDS_DELIMITER;
     private final UnitTransformer unitTransformer=new UnitTransformer();
     private final ArmyInfoTransformer armyInfoTransformer=new ArmyInfoTransformer();
     @Override

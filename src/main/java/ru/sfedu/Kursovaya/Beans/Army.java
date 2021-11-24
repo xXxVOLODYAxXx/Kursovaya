@@ -45,12 +45,10 @@ public class Army {
         Army army = (Army) o;
         return Objects.equals(units, army.units) && Objects.equals(armyInfo, army.armyInfo);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(units, armyInfo);
     }
-
     @Override
     public String toString() {
         return "Army{" +

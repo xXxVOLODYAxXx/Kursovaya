@@ -19,11 +19,12 @@ import ru.sfedu.Kursovaya.Main;
 import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.Constants;
 
-public class CSVDataProvider {
+public class CSVDataProvider extends AbstractDataProvider implements DataProvider {
     public CSVDataProvider() throws IOException {}
     private final String PATHTOCSV= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_CSV);
     private final String CSVEXTENSION=ConfigurationUtil.getConfigurationEntry(Constants.CSV_FILE_EXTENSION);
     private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
+    MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
 
     /**ЧИТАЕМ и ПИШЕМ*/
     private CSVReader reader;
@@ -80,36 +81,42 @@ public class CSVDataProvider {
         statefulBeanToCSV.write(glist);
         this.close();
     }
-    private List<Unit> sortUnitList(List<Unit> unitList) throws IOException {
+    private List<Unit> sortUnitList(List<Unit> unitList) {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
         return unitList;
     }
-    private List<Building> sortBuildingList(List<Building> buildingList) throws IOException {
+    private List<Building> sortBuildingList(List<Building> buildingList) {
         buildingList=buildingList.stream().sorted((o1, o2)->o1.getBuildingId().compareTo(o2.getBuildingId())).collect(Collectors.toList());
         return buildingList;
     }
-    private List<PlayerPlanet> sortPlayerPlanetList(List<PlayerPlanet> pplist) throws IOException {
+    private List<PlayerPlanet> sortPlayerPlanetList(List<PlayerPlanet> pplist) {
         pplist=pplist.stream().sorted((o1, o2)->o1.getPlanetId().compareTo(o2.getPlanetId())).collect(Collectors.toList());
         return pplist;
     }
-    private List<EnemyPlanet> sortEnemyPlanetList(List<EnemyPlanet> eplist) throws IOException {
+    private List<EnemyPlanet> sortEnemyPlanetList(List<EnemyPlanet> eplist) {
         eplist=eplist.stream().sorted((o1, o2)->o1.getPlanetId().compareTo(o2.getPlanetId())).collect(Collectors.toList());
         return eplist;
     }
-    private List<Army> sortArmyList(List<Army> alist) throws IOException {
+    private List<Army> sortArmyList(List<Army> alist) {
         alist=alist.stream().sorted((o1, o2)->o1.getArmyId().compareTo(o2.getArmyId())).collect(Collectors.toList());
         return alist;
     }
-    private List<Resources> sortResourcesList(List<Resources> rlist) throws IOException {
+    private List<Resources> sortResourcesList(List<Resources> rlist) {
         rlist=rlist.stream().sorted((o1, o2)->o1.getResourcesId().compareTo(o2.getResourcesId())).collect(Collectors.toList());
         return rlist;
     }
-    private List<Game> sortGameList(List<Game> glist) throws IOException {
+    private List<Game> sortGameList(List<Game> glist) {
         glist=glist.stream().sorted((o1, o2)->o1.getGameId().compareTo(o2.getGameId())).collect(Collectors.toList());
         return glist;
     }
-    /**CRUD*/
-    /**UNIT*/
+    public String getClassName(){
+        return Thread.currentThread().getStackTrace()[2].getClassName();
+    }
+    public String getMethodName(){
+        return Thread.currentThread().getStackTrace()[2].getMethodName();
+    }
+    /**CRUD
+     * UNIT*/
     public List<Unit> getUnitList() throws IOException {
         this.initReader("Units");
         CsvToBean<Unit> csvToBean=new CsvToBeanBuilder<Unit>(this.reader).withType(Unit.class).build();
@@ -117,26 +124,44 @@ public class CSVDataProvider {
         unitlist=sortUnitList(unitlist);
         return unitlist;
     }
+
     public void createUnit(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName=getMethodName();
+        String className=getClassName();
         List<Unit> unitList=getUnitList();
         unitList.add(unit);
         unitList=sortUnitList(unitList);
         this.writeUnits(unitList);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,"Unit",className,methodName));
     }
-    public Unit getUnitById(Long id) throws IOException {
+    public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName=getMethodName();
+        String className=getClassName();
         List<Unit> unitList=getUnitList();
         Unit unit=unitList.stream().filter(x-> id.equals(x.getUnitId())).findAny().orElse(null);
         if(unit==null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName));
             log.info("ERROR:Unit does not exist");
             return unit;
         } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,"Unit",className,methodName));
             return unit;
         }
     }
     public void deleteUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName=getMethodName();
+        String className=getClassName();
         List<Unit> unitList=getUnitList();
-        unitList=unitList.stream().filter(x-> !id.equals(x.getUnitId())).collect(Collectors.toList());
-        this.writeUnits(unitList);
+        try {
+            Unit unit = unitList.stream().filter(x-> id.equals(x.getUnitId())).findAny().get();
+            unitList = unitList.stream().filter(x-> !id.equals(x.getUnitId())).collect(Collectors.toList());
+            this.writeUnits(unitList);
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,"Unit",className,methodName));
+        }
+        catch (NoSuchElementException e){
+            log.info(e);
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName));
+        }
     }
     public void clearUnits() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         List<Unit> unitList=getUnitList();
@@ -144,6 +169,8 @@ public class CSVDataProvider {
         this.writeUnits(unitList);
     }
     public void updateUnitById(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName=getMethodName();
+        String className=getClassName();
         List<Unit> unitList=getUnitList();
         try{
             unit.getUnitId().equals(unitList.stream().filter(x -> unit.getUnitId().equals(x.getUnitId())).findFirst().get().getUnitId());
@@ -152,7 +179,9 @@ public class CSVDataProvider {
             unitList.add(unit);
             unitList=sortUnitList(unitList);
             writeUnits(unitList);
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,"Unit",className,methodName));
         } catch (NoSuchElementException e){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName));
             log.info("Unit does not exist");
         }
     }
@@ -438,8 +467,9 @@ public class CSVDataProvider {
             log.info("Game does not exist");
         }
     }
-    /**CRUD*/
-
+    /**CRUD
+     * NORMALNAYACHAST*/
+    @Override
     public Game createUniverse(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Game game = new Game();
         Resources resources = new Resources();
@@ -463,24 +493,27 @@ public class CSVDataProvider {
         createArmy(army);
         return game;
     }
-
-    public void deleteUniverse(Long id) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    @Override
+    public Boolean deleteUniverse(Long id) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         deleteGameById(id);
         deleteArmyById(id);
         deleteResourcesById(id);
+        return true;
     }
-
+    @Override
     public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException {
         return getGameById(gameId)
                 .getEnemyPlanetList()
                 .get(Math.toIntExact(planetId));
     }
+    @Override
     public ArmyInfo getArmyPower(Long gameId) throws IOException {
         return getGameById(gameId)
                 .getResources()
                 .getArmy()
                 .getArmyInfo();
     }
+    @Override
     public Boolean attackPlanet(Long enemyPlanetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Boolean result = null;
         Game game = getGameById(gameId);
@@ -515,7 +548,8 @@ public class CSVDataProvider {
         result=true;
         return result;
     }
-    public Game hireUnit(Long unitId,Long gameId) throws IOException {
+    @Override
+    public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Game game = getGameById(gameId);
         Unit unit = getUnitById(unitId);
         if (unit == null){
@@ -550,11 +584,13 @@ public class CSVDataProvider {
                 .setUnits(unitList);
         return game;}
     }
+    @Override
     public List<Building> getBuildingsInfo(Long gameId) throws IOException {
         return getGameById(gameId)
                 .getResources()
                 .getBuildingList();
     }
+    @Override
     public Game addBuilding(Long buildingId,Long gameId) throws IOException {
         Game game=getGameById(gameId);
         Building building=getBuildingById(buildingId);
@@ -599,6 +635,7 @@ public class CSVDataProvider {
         return game;
         }
     }
+    @Override
     public Game removeBuilding(Long buildingId,Long gameId) throws IOException {
         Building building = getBuildingById(buildingId);
         Game game = getGameById(gameId);
@@ -611,6 +648,7 @@ public class CSVDataProvider {
                 .setBuildingList(buildingList);
         return game;
     }
+    @Override
     public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Game game=new Game();
         switch (operation) {
@@ -625,6 +663,7 @@ public class CSVDataProvider {
         updateArmyById(game.getResources().getArmy());
         return game;
     }
+    @Override
     public Game manageResources(Long gameId,int operation) throws IOException {
         Game game=new Game();
         if (operation == 1) {

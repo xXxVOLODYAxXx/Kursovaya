@@ -2,6 +2,7 @@ package ru.sfedu.Kursovaya.utils.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.Building;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BuildingTransformer extends AbstractBeanField {
-    private String fieldsDelimiter="@";
-    private String elemDelimiter="#";
+    private final String fieldsDelimiter= Constants.BUILDING_FIELDS_DELIMITER;
+    private final String elemDelimiter=Constants.BUILDING_ELEMENTS_DELIMITER;
 
     @Override
     public Object convert(String value){

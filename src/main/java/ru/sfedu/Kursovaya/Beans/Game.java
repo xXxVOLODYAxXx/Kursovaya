@@ -27,29 +27,29 @@ public class Game {
     public Long getGameId() {
         return this.id;
     }
-    public void setGameId(Long id) {
-        this.id = id;
-    }
     public String getGameName() {
         return this.gameName;
-    }
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
     }
     public List<EnemyPlanet> getEnemyPlanetList() {
         return this.enemyPlanetList;
     }
-    public void setEnemyPlanetList(List<EnemyPlanet> enemyPlanetList) {
-        this.enemyPlanetList = enemyPlanetList;
-    }
     public List<PlayerPlanet> getPlayerPlanetList() {
         return this.playerPlanetList;
     }
-    public void setPlayerPlanetList(List<PlayerPlanet> playerPlanetList) {
-        this.playerPlanetList = playerPlanetList;
-    }
     public Resources getResources() {
         return this.resources;
+    }
+    public void setGameId(Long id) {
+        this.id = id;
+    }
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
+    public void setEnemyPlanetList(List<EnemyPlanet> enemyPlanetList) {
+        this.enemyPlanetList = enemyPlanetList;
+    }
+    public void setPlayerPlanetList(List<PlayerPlanet> playerPlanetList) {
+        this.playerPlanetList = playerPlanetList;
     }
     public void setResources(Resources resources) {
         this.resources = resources;
@@ -62,12 +62,10 @@ public class Game {
         Game game = (Game) o;
         return Objects.equals(id, game.id) && Objects.equals(gameName, game.gameName) && Objects.equals(enemyPlanetList, game.enemyPlanetList) && Objects.equals(playerPlanetList, game.playerPlanetList) && Objects.equals(resources, game.resources);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, gameName, enemyPlanetList, playerPlanetList, resources);
     }
-
     @Override
     public String toString() {
         return "Game{" +

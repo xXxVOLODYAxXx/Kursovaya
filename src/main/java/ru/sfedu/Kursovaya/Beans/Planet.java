@@ -14,10 +14,10 @@ public class Planet {
     public Planet() {super();}
 
     public Long getPlanetId() {return this.id;}
-    public void setPlanetId(Long id) {this.id = id;}
     public String getPlanetName() {return this.planetName;}
-    public void setPlanetName(String planetName) {this.planetName = planetName;}
     public String getPlanetType() {return type;}
+    public void setPlanetId(Long id) {this.id = id;}
+    public void setPlanetName(String planetName) {this.planetName = planetName;}
     public void setPlanetType(String type) {this.type = type;}
 
     @Override
@@ -27,12 +27,10 @@ public class Planet {
         Planet planet = (Planet) o;
         return Objects.equals(id, planet.id) && Objects.equals(planetName, planet.planetName) && Objects.equals(type, planet.type);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, planetName, type);
     }
-
     @Override
     public String toString() {
         return "Planet{" +

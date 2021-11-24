@@ -7,16 +7,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.opencsv.bean.AbstractBeanField;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 public class UnitTransformer extends AbstractBeanField {
-    private String fieldsDelimiter="@";
-    private String elemDelimiter="#";
+    private final String fieldsDelimiter= Constants.UNIT_FIELDS_DELIMITER;
+    private final String elemDelimiter=Constants.UNIT_ELEMENTS_DELIMITER;
 
     @Override
     public Object convert(String value){
         List<Unit> unitList=new ArrayList<>();
         List<String> stringList= Arrays.asList(value.split(elemDelimiter));
-        stringList.stream().forEach(x-> {
+        stringList.forEach(x-> {
             Unit unit = new Unit();
             String[] parsedData =x.split(fieldsDelimiter);
             unit.setUnitId(Long.parseLong(parsedData[0]));
@@ -30,7 +31,6 @@ public class UnitTransformer extends AbstractBeanField {
         });
         return unitList;
     }
-
     @Override
     public String convertToWrite(Object unit){
         List<Unit> unitList=(List<Unit>) unit;

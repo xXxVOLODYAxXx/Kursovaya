@@ -27,7 +27,7 @@ public class Building {
     @CsvBindByName
     private int goldRequired;
 
-    public Building(){super();}
+    public Building(){}
 
     public Long getBuildingId(){
         return this.id;
@@ -51,7 +51,6 @@ public class Building {
     public int getFoodRequired(){
         return this.foodRequired;
     }
-
     public void setBuildingId(Long id){
         this.id=id;
     }
@@ -91,12 +90,10 @@ public class Building {
                 && metalRequired == building.metalRequired
                 && goldRequired == building.goldRequired;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, buildingType, foodBuff, metalBuff, goldBuff, goldRequired, metalRequired, foodRequired);
     }
-
     @Override
     public String toString() {
         return "Unit{" +

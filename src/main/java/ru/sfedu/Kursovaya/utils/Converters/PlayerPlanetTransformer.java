@@ -3,6 +3,7 @@ package ru.sfedu.Kursovaya.utils.Converters;
 import com.opencsv.bean.AbstractBeanField;
 import ru.sfedu.Kursovaya.Beans.EnemyPlanet;
 import ru.sfedu.Kursovaya.Beans.PlayerPlanet;
+import ru.sfedu.Kursovaya.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlayerPlanetTransformer extends AbstractBeanField {
-    private String fieldsDelimiter="}";
-    private String elemDelimiter="!";
+    private final String fieldsDelimiter= Constants.PLAYER_PLANET_FIELDS_DELIMITER;
+    private final String elemDelimiter=Constants.PLAYER_PLANET_ELEMENTS_DELIMITER;
 
     @Override
     public Object convert(String value){
@@ -28,7 +29,6 @@ public class PlayerPlanetTransformer extends AbstractBeanField {
         });
         return playerPlanetList;
     }
-
     @Override
     public String convertToWrite(Object value){
         List<PlayerPlanet> playerPlanetList=(List<PlayerPlanet>) value;
