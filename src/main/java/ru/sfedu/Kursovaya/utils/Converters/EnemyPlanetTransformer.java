@@ -1,9 +1,12 @@
 package ru.sfedu.Kursovaya.utils.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.Building;
 import ru.sfedu.Kursovaya.Beans.EnemyPlanet;
 import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,11 +16,12 @@ import java.util.stream.Collectors;
 public class EnemyPlanetTransformer extends AbstractBeanField {
     private String fieldsDelimiter= Constants.ENEMY_PLANET_FIELDS_DELIMITER;
     private String elemDelimiter=Constants.ENEMY_PLANET_ELEMENTS_DELIMITER;
-
+    private static final Logger log = LogManager.getLogger(EnemyPlanetTransformer.class);
     @Override
     public Object convert(String value){
         List<EnemyPlanet> enemyPlanetList=new ArrayList<>();
         List<String> stringList= Arrays.asList(value.split(elemDelimiter));
+        try {
         stringList.stream().forEach(x-> {
             EnemyPlanet enemyPlanet=new EnemyPlanet();
             String[] data =x.split(fieldsDelimiter);
@@ -28,12 +32,19 @@ public class EnemyPlanetTransformer extends AbstractBeanField {
             enemyPlanet.setEnemyAttackPoints(Integer.parseInt(data[4]));
             enemyPlanetList.add(enemyPlanet);
         });
-        return enemyPlanetList;
+        } catch (NumberFormatException e){
+            log.info("EnemyPlanetList is empty");
+        } finally {
+            return enemyPlanetList;
+        }
     }
 
     @Override
     public String convertToWrite(Object value){
         List<EnemyPlanet> enemyPlanetList=(List<EnemyPlanet>) value;
+        if (enemyPlanetList==null){
+            return Constants.ENEMY_PLANET_ELEMENTS_DELIMITER;
+        } else {
         List<String> stringList= enemyPlanetList.stream()
                 .map(x-> String.format("%d"
                                 +fieldsDelimiter
@@ -52,5 +63,6 @@ public class EnemyPlanetTransformer extends AbstractBeanField {
                 .collect(Collectors.toList()
                 );
         return String.join(elemDelimiter,stringList);
+        }
     }
 }

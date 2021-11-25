@@ -45,6 +45,18 @@ class CSVDataProviderTest extends BaseTest {
         log.info(c.getBuildingList());
     }
     @Test
+    void createBuilding() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createBuilding(initBuilding());
+    }
+    @Test
+    void createEnemyPlanet() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createEnemyPlanet(initEnemyPlanet());
+    }
+    @Test
+    void createPayerPlanet() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createPlayerPlanet(initPlayerPlanet());
+    }
+    @Test
     void createArmy() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         c.createArmy(initArmy());
     }
@@ -68,5 +80,6 @@ class CSVDataProviderTest extends BaseTest {
     void getGameList() throws IOException {
         log.info(c.getGameList());
     }
+
 
 }

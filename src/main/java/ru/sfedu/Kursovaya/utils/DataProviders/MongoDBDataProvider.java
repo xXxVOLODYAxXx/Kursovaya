@@ -12,6 +12,7 @@ import org.bson.Document;
 import org.joda.time.DateTime;
 import ru.sfedu.Kursovaya.Beans.HistoryContent;
 import ru.sfedu.Kursovaya.Enums.Status;
+import ru.sfedu.Kursovaya.utils.Constants;
 import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import java.util.*;
@@ -34,7 +35,7 @@ public class MongoDBDataProvider {
         historyContent.setId(new Random().nextLong());
         historyContent.setClassName(className);
         historyContent.setCreatedDate(dateTime.toString());
-        historyContent.setActor("SYSTEM");
+        historyContent.setActor(Constants.DEFAULT_ACTOR);
         historyContent.setMethodName(methodName);
         historyContent.setObject(map);
         historyContent.setStatus(Status.SUCCESS.toString());

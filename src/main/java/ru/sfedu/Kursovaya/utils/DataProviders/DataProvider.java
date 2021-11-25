@@ -1,14 +1,12 @@
 package ru.sfedu.Kursovaya.utils.DataProviders;
 
-import ru.sfedu.Kursovaya.Beans.ArmyInfo;
-import ru.sfedu.Kursovaya.Beans.Building;
-import ru.sfedu.Kursovaya.Beans.EnemyPlanet;
-import ru.sfedu.Kursovaya.Beans.Game;
+import ru.sfedu.Kursovaya.Beans.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface DataProvider {
-    public Game createUniverse(Long id) throws Exception;
+    public Game createUniverse(Game game, Resources resources, Army army)throws Exception;
     public Boolean deleteUniverse(Long id) throws Exception;
     public EnemyPlanet getEnemyPower(Long planetId, Long gameId) throws Exception;
     public ArmyInfo getArmyPower(Long gameId) throws Exception;
@@ -19,4 +17,10 @@ public interface DataProvider {
     public Game removeBuilding(Long buildingId,Long gameId) throws Exception;
     public Game manageResources(Long gameId,int operation,Long id) throws Exception;
     public Game manageResources(Long gameId,int operation) throws Exception;
+
+    List<PlayerPlanet> getPlayerPlanetList() throws IOException;
+
+    List<EnemyPlanet> getEnemyPlanetList() throws IOException;
+
+
 }

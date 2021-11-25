@@ -19,25 +19,24 @@ import java.util.Map;
 public class BaseTest {
     public BaseTest() throws JAXBException, IOException {}
 
-    Unit unit = new Unit();
-    Building building = new Building();
-    PlayerPlanet playerPlanet = new PlayerPlanet();
-    EnemyPlanet enemyPlanet = new EnemyPlanet();
-    HistoryContent historyContent = new HistoryContent();
-    Army army=new Army();
-    Game game=new Game();
-    Resources resources=new Resources();
-    List<Building> buildingList=new ArrayList<Building>();
-    List<Unit> unitList=new ArrayList<Unit>();
-    List<EnemyPlanet> enemyPlanetList=new ArrayList<EnemyPlanet>();
-    List<PlayerPlanet> playerPlanetList=new ArrayList<PlayerPlanet>();
-    ArmyInfo armyInfo=new ArmyInfo();
+    public Unit unit = new Unit();
+    public Building building = new Building();
+    public PlayerPlanet playerPlanet = new PlayerPlanet();
+    public EnemyPlanet enemyPlanet = new EnemyPlanet();
+    public HistoryContent historyContent = new HistoryContent();
+    public ArmyInfo armyInfo=new ArmyInfo();
+    public Army army=new Army();
+    public Resources resources=new Resources();
+    public Game game=new Game();
+    public List<Building> buildingList=new ArrayList<Building>();
+    public List<Unit> unitList=new ArrayList<Unit>();
+    public List<EnemyPlanet> enemyPlanetList=new ArrayList<EnemyPlanet>();
+    public List<PlayerPlanet> playerPlanetList=new ArrayList<PlayerPlanet>();
     XMLList xl = new XMLList();
-    XMLDataProvider x = new XMLDataProvider();
-    CSVDataProvider c = new CSVDataProvider();
-
+    public XMLDataProvider x = new XMLDataProvider();
+    public CSVDataProvider c = new CSVDataProvider();
     public JDBCDataProvider j = new JDBCDataProvider();
-    Logger log = LogManager.getLogger(CSVDataProvider.class);
+    public Logger log = LogManager.getLogger(CSVDataProvider.class);
 
 
     public HistoryContent initHistoryContent(){
@@ -89,13 +88,16 @@ public class BaseTest {
         enemyPlanet.setEnemyHealthPoints(50);
         return enemyPlanet;
     }
+    public ArmyInfo initArmyInfo(){
+        armyInfo.setArmyAttackPoints(50);
+        armyInfo.setArmyHealthPoints(50);
+        return armyInfo;
+    }
     public Army initArmy(){
         army.setArmyId(1L);
         unitList.add(initUnit());
         unitList.add(initUnit());
-        armyInfo.setArmyHealthPoints(10);
-        armyInfo.setArmyHealthPoints(10);
-        army.setArmyInfo(armyInfo);
+        army.setArmyInfo(initArmyInfo());
         army.setUnits(unitList);
         return army;
     }
@@ -126,19 +128,106 @@ public class BaseTest {
     @Test
     public void readUnit(){
         initUnit();
-        System.out.println(unit.getUnitId());
-        System.out.println(unit.getUnitType());
-        System.out.println(unit.getUnitAttackPoints());
-        System.out.println(unit.getUnitHealthPoints());
-        System.out.println(unit.getFoodRequired());
-        System.out.println(unit.getGoldRequired());
-        System.out.println(unit.getMetalRequired());
+        log.info(unit.getUnitId());
+        log.info(unit.getUnitType());
+        log.info(unit.getUnitAttackPoints());
+        log.info(unit.getUnitHealthPoints());
+        log.info(unit.getFoodRequired());
+        log.info(unit.getGoldRequired());
+        log.info(unit.getMetalRequired());
     }
     @Test
-    public void ddd(){
-        String string="1L";
-        string=string.substring(0,string.length()-1);
-        log.info(Long.valueOf(string));
+    public void readBuilding(){
+        initBuilding();
+        log.info(building.getBuildingId());
+        log.info(building.getBuildingType());
+        log.info(building.getFoodRequired());
+        log.info(building.getGoldRequired());
+        log.info(building.getMetalRequired());
+        log.info(building.getFoodBuff());
+        log.info(building.getGoldBuff());
+        log.info(building.getMetalBuff());
     }
+    @Test
+    public void readEnemyPlanet(){
+        initEnemyPlanet();
+        log.info(enemyPlanet.getPlanetId());
+        log.info(enemyPlanet.getPlanetName());
+        log.info(enemyPlanet.getPlanetType());
+        log.info(enemyPlanet.getEnemyAttackPoints());
+        log.info(enemyPlanet.getEnemyHealthPoints());
+    }
+    @Test
+    public void readEnemyPlanet(EnemyPlanet enemyPlanet){
+        try {
+            log.info(enemyPlanet.getPlanetName());
+            log.info(enemyPlanet.getPlanetType());
+            log.info(enemyPlanet.getEnemyAttackPoints());
+            log.info(enemyPlanet.getEnemyHealthPoints());
+            log.info(enemyPlanet.getPlanetId());
+        } catch (NullPointerException e) {}
+
+    }
+    @Test
+    public void readPlayerPlanet(){
+        initPlayerPlanet();
+        log.info(playerPlanet.getPlanetId());
+        log.info(playerPlanet.getPlanetName());
+        log.info(playerPlanet.getPlanetType());
+        log.info(playerPlanet.getBuildingLimit());
+    }
+    @Test
+    public void readArmyInfo(){
+        initArmyInfo();
+        log.info(armyInfo.getArmyAttackPoints());
+        log.info(armyInfo.getArmyHealthPoints());
+    }
+    @Test
+    public void readArmyInfo(ArmyInfo armyInfo){
+        try {
+            log.info(armyInfo.getArmyAttackPoints());
+            log.info(armyInfo.getArmyHealthPoints());
+        }catch (NullPointerException e) {}
+
+    }
+    @Test
+    public void readArmy(){
+        initArmy();
+        log.info(army.getArmyId());
+        log.info(army.getArmyInfo());
+        log.info(army.getUnits());
+    }
+    @Test
+    public void readResources(){
+        initResources();
+        log.info(resources.getResourcesId());
+        log.info(resources.getArmy());
+        log.info(resources.getBuildingList());
+        log.info(resources.getFood());
+        log.info(resources.getGold());
+        log.info(resources.getMetal());
+        log.info(resources.getOperation());
+    }
+    @Test
+    public void readGame(){
+        initGame();
+        log.info(game.getGameId());
+        log.info(game.getGameName());
+        log.info(game.getEnemyPlanetList());
+        log.info(game.getPlayerPlanetList());
+        log.info(game.getResources());
+    }
+    @Test
+    public void readGame(Game game){
+        try {
+        log.info(game.getGameId());
+        log.info(game.getGameName());
+        log.info(game.getEnemyPlanetList());
+        log.info(game.getPlayerPlanetList());
+        log.info(game.getResources());
+    }catch (NullPointerException e) {}
+    }
+
+
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ResourcesTransformer extends AbstractBeanField {
     private final String fieldsDelimiter = Constants.RESOURCES_FIELDS_DELIMITER;
+    private final String elementsDelimiter=Constants.RESOURCES_ELEMENTS_DELIMITER;
     private final BuildingTransformer buildingTransformer=new BuildingTransformer();
     private final ArmyTransformer armyTransformer=new ArmyTransformer();
     @Override
@@ -26,6 +27,9 @@ public class ResourcesTransformer extends AbstractBeanField {
     @Override
     public String convertToWrite(Object value){
         Resources resources = (Resources) value;
+        if (resources==null){
+            return elementsDelimiter;
+        }else {
         return String.format("%d"
                         + fieldsDelimiter
                         + "%d"
@@ -46,5 +50,6 @@ public class ResourcesTransformer extends AbstractBeanField {
                 armyTransformer.convertToWrite(resources.getArmy()),
                 buildingTransformer.convertToWrite(resources.getBuildingList()),
                 resources.getOperation());
+        }
     }
 }
