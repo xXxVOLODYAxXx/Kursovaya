@@ -33,7 +33,7 @@ public class EnemyPlanetTransformer extends AbstractBeanField {
             enemyPlanetList.add(enemyPlanet);
         });
         } catch (NumberFormatException e){
-            log.info("EnemyPlanetList is empty");
+            log.error("EnemyPlanetList is empty");
         } finally {
             return enemyPlanetList;
         }
@@ -43,7 +43,7 @@ public class EnemyPlanetTransformer extends AbstractBeanField {
     public String convertToWrite(Object value){
         List<EnemyPlanet> enemyPlanetList=(List<EnemyPlanet>) value;
         if (enemyPlanetList==null){
-            return Constants.ENEMY_PLANET_ELEMENTS_DELIMITER;
+            return elemDelimiter;
         } else {
         List<String> stringList= enemyPlanetList.stream()
                 .map(x-> String.format("%d"

@@ -3,10 +3,9 @@ package ru.sfedu.Kursovaya.utils.DataProviders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.Unit;
-import ru.sfedu.Kursovaya.Beans.XMLList;
+import ru.sfedu.Kursovaya.UtilBeans.XMLList;
 import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.Constants;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import javax.xml.bind.*;
 import java.io.File;

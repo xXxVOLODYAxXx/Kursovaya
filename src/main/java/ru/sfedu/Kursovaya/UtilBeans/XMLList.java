@@ -1,4 +1,7 @@
-package ru.sfedu.Kursovaya.Beans;
+package ru.sfedu.Kursovaya.UtilBeans;
+
+import ru.sfedu.Kursovaya.Beans.Building;
+import ru.sfedu.Kursovaya.Beans.Unit;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

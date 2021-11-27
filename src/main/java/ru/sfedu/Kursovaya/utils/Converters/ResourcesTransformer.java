@@ -1,6 +1,8 @@
 package ru.sfedu.Kursovaya.utils.Converters;
 
 import com.opencsv.bean.AbstractBeanField;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.*;
 import ru.sfedu.Kursovaya.utils.Constants;
 
@@ -11,18 +13,25 @@ public class ResourcesTransformer extends AbstractBeanField {
     private final String elementsDelimiter=Constants.RESOURCES_ELEMENTS_DELIMITER;
     private final BuildingTransformer buildingTransformer=new BuildingTransformer();
     private final ArmyTransformer armyTransformer=new ArmyTransformer();
+    private static final Logger log = LogManager.getLogger(ResourcesTransformer.class);
     @Override
     public Object convert(String value){
         Resources resources = new Resources();
-        String[] parsedData = value.split(fieldsDelimiter);
-        resources.setResourcesId(Long.parseLong(parsedData[0]));
-        resources.setFood(Integer.parseInt(parsedData[1]));
-        resources.setMetal(Integer.parseInt(parsedData[2]));
-        resources.setGold(Integer.parseInt(parsedData[3]));
-        resources.setArmy((Army) armyTransformer.convert(parsedData[4]));
-        resources.setBuildingList((List<Building>) buildingTransformer.convert(parsedData[5]));
-        resources.setOperation(Integer.parseInt(parsedData[6]));
-        return resources;
+        try {
+            String[] parsedData = value.split(fieldsDelimiter);
+            resources.setResourcesId(Long.parseLong(parsedData[0]));
+            resources.setFood(Integer.parseInt(parsedData[1]));
+            resources.setMetal(Integer.parseInt(parsedData[2]));
+            resources.setGold(Integer.parseInt(parsedData[3]));
+            resources.setArmy((Army) armyTransformer.convert(parsedData[4]));
+            resources.setBuildingList((List<Building>) buildingTransformer.convert(parsedData[5]));
+            resources.setOperation(Integer.parseInt(parsedData[6]));
+        }catch (NumberFormatException e){
+            log.error("Resources do not exist");
+        }finally {
+            return resources;
+        }
+
     }
     @Override
     public String convertToWrite(Object value){

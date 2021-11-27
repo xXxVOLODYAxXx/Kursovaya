@@ -34,7 +34,7 @@ public class BuildingTransformer extends AbstractBeanField {
                 buildingList.add(building);
             });
         } catch (NumberFormatException e){
-            log.info("UnitList is empty");
+            log.error("BuildingList is empty");
         } finally {
             return buildingList;
         }
@@ -46,7 +46,7 @@ public class BuildingTransformer extends AbstractBeanField {
     public String convertToWrite(Object building){
         List<Building> buildingList=(List<Building>) building;
         if(buildingList==null){
-          return Constants.BUILDING_ELEMENTS_DELIMITER;
+          return elemDelimiter;
         } else {
             List<String> stringList = buildingList.stream()
                     .map(x -> String.format("%d"
@@ -69,9 +69,9 @@ public class BuildingTransformer extends AbstractBeanField {
                             x.getFoodBuff(),
                             x.getMetalBuff(),
                             x.getGoldBuff(),
-                            x.getGoldRequired(),
-                            x.getGoldRequired(),
-                            x.getFoodRequired()))
+                            x.getFoodRequired(),
+                            x.getMetalRequired(),
+                            x.getGoldRequired()))
                     .collect(Collectors.toList()
                     );
             return String.join(elemDelimiter, stringList);

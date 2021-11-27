@@ -4,7 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import ru.sfedu.Kursovaya.Beans.*;
-import ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider;
+import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
+import ru.sfedu.Kursovaya.UtilBeans.XMLList;
 import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 import ru.sfedu.Kursovaya.utils.DataProviders.JDBCDataProvider;
 import ru.sfedu.Kursovaya.utils.DataProviders.XMLDataProvider;
@@ -198,8 +199,26 @@ public class BaseTest {
         log.info(army.getUnits());
     }
     @Test
+    public void readArmy(Army army){
+        log.info("ARMY");
+        log.info(army.getArmyId());
+        log.info(army.getArmyInfo());
+        log.info(army.getUnits());
+    }
+    @Test
     public void readResources(){
         initResources();
+        log.info(resources.getResourcesId());
+        log.info(resources.getArmy());
+        log.info(resources.getBuildingList());
+        log.info(resources.getFood());
+        log.info(resources.getGold());
+        log.info(resources.getMetal());
+        log.info(resources.getOperation());
+    }
+    @Test
+    public void readResources(Resources resources){
+        log.info("RESOURCES");
         log.info(resources.getResourcesId());
         log.info(resources.getArmy());
         log.info(resources.getBuildingList());
@@ -219,13 +238,12 @@ public class BaseTest {
     }
     @Test
     public void readGame(Game game){
-        try {
+        log.info("GAME");
         log.info(game.getGameId());
         log.info(game.getGameName());
         log.info(game.getEnemyPlanetList());
         log.info(game.getPlayerPlanetList());
         log.info(game.getResources());
-    }catch (NullPointerException e) {}
     }
 
 

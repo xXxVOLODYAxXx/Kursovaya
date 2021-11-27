@@ -2,6 +2,7 @@ package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.sfedu.Kursovaya.Beans.Army;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;
@@ -21,7 +22,21 @@ class CSVDataProviderCoreTest extends BaseTest {
     }
 
     @Test
-    void createUniverse() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void createUniverseSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+    }
+    @Test
+    void createUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.createUniverse(game,resources,army);
+    }
+    @Test
+    void deleteUniverseSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         Long id = 1L;
         Game game = new Game();
         Resources resources = new Resources();
@@ -41,10 +56,10 @@ class CSVDataProviderCoreTest extends BaseTest {
         game.setPlayerPlanetList(c.getPlayerPlanetList());
         game.setEnemyPlanetList(c.getEnemyPlanetList());
         c.createUniverse(game,resources,army);
+        c.deleteUniverse(1L);
     }
-
     @Test
-    void deleteUniverse() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void deleteUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         c.deleteUniverse(1L);
     }
 

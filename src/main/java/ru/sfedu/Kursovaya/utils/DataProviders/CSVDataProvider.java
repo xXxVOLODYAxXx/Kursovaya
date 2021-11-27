@@ -10,6 +10,7 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import org.apache.commons.lang3.ObjectUtils;
 import ru.sfedu.Kursovaya.Beans.*;
 
 import java.util.stream.*;
@@ -66,6 +67,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
     private void writeArmy (List<Army> alist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         this.initWriter(Constants.CSV_FILE_NAME_ARMY);
         StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
+        log.info(alist);
         statefulBeanToCSV.write(alist);
         this.close();
     }
@@ -102,19 +104,28 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return alist;
     }
     private List<Resources> sortResourcesList(List<Resources> rlist) {
-        rlist=rlist.stream().sorted((o1, o2)->o1.getResourcesId().compareTo(o2.getResourcesId())).collect(Collectors.toList());
-        return rlist;
+        try {
+            rlist=rlist.stream().sorted((o1, o2)->o1.getResourcesId().compareTo(o2.getResourcesId())).collect(Collectors.toList());
+        } catch (NullPointerException e){} finally {
+            return rlist;
+        }
+
+
     }
     private List<Game> sortGameList(List<Game> glist) {
-        glist=glist.stream().sorted((o1, o2)->o1.getGameId().compareTo(o2.getGameId())).collect(Collectors.toList());
-        return glist;
+        try {
+            glist=glist.stream().sorted((o1, o2)->o1.getGameId().compareTo(o2.getGameId())).collect(Collectors.toList());
+        } catch (NullPointerException e){} finally {
+            return glist;
+        }
     }
-    public String getClassName(){
+    private String getClassName(){
         return Thread.currentThread().getStackTrace()[2].getClassName();
     }
-    public String getMethodName(){
+    private String getMethodName(){
         return Thread.currentThread().getStackTrace()[2].getMethodName();
     }
+
     /**CRUD
      * UNIT*/
     public List<Unit> getUnitList() throws IOException {
@@ -400,9 +411,10 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         String methodName=getMethodName();
         String className=getClassName();
         List<Army> armylist=getArmyList();
+        log.info(armylist);
         armylist.add(army);
         armylist=sortArmyList(armylist);
-        this.writeArmy(armylist);
+        writeArmy(armylist);
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(army,Constants.ARMY,className,methodName));
     }
     public Army getArmyById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -548,7 +560,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         Game game=gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().orElse(null);
         if(game==null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName));
-            log.info("ERROR:Game does not exist");
+            log.error("Game does not exist");
             return game;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName));
@@ -564,8 +576,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
             gameList = gameList.stream().filter(x-> !id.equals(x.getGameId())).collect(Collectors.toList());
             this.writeGame(gameList);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName));
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e){
             log.info(e);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName));
         }
@@ -592,21 +603,33 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
             log.info("Game does not exist");
         }
     }
+
     /**CRUD
      * CORE*/
     @Override
     public Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        if (game.getGameId()==null || army.getArmyId() == null || resources.getResourcesId() == null){
+            log.info("Wrong parameters");
+            return null;
+        } else {
         createGame(game);
         createResources(resources);
         createArmy(army);
         return game;
+        }
     }
     @Override
-    public Boolean deleteUniverse(Long id) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        deleteGameById(id);
-        deleteArmyById(id);
-        deleteResourcesById(id);
-        return true;
+    public Boolean deleteUniverse(Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        try {
+            getGameById(gameId).getGameId();
+            deleteGameById(gameId);
+            deleteArmyById(gameId);
+            deleteResourcesById(gameId);
+            return true;
+        } catch (NullPointerException e){
+            log.error("Nothing to delete");
+            return false;
+        }
     }
     @Override
     public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -632,11 +655,11 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         }
     }
     @Override
-    public Boolean attackPlanet(Long enemyPlanetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public Boolean attackPlanet(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Boolean result = null;
         Game game = getGameById(gameId);
         ArmyInfo armyInfo = getArmyPower(gameId);
-        EnemyPlanet enemyPlanet = getEnemyPower(enemyPlanetId,gameId);
+        EnemyPlanet enemyPlanet = getEnemyPower(planetId,gameId);
         try {
             while (enemyPlanet.getEnemyHealthPoints() > 0){
                 if (armyInfo.getArmyHealthPoints() > 0){
@@ -648,7 +671,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
                     return result = false;
                 }}
             List<EnemyPlanet> enemyPlanetList = game.getEnemyPlanetList();
-            enemyPlanetList.remove(Math.toIntExact(enemyPlanetId)-1);
+            enemyPlanetList.remove(Math.toIntExact(planetId)-1);
             game.setEnemyPlanetList(enemyPlanetList);
             PlayerPlanet playerPlanet = new PlayerPlanet();
             playerPlanet.setPlanetId(enemyPlanet.getPlanetId());
@@ -706,7 +729,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
                 .getArmy()
                 .setUnits(unitList);
         }catch (NullPointerException e){
-            log.info("ERROR");
+            log.error("ERROR");
         }finally {
             return game;
         }
@@ -796,13 +819,13 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
             case (2) -> game = addBuilding(id, gameId);
             case (3) -> game = removeBuilding(id, gameId);
             case (4) -> game = hireUnit(id, gameId);
-            default -> log.info("ERROR");
+            default -> log.error("Wrong id");
         }
             updateGameById(game);
             updateResourcesById(game.getResources());
             updateArmyById(game.getResources().getArmy());
         } catch (NullPointerException e){
-            log.info("Game does not exist");
+            log.error("Game does not exist");
         }
         return game;
     }
@@ -812,7 +835,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {
-            log.info("ERROR");
+            log.error("Wrong operation");
         }
         return game;
     }

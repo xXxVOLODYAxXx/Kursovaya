@@ -10,10 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 import org.joda.time.DateTime;
-import ru.sfedu.Kursovaya.Beans.HistoryContent;
+import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
 import ru.sfedu.Kursovaya.Enums.Status;
 import ru.sfedu.Kursovaya.utils.Constants;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import java.util.*;
 

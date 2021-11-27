@@ -50,10 +50,8 @@ public class Constants {
     public static final String REMOVE_BUILDING="REMOVEBUILDING";
     public static final String MANAGE_RESOURCES="MANAGERESOURCES";
 
-
-
-
     public static final String ARMY_INFO_FIELDS_DELIMITER="::";
+    public static final String ARMY_ELEMENTS_DELIMITER="*";
     public static final String ARMY_FIELDS_DELIMITER="'";
     public static final String BUILDING_FIELDS_DELIMITER="@";
     public static final String BUILDING_ELEMENTS_DELIMITER="#";

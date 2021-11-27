@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.Beans;
+package ru.sfedu.Kursovaya.UtilBeans;
 
 import java.util.Map;
 import java.util.Objects;

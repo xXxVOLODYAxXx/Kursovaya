@@ -90,13 +90,6 @@ public class Main {
         }
     }
 
-
-
-
-
-
-
-
     private static DataProvider getDataProvider(String dpType) throws IOException, JAXBException {
         switch(dpType.toUpperCase(Locale.ROOT)) {
             case(Constants.CSV): {
