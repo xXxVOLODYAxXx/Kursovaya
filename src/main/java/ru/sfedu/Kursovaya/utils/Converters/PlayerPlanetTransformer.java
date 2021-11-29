@@ -32,7 +32,7 @@ public class PlayerPlanetTransformer extends AbstractBeanField {
                 playerPlanetList.add(playerPlanet);
             });
         } catch (NumberFormatException e){
-            log.error("PlayerPlanetList is empty");
+            log.error(Constants.PLAYER_PLANET+Constants.DO_NOT_EXIST);
         } finally {
             return playerPlanetList;
         }

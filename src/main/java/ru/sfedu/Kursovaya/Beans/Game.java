@@ -55,7 +55,6 @@ public class Game {
         this.resources = resources;
     }
 
-
     @Override
     public int hashCode() {
         return Objects.hash(id, gameName, enemyPlanetList, playerPlanetList, resources);
@@ -70,7 +69,6 @@ public class Game {
                 ", resources=" + resources +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

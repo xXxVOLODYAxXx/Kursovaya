@@ -64,7 +64,11 @@ public class Main {
                 break;
             }
             case Constants.MANAGE_RESOURCES:{
-                //dataProvider.manageResources();
+                if (args[4]!=null){
+                    dataProvider.manageResources(Long.parseLong(args[2]),Integer.parseInt(args[3]),Long.parseLong(args[4]));
+                } else {
+                    dataProvider.manageResources(Long.parseLong(args[2]),Integer.parseInt(args[3]));
+                }
                 break;
             }
             case Constants.ADD_BUILDING:{

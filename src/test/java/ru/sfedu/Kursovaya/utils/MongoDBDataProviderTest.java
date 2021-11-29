@@ -21,11 +21,11 @@ class MongoDBDataProviderTest extends BaseTest{
     }
 
     @Test
-    void insertRand() {
+    void insertRand() throws IOException {
         m.insertRecord(initHistoryContent());
     }
     @Test
-    void readAll(){
+    void readAll() throws IOException {
         log.info(m.readAll());
     }
 }

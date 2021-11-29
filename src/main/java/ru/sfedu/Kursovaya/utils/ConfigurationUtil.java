@@ -10,7 +10,7 @@ import java.util.Properties;
  * @author Boris Jmailov
  */
 public class ConfigurationUtil {
-    private static final String DEFAULT_CONFIG_PATH = "./environment.properties";
+    private static final String DEFAULT_CONFIG_PATH = "./src/main/resources/environment.properties";
     private static final String CUSTOM_CONFIG_PATH=System.getProperty("environmentPath");
     private static final Properties configuration = new Properties();
     /**

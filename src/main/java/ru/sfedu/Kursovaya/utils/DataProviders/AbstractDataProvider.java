@@ -14,7 +14,6 @@ public abstract class AbstractDataProvider  {
     private final MongoDBDataProvider mdvdp=new MongoDBDataProvider();
     private static final Logger log = LogManager.getLogger(AbstractDataProvider.class);
 
-
     public AbstractDataProvider() throws IOException {}
 
     public abstract void createUnit(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
@@ -26,9 +25,6 @@ public abstract class AbstractDataProvider  {
     mdvdp.insertRecord(historyContent);
     }
 
-
-
-
     public abstract Boolean deleteUniverse(Long id) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException;
     public abstract EnemyPlanet getEnemyPower(Long planetId, Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
     public abstract ArmyInfo getArmyPower(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
@@ -39,5 +35,4 @@ public abstract class AbstractDataProvider  {
     public abstract Game removeBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
     public abstract Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
     public abstract Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
-
 }

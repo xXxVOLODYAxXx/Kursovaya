@@ -12,8 +12,10 @@ import org.bson.Document;
 import org.joda.time.DateTime;
 import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
 import ru.sfedu.Kursovaya.Enums.Status;
+import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.Constants;
 
+import java.io.IOException;
 import java.util.*;
 
 public class MongoDBDataProvider {
@@ -29,7 +31,6 @@ public class MongoDBDataProvider {
         DateTime dateTime = new DateTime();
         Map<String,Object> map = new HashMap<>();
         map.put(objectName,convertEntityToMap(object));
-        log.info(map);
         HistoryContent historyContent = new HistoryContent();
         historyContent.setId(new Random().nextLong());
         historyContent.setClassName(className);
@@ -38,40 +39,43 @@ public class MongoDBDataProvider {
         historyContent.setMethodName(methodName);
         historyContent.setObject(map);
         historyContent.setStatus(Status.SUCCESS.toString());
-        log.info(historyContent.getObject());
         return historyContent;
     }
     public HistoryContent initHistoryContentFalse(String string,String className,String methodName){
         DateTime dateTime = new DateTime();
         Map<String,Object> map = new HashMap<>();
-        map.put("null","null");
+        map.put(Constants.NULL,Constants.NULL);
         HistoryContent historyContent = new HistoryContent();
         historyContent.setId(new Random().nextLong());
         historyContent.setClassName(className);
         historyContent.setCreatedDate(dateTime.toString());
-        historyContent.setActor("SYSTEM");
+        historyContent.setActor(Constants.SYSTEM);
         historyContent.setMethodName(methodName);
         historyContent.setObject(map);
         historyContent.setStatus(Status.FAULT.toString());
-        log.info(historyContent.getObject());
         return historyContent;
     }
-    public List<Document> readAll() {
+    public List<Document> readAll()  {
         initConnection();
-        MongoCollection<Document> mongoCollection = database.getCollection("test");
+        MongoCollection<Document> mongoCollection = database.getCollection(Constants.MONGODBTESTSERVER);
         FindIterable<Document> documents = mongoCollection.find();
         return documents.into(new ArrayList<Document>());
     }
-    public void initConnection(){
-        this.client = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-        this.database = client.getDatabase("test");
+    public void initConnection() {
+        try {
+            this.client = new MongoClient(new MongoClientURI(ConfigurationUtil.getConfigurationEntry(Constants.MONGODB)));
+            this.database = client.getDatabase(Constants.MONGODBTESTSERVER);
+        } catch (IOException e){
+            log.error(e);
+        }
+
     }
     public void closeConnection(){
         this.client.close();
     }
-    public void insertRecord(HistoryContent historyContent){
+    public void insertRecord(HistoryContent historyContent) {
         initConnection();
-        MongoCollection<Document> mongoCollection = database.getCollection("test");
+        MongoCollection<Document> mongoCollection = database.getCollection(Constants.MONGODBTESTSERVER);
         mongoCollection.insertOne(new Document(this.convertEntityToMap(historyContent)));
         closeConnection();
     }

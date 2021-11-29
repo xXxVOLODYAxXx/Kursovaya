@@ -3,6 +3,8 @@ package ru.sfedu.Kursovaya.utils;
 public class Constants {
     public static final String PATH_TO_CSV="PATH_TO_CSV";
     public static final String PATH_TO_XML="PATH_TO_XML";
+    public static final String MONGODB="MONGODB";
+    public static final String MONGODBTESTSERVER="Test";
     public static final String CSV_FILE_EXTENSION="CSV_FILE_EXTENSION";
     public static final String XML_FILE_EXTENSION="XML_FILE_EXTENSION";
     public static final String CSV_FILE_NAME_UNIT="Units";
@@ -24,7 +26,9 @@ public class Constants {
     public static final String INVALID_DATA_PROVIDER = "Invalid DataProvider type...";
     public static final String FEW_ARGUMENTS = "Too few arguments were given...";
     public static final String INVALID_METHOD_NAME = "Invalid method name was given...";
+    public static final String DO_NOT_EXIST=" do not exist";
 
+    public static final String SYSTEM="System";
     public static final String UNIT="Unit";
     public static final String BUILDING="Building";
     public static final String ENEMY_PLANET="EnemyPlanet";
@@ -32,6 +36,7 @@ public class Constants {
     public static final String ARMY="Army";
     public static final String RESOURCES="Resources";
     public static final String GAME="Game";
+    public static final String ARMYINFO="ArmyInfo";
     public static final String DEFAULT_ACTOR = "SYSTEM";
     public static final int DEFAULT_FOOD=50;
     public static final int DEFAULT_GOLD=50;

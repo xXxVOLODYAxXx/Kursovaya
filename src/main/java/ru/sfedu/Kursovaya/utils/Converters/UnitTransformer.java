@@ -33,7 +33,7 @@ public class UnitTransformer extends AbstractBeanField {
                 unitList.add(unit);
             });
         } catch (NumberFormatException e){
-            log.error("UnitList is empty");
+            log.error(Constants.UNIT+Constants.DO_NOT_EXIST);
 
         } finally {
             return unitList;
