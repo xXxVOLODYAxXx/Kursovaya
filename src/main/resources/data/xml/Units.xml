@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xmlList>
     <Unit>
-        <id>2</id>
+        <id>1</id>
         <unitType>MARKSMAN</unitType>
         <unitAttackPoints>2</unitAttackPoints>
         <unitHealthPoints>1</unitHealthPoints>

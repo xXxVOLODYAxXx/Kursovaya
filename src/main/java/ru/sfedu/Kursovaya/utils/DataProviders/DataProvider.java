@@ -2,6 +2,7 @@ package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import ru.sfedu.Kursovaya.Beans.*;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,9 +19,9 @@ public interface DataProvider {
     public Game manageResources(Long gameId,int operation,Long id) throws Exception;
     public Game manageResources(Long gameId,int operation) throws Exception;
 
-    List<PlayerPlanet> getPlayerPlanetList() throws IOException;
+    List<PlayerPlanet> getPlayerPlanetList() throws IOException, JAXBException;
 
-    List<EnemyPlanet> getEnemyPlanetList() throws IOException;
+    List<EnemyPlanet> getEnemyPlanetList() throws IOException, JAXBException;
 
 
 }

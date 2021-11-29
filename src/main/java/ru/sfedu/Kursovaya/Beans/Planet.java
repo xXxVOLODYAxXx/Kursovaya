@@ -2,13 +2,21 @@ package ru.sfedu.Kursovaya.Beans;
 
 import com.opencsv.bean.CsvBindByName;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Planet {
+    @XmlElement(type = Long.class)
     @CsvBindByName
     private Long id;
+    @XmlElement(type = String.class)
     @CsvBindByName
     private String planetName;
+    @XmlElement(type = String.class)
     @CsvBindByName
     private String type;
     public Planet() {super();}

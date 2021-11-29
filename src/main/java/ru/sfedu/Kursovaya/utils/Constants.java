@@ -4,16 +4,17 @@ public class Constants {
     public static final String PATH_TO_CSV="PATH_TO_CSV";
     public static final String PATH_TO_XML="PATH_TO_XML";
     public static final String MONGODB="MONGODB";
-    public static final String MONGODBTESTSERVER="Test";
+    public static final String MONGODB_TEST_SERVER="test";
+    public static final String MONGODB_XML_TEST_SERVER="XMLTest";
     public static final String CSV_FILE_EXTENSION="CSV_FILE_EXTENSION";
     public static final String XML_FILE_EXTENSION="XML_FILE_EXTENSION";
-    public static final String CSV_FILE_NAME_UNIT="Units";
-    public static final String CSV_FILE_NAME_BUILDING="Buildings";
-    public static final String CSV_FILE_NAME_ENEMY_PLANET="EnemyPlanet";
-    public static final String CSV_FILE_NAME_PLAYER_PLANET="PlayerPlanet";
-    public static final String CSV_FILE_NAME_ARMY="Army";
-    public static final String CSV_FILE_NAME_RESOURCES="Resources";
-    public static final String CSV_FILE_NAME_GAME="Game";
+    public static final String FILE_NAME_UNIT="Units";
+    public static final String FILE_NAME_BUILDING="Buildings";
+    public static final String FILE_NAME_ENEMY_PLANET="EnemyPlanet";
+    public static final String FILE_NAME_PLAYER_PLANET="PlayerPlanet";
+    public static final String FILE_NAME_ARMY="Army";
+    public static final String FILE_NAME_RESOURCES="Resources";
+    public static final String FILE_NAME_GAME="Game";
 
     public static final String JDBC_URL="JDBC_URL";
     public static final String JDBC_USERNAME="JDBC_USERNAME";

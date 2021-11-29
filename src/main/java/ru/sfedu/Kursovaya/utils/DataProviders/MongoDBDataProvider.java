@@ -56,15 +56,15 @@ public class MongoDBDataProvider {
         return historyContent;
     }
     public List<Document> readAll()  {
-        initConnection();
-        MongoCollection<Document> mongoCollection = database.getCollection(Constants.MONGODBTESTSERVER);
+        initConnection(Constants.MONGODB_TEST_SERVER);
+        MongoCollection<Document> mongoCollection = database.getCollection(Constants.MONGODB_TEST_SERVER);
         FindIterable<Document> documents = mongoCollection.find();
         return documents.into(new ArrayList<Document>());
     }
-    public void initConnection() {
+    public void initConnection(String string) {
         try {
             this.client = new MongoClient(new MongoClientURI(ConfigurationUtil.getConfigurationEntry(Constants.MONGODB)));
-            this.database = client.getDatabase(Constants.MONGODBTESTSERVER);
+            this.database = client.getDatabase(string);
         } catch (IOException e){
             log.error(e);
         }
@@ -73,9 +73,9 @@ public class MongoDBDataProvider {
     public void closeConnection(){
         this.client.close();
     }
-    public void insertRecord(HistoryContent historyContent) {
-        initConnection();
-        MongoCollection<Document> mongoCollection = database.getCollection(Constants.MONGODBTESTSERVER);
+    public void insertRecord(HistoryContent historyContent,String string) {
+        initConnection(string);
+        MongoCollection<Document> mongoCollection = database.getCollection(string);
         mongoCollection.insertOne(new Document(this.convertEntityToMap(historyContent)));
         closeConnection();
     }

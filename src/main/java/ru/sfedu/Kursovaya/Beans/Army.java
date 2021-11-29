@@ -5,9 +5,13 @@ import com.opencsv.bean.CsvCustomBindByName;
 import ru.sfedu.Kursovaya.utils.Converters.ArmyInfoTransformer;
 import ru.sfedu.Kursovaya.utils.Converters.UnitTransformer;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Objects;
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Army {
     @CsvBindByName
     private Long id;
