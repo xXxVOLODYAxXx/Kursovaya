@@ -1,12 +1,12 @@
 package ru.sfedu.Kursovaya;
 
-import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
+import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 class MainTest {
     @Test

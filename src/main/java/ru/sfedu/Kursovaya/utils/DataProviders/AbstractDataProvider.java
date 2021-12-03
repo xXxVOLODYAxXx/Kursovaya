@@ -37,4 +37,8 @@ public abstract class AbstractDataProvider  {
     public abstract Game removeBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException;
     public abstract Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
     public abstract Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
+
+    public abstract List<PlayerPlanet> getPlayerPlanetList() throws IOException, JAXBException;
+
+    public abstract List<EnemyPlanet> getEnemyPlanetList() throws JAXBException, IOException;
 }

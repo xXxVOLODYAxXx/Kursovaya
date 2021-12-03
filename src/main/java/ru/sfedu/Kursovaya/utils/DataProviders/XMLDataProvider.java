@@ -6,8 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.*;
 import ru.sfedu.Kursovaya.UtilBeans.XMLList;
-import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import javax.xml.bind.*;
 import java.io.*;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class XMLDataProvider extends AbstractDataProvider implements DataProvider{
+public class XMLDataProvider extends AbstractDataProvider {
     public XMLDataProvider() throws IOException, JAXBException {}
     MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
     private FileReader fileReader=null;

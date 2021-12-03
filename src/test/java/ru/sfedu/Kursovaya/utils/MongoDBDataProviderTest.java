@@ -2,6 +2,7 @@ package ru.sfedu.Kursovaya.utils;
 
 import org.junit.jupiter.api.Test;
 import ru.sfedu.Kursovaya.utils.DataProviders.MongoDBDataProvider;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -22,7 +23,7 @@ class MongoDBDataProviderTest extends BaseTest{
 
     @Test
     void insertRand() throws IOException {
-        m.insertRecord(initHistoryContent(),Constants.MONGODB_TEST_SERVER);
+        m.insertRecord(initHistoryContent(), Constants.MONGODB_TEST_SERVER);
     }
     @Test
     void readAll() throws IOException {

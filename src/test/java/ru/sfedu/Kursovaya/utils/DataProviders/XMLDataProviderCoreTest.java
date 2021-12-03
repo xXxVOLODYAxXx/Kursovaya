@@ -9,12 +9,10 @@ import ru.sfedu.Kursovaya.Beans.ArmyInfo;
 import ru.sfedu.Kursovaya.Beans.Game;
 import ru.sfedu.Kursovaya.Beans.Resources;
 import ru.sfedu.Kursovaya.utils.BaseTest;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class XMLDataProviderCoreTest extends BaseTest {
 

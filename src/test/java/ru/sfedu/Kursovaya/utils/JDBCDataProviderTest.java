@@ -19,12 +19,16 @@ class JDBCDataProviderTest extends BaseTest {
     @Test
     void insertRecord() throws SQLException {
         j.insertUnit(initUnit());
-        Assertions.assertTrue(j.readUnitById(1L).equals(initUnit()));
     }
     @Test
     void readJDBCUnit() throws SQLException {
         log.info(j.readUnitById(1L));
-        Assertions.assertTrue(j.readUnitById(1L).equals(initUnit()));
+
+    }
+    @Test
+    void readJDBCUnitList() throws SQLException {
+        log.info(j.readUnitList());
+
     }
     @Test
     void updateUnit() throws SQLException {

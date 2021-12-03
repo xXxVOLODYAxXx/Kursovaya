@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.OtherUtils;
 
 public class Constants {
     public static final String PATH_TO_CSV="PATH_TO_CSV";

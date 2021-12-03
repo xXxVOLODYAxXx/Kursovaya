@@ -1,10 +1,10 @@
-package ru.sfedu.Kursovaya.utils.Converters;
+package ru.sfedu.Kursovaya.utils.CSVConverters;
 
 import com.opencsv.bean.AbstractBeanField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 public class ArmyInfoTransformer extends AbstractBeanField {
     private final String fieldsDelimiter = Constants.ARMY_INFO_FIELDS_DELIMITER;

@@ -14,7 +14,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.sfedu.Kursovaya.Main</mainClass>
+                            <attribute name="Main-Class" value="ru.sfedu.Kursovaya.Main"/>
                         </manifest>
                     </archive>
                     <descriptorRefs>

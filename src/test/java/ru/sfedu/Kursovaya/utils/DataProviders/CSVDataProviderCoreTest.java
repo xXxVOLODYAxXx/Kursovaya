@@ -9,12 +9,10 @@ import ru.sfedu.Kursovaya.Beans.ArmyInfo;
 import ru.sfedu.Kursovaya.Beans.Game;
 import ru.sfedu.Kursovaya.Beans.Resources;
 import ru.sfedu.Kursovaya.utils.BaseTest;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CSVDataProviderCoreTest extends BaseTest {
 
@@ -30,6 +28,7 @@ class CSVDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        c.deleteUniverse(1L);
     }
     @Test
     void createUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
@@ -61,58 +60,200 @@ class CSVDataProviderCoreTest extends BaseTest {
     @Test
     void deleteUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         c.deleteUniverse(1L);
+        c.deleteUniverse(1L);
     }
-
     @Test
-    void getEnemyPower() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void getEnemyPowerSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readEnemyPlanet(c.getEnemyPower(1L,1L));
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void getEnemyPowerFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.deleteUniverse(1L);
         readEnemyPlanet(c.getEnemyPower(1L,1L));
     }
-
     @Test
-    void getArmyPower() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void getArmyPowerSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readArmyInfo(c.getArmyPower(1L));
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void getArmyPowerFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         readArmyInfo(c.getArmyPower(2L));
     }
-
     @Test
-    void attackPlanet() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void attackPlanetSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        log.info(c.attackPlanet(1L,1L));
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void attackPlanetFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         log.info(c.attackPlanet(1L,2L));
     }
-
     @Test
-    void hireUnit() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        readGame(c.hireUnit(1L,2L));
-    }
-
-    @Test
-    void getBuildingsInfo() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.getBuildingsInfo(2L));
-    }
-
-    @Test
-    void addBuilding() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        readGame(c.addBuilding(1L,2L));
-    }
-
-    @Test
-    void removeBuilding() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.removeBuilding(1L,2L));
-    }
-
-    @Test
-    void manageResources() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.manageResources(2L,1));
-    }
-
-    @Test
-    void testManageResources2() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.manageResources(2L,2,1L));
+    void hireUnitSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readGame(game);
+        readGame(c.hireUnit(1L,1L));
+        Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(c.hireUnit(1L, 1L).getResources().getArmy().getUnits()) );
+        c.deleteUniverse(1L);
     }
     @Test
-    void testManageResources3() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.manageResources(2L,3,1L));
+    void hireUnitFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        c.deleteUniverse(1L);
+        readGame(c.hireUnit(1L,1L));
     }
     @Test
-    void testManageResources4() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        log.info(c.manageResources(2L,4,1L));
+    void getBuildingsInfoSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        log.info(c.getBuildingsInfo(1L));
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void getBuildingsInfoFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        log.info(c.getBuildingsInfo(1L));
+    }
+    @Test
+    void addBuildingSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readGame(game);
+        readGame(c.addBuilding(1L,1L));
+        Assertions.assertFalse(game.getResources().getBuildingList().equals(c.addBuilding(1L, 1L).getResources().getBuildingList()) );
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void addBuildingFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        readGame(c.addBuilding(1L,1L));
+    }
+    @Test
+    void removeBuildingSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        Assertions.assertFalse(game.getResources().getBuildingList().equals(c.addBuilding(1L, 1L).getResources().getBuildingList()) );
+        Assertions.assertFalse(game.getResources().getBuildingList().equals(c.removeBuilding(1L, 1L).getResources().getBuildingList()) );
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void removeBuildingFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        log.info(c.removeBuilding(1L,1L));
+    }
+    @Test
+    void manageResources1Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        log.info(c.manageResources(1L,1));
+    }
+    @Test
+    void manageResources1Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        log.info(c.manageResources(1L,1));
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void testManageResources2Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readGame(game);
+        readGame(c.manageResources(1L,2,1L));
+        Assertions.assertFalse(game.getResources().getBuildingList().equals(c.manageResources(1L,2,1L).getResources().getBuildingList()) );
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void testManageResources2Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        readGame(c.manageResources(1L,2,1L));
+    }
+    @Test
+    void testManageResources3Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        Assertions.assertFalse(game.getResources().getBuildingList().equals(c.manageResources(1L,2,1L).getResources().getBuildingList()) );
+        Assertions.assertTrue(game.getResources().getBuildingList().equals(c.manageResources(1L,3,1L).getResources().getBuildingList()) );
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void testManageResources3Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        log.info(c.manageResources(1L,3,1L));
+    }
+    @Test
+    void testManageResources4Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        game=initGame();
+        resources=initResources();
+        army=initArmy();
+        c.createUniverse(game,resources,army);
+        Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
+        Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
+        Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
+        readGame(game);
+        readGame(c.manageResources(1L,4,1L));
+        Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(c.manageResources(1L,4,1L).getResources().getArmy().getUnits()) );
+        c.deleteUniverse(1L);
+    }
+    @Test
+    void testManageResources4Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        c.deleteUniverse(1L);
+        log.info(c.manageResources(1L,4,1L));
     }
 }

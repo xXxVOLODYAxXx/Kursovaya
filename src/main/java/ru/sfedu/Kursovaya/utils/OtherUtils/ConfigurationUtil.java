@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils;
+package ru.sfedu.Kursovaya.utils.OtherUtils;
 
 import java.io.*;
 import java.util.Properties;

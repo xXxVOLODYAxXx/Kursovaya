@@ -54,7 +54,7 @@ public class BaseTest {
         return historyContent;
     }
     public Unit initUnit(){
-        unit.setUnitId(1L);
+        unit.setUnitId(3L);
         unit.setUnitType("MARKSMAN");
         unit.setUnitAttackPoints(2);
         unit.setUnitHealthPoints(1);
@@ -90,8 +90,8 @@ public class BaseTest {
         return enemyPlanet;
     }
     public ArmyInfo initArmyInfo(){
-        armyInfo.setArmyAttackPoints(50);
-        armyInfo.setArmyHealthPoints(50);
+        armyInfo.setArmyAttackPoints(100);
+        armyInfo.setArmyHealthPoints(100);
         return armyInfo;
     }
     public Army initArmy(){
@@ -238,12 +238,17 @@ public class BaseTest {
     }
     @Test
     public void readGame(Game game){
-        log.info("GAME");
-        log.info(game.getGameId());
-        log.info(game.getGameName());
-        log.info(game.getEnemyPlanetList());
-        log.info(game.getPlayerPlanetList());
-        log.info(game.getResources());
+        try {
+            log.info("GAME");
+            log.info(game.getGameId());
+            log.info(game.getGameName());
+            log.info(game.getEnemyPlanetList());
+            log.info(game.getPlayerPlanetList());
+            log.info(game.getResources());
+        } catch (NullPointerException e){
+            log.debug("aADADSDdasdadadadЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ");
+        }
+
     }
 
 

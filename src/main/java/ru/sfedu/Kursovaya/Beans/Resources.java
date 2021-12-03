@@ -2,8 +2,8 @@ package ru.sfedu.Kursovaya.Beans;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
-import ru.sfedu.Kursovaya.utils.Converters.ArmyTransformer;
-import ru.sfedu.Kursovaya.utils.Converters.BuildingTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.ArmyTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.BuildingTransformer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

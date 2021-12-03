@@ -12,8 +12,8 @@ import org.bson.Document;
 import org.joda.time.DateTime;
 import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
 import ru.sfedu.Kursovaya.Enums.Status;
-import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import java.io.IOException;
 import java.util.*;

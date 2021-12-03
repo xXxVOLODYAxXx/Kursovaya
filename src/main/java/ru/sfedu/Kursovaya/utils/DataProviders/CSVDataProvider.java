@@ -1,6 +1,9 @@
 package ru.sfedu.Kursovaya.utils.DataProviders;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -10,35 +13,44 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import org.apache.commons.lang3.ObjectUtils;
 import ru.sfedu.Kursovaya.Beans.*;
 
 import java.util.stream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.Kursovaya.Main;
-import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.BeansGenerator;
+import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
-public class CSVDataProvider extends AbstractDataProvider implements DataProvider {
+public class CSVDataProvider extends AbstractDataProvider {
     public CSVDataProvider() throws IOException {}
     private final String PATHTOCSV= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_CSV);
     private final String CSVEXTENSION=ConfigurationUtil.getConfigurationEntry(Constants.CSV_FILE_EXTENSION);
     private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
     MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
-
     /**ЧИТАЕМ и ПИШЕМ*/
     private CSVReader reader;
     private CSVWriter writer;
-    private void initReader(String string) throws FileNotFoundException {
+    private void initReader(String string) throws IOException {
+        initDataSource(string);
         this.reader=new CSVReader(new FileReader(PATHTOCSV+string+CSVEXTENSION));
     }
     private void initWriter(String string) throws IOException {
+        initDataSource(string);
         this.writer=new CSVWriter(new FileWriter(PATHTOCSV+string+CSVEXTENSION));
     }
     private void close() throws IOException {
         if (reader!=null){this.reader.close();}
         if(writer!=null){this.writer.close();}
+    }
+    public void initDataSource(String string) throws IOException {
+        string = PATHTOCSV+string+CSVEXTENSION;
+        File file = new File(string);
+        if (!file.exists()) {
+            Path dirPath = Paths.get(PATHTOCSV);
+            Files.createDirectories(dirPath);
+            file.createNewFile();
+        }
     }
     private void writeUnits (List<Unit> ulist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         this.initWriter(Constants.FILE_NAME_UNIT);
@@ -135,6 +147,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return unitlist;
     }
     public void createUnit(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<Unit> unitList=getUnitList();
@@ -203,6 +216,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return buildingList;
     }
     public void createBuilding(Building building) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<Building> buildingList=getBuildingList();
@@ -271,6 +285,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return playerPlanetList;
     }
     public void createPlayerPlanet(PlayerPlanet playerPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
@@ -339,6 +354,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return enemyPlanetList;
     }
     public void createEnemyPlanet(EnemyPlanet enemyPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
@@ -407,6 +423,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return armylist;
     }
     public void createArmy(Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<Army> armylist=getArmyList();
@@ -476,6 +493,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return resourcesList;
     }
     public void createResources(Resources resources) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<Resources> resourcesList=getResourcesList();
@@ -544,6 +562,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         return gameList;
     }
     public void createGame(Game game) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
         String methodName=getMethodName();
         String className=getClassName();
         List<Game> gameList=getGameList();
@@ -614,6 +633,20 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
         createGame(game);
         createResources(resources);
         createArmy(army);
+        log.info("Your resources:");
+        log.info("Food:"+game.getResources().getFood());
+        log.info("Metal:"+game.getResources().getMetal());
+        log.info("Gold:"+game.getResources().getGold());
+        log.info("Your army power:");
+        log.info("Health:"+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+" Attack:"+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+        log.info("Your planets:");
+        game.getPlayerPlanetList().forEach(x->{
+            log.info("Id:"+x.getPlanetId()+" Planet name:"+x.getPlanetName()+" Building limit:"+x.getBuildingLimit());
+        });
+        log.info("Enemy planets:");
+        game.getEnemyPlanetList().forEach(x->{
+            log.info("Id:"+x.getPlanetId()+" Planet name:"+x.getPlanetName());
+        });
         return game;
         }
     }
@@ -624,6 +657,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
             deleteGameById(gameId);
             deleteArmyById(gameId);
             deleteResourcesById(gameId);
+            log.info("Universe deleted");
             return true;
         } catch (NullPointerException e){
             log.error("Nothing to delete");
@@ -687,10 +721,10 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
                     .getResources());
             updateGameById(game);
             result=true;
-            return result;
         }catch (NullPointerException e){
             log.info("EnemyPlanet does not exist");
             result=false;
+        } finally {
             return result;
         }
 
@@ -728,7 +762,7 @@ public class CSVDataProvider extends AbstractDataProvider implements DataProvide
                 .getArmy()
                 .setUnits(unitList);
         }catch (NullPointerException e){
-            log.error("ERROR");
+            log.error("Wrong parameters");
         }finally {
             return game;
         }

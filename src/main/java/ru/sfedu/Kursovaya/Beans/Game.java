@@ -2,10 +2,9 @@ package ru.sfedu.Kursovaya.Beans;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
-import ru.sfedu.Kursovaya.utils.Converters.BuildingTransformer;
-import ru.sfedu.Kursovaya.utils.Converters.EnemyPlanetTransformer;
-import ru.sfedu.Kursovaya.utils.Converters.PlayerPlanetTransformer;
-import ru.sfedu.Kursovaya.utils.Converters.ResourcesTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.EnemyPlanetTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.PlayerPlanetTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.ResourcesTransformer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -1,12 +1,10 @@
-package ru.sfedu.Kursovaya.utils.Converters;
+package ru.sfedu.Kursovaya.utils.CSVConverters;
 
 import com.opencsv.bean.AbstractBeanField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.Kursovaya.Beans.EnemyPlanet;
 import ru.sfedu.Kursovaya.Beans.PlayerPlanet;
-import ru.sfedu.Kursovaya.utils.Constants;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;

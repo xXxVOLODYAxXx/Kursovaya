@@ -6,12 +6,11 @@ import ru.sfedu.Kursovaya.Beans.Army;
 import ru.sfedu.Kursovaya.Beans.ArmyInfo;
 import ru.sfedu.Kursovaya.Beans.Game;
 import ru.sfedu.Kursovaya.Beans.Resources;
-import ru.sfedu.Kursovaya.utils.ConfigurationUtil;
-import ru.sfedu.Kursovaya.utils.Constants;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
-import ru.sfedu.Kursovaya.utils.DataProviders.DataProvider;
-import ru.sfedu.Kursovaya.utils.DataProviders.JDBCDataProvider;
+import ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider;
 import ru.sfedu.Kursovaya.utils.DataProviders.XMLDataProvider;
+import ru.sfedu.Kursovaya.utils.OtherUtils.BeansGenerator;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
+import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -20,30 +19,26 @@ import java.util.Locale;
 
 public class Main {
     private static final Logger log = LogManager.getLogger(Main.class);
+    private static BeansGenerator beansGenerator = null;
+    static {
+        try {
+            beansGenerator = new BeansGenerator();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         checkArgumentsCount(args);
-        DataProvider dataProvider = getDataProvider(args[0]);
+        AbstractDataProvider dataProvider = getDataProvider(args[0]);
         switch (args[1].toUpperCase(Locale.ROOT)){
             case Constants.CREATE_UNIVERSE:{
                 Long id = Long.parseLong(args[2]);
                 Game game = new Game();
                 Resources resources = new Resources();
                 Army army = new Army();
-                ArmyInfo armyInfo = new ArmyInfo();
-                armyInfo.setArmyAttackPoints(Constants.DEFAULT_ARMY_ATTACK_POINTS);
-                armyInfo.setArmyHealthPoints(Constants.DEFAULT_ARMY_HEALTH_POINTS);
-                army.setArmyId(id);
-                army.setArmyInfo(armyInfo);
-                resources.setResourcesId(id);
-                resources.setFood(Constants.DEFAULT_FOOD);
-                resources.setGold(Constants.DEFAULT_GOLD);
-                resources.setMetal(Constants.DEFAULT_METAL);
-                resources.setArmy(army);
-                game.setGameId(id);
-                game.setResources(resources);
-                game.setPlayerPlanetList(dataProvider.getPlayerPlanetList());
-                game.setEnemyPlanetList(dataProvider.getEnemyPlanetList());
+                beansGenerator.defaultBeans();
+                beansGenerator.defaultPreset(id,army,resources,game);
                 dataProvider.createUniverse(game,resources,army);
                 break;
             }
@@ -60,7 +55,7 @@ public class Main {
                 break;
             }
             case Constants.ATTACK_PLANET:{
-                dataProvider.attackPlanet(Long.parseLong(args[2]),Long.parseLong(args[3]));
+                log.info(dataProvider.attackPlanet(Long.parseLong(args[2]),Long.parseLong(args[3])));
                 break;
             }
             case Constants.MANAGE_RESOURCES:{
@@ -94,15 +89,15 @@ public class Main {
         }
     }
 
-    private static DataProvider getDataProvider(String dpType) throws IOException, JAXBException {
+    private static AbstractDataProvider getDataProvider(String dpType) throws IOException, JAXBException {
         switch(dpType.toUpperCase(Locale.ROOT)) {
             case(Constants.CSV): {
                 return new CSVDataProvider();
             }
-            /**case(Constants.XML): {
+            case(Constants.XML): {
                 return new XMLDataProvider();
             }
-            case(Constants.DB): {
+            /**case(Constants.DB): {
                 return new JDBCDataProvider();
             }*/
             default: {

@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils.Converters;
+package ru.sfedu.Kursovaya.utils.CSVConverters;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.opencsv.bean.AbstractBeanField;
-import ru.sfedu.Kursovaya.utils.Constants;
+import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 public class UnitTransformer extends AbstractBeanField {
     private final String fieldsDelimiter= Constants.UNIT_FIELDS_DELIMITER;

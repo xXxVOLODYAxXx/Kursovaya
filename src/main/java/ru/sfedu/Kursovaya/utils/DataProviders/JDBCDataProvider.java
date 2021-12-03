@@ -3,9 +3,11 @@ package ru.sfedu.Kursovaya.utils.DataProviders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.Unit;
-import ru.sfedu.Kursovaya.utils.JDBCH2Utils;
+import ru.sfedu.Kursovaya.utils.OtherUtils.JDBCH2Utils;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JDBCDataProvider {
     private static final Logger log = LogManager.getLogger(JDBCDataProvider.class);
@@ -23,6 +25,7 @@ public class JDBCDataProvider {
             + "  (id, unitType, unitAttackPoints, unitHealthPoints, goldRequired, metalRequired, foodRequired) VALUES "
             + " (?, ?, ?, ?, ?, ?, ?);";
     private static final String READ_UNIT_SQL = "select id,unitType,unitAttackPoints,unitHealthPoints,goldRequired,metalRequired,foodRequired from units where id =";
+    private static final String READ_UNIT_LIST="select * from units";
     private static final String UPDATE_UNITS_SQL = "update units set " +
             "unitType = ?," +
             "unitAttackPoints = ?," +
@@ -65,6 +68,28 @@ public class JDBCDataProvider {
         }finally {
             closeConnection();
         }
+    }
+    public List<Unit> readUnitList() throws SQLException {
+        List<Unit> unitList = new ArrayList<>();
+        PreparedStatement preparedStatement = initConnection().prepareStatement(READ_UNIT_LIST);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            unitList.forEach(x -> {
+                try {
+                    x.setUnitId(rs.getLong("id"));
+                    x.setUnitType(rs.getString("unitType"));
+                    x.setUnitAttackPoints(rs.getInt("unitAttackPoints"));
+                    x.setUnitHealthPoints(rs.getInt("unitHealthPoints"));
+                    x.setGoldRequired(rs.getInt("goldRequired"));
+                    x.setMetalRequired(rs.getInt("metalRequired"));
+                    x.setFoodRequired(rs.getInt("foodRequired"));
+                } catch (SQLException e){
+                    log.info(e);
+                }
+            });
+        }
+        closeConnection();
+        return unitList;
     }
     public Unit readUnitById(Long id) throws SQLException {
         Unit unit=new Unit();
