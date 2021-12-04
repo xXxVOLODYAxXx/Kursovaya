@@ -17,11 +17,6 @@ public abstract class AbstractDataProvider  {
 
     public AbstractDataProvider() throws IOException {}
 
-    public abstract void createUnit(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException;
-    public abstract Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException;
-    public abstract void deleteUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException;
-    public abstract void updateUnitById(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException;
-
     public void saveToLog(HistoryContent historyContent,String string) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
     mdvdp.insertRecord(historyContent,string);
     }

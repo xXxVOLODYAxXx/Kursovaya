@@ -11,6 +11,9 @@ import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 import javax.xml.bind.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,16 +27,32 @@ public class XMLDataProvider extends AbstractDataProvider {
     private final JAXBContext jaxbContext = JAXBContext.newInstance(XMLList.class);
     private final Marshaller Marshaller = jaxbContext.createMarshaller();
     private final Unmarshaller Unmarshaller = jaxbContext.createUnmarshaller();
+
+    private final String PATH_TO_XML= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_XML);
+    private final String XML_FILE_EXTENSION=ConfigurationUtil.getConfigurationEntry(Constants.XML_FILE_EXTENSION);
+
+    public void initDataSource(String string) throws IOException {
+        string = PATH_TO_XML + string + XML_FILE_EXTENSION;
+        File file = new File(string);
+        if (!file.exists()) {
+            Path dirPath = Paths.get(PATH_TO_XML);
+            Files.createDirectories(dirPath);
+            file.createNewFile();
+        }
+    }
     private void initReader (String string) throws IOException {
-        this.fileReader=new FileReader(ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_XML)+string+ConfigurationUtil.getConfigurationEntry(Constants.XML_FILE_EXTENSION));
+        initDataSource(string);
+        this.fileReader=new FileReader(PATH_TO_XML+string+XML_FILE_EXTENSION);
+    }
+    private File initFile(String string) throws IOException {
+        initDataSource(string);
+        String PATH= PATH_TO_XML+string+XML_FILE_EXTENSION;
+        return new File(PATH);
     }
     private void closeReader () throws IOException {
         fileReader.close();
     }
-    private File initFile(String string) throws IOException {
-        String PATH= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_XML)+string+ConfigurationUtil.getConfigurationEntry(Constants.XML_FILE_EXTENSION);
-        return new File(PATH);
-    }
+
     private String getClassName(){
         return Thread.currentThread().getStackTrace()[2].getClassName();
     }
