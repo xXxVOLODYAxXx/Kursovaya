@@ -5,12 +5,12 @@ import com.opencsv.bean.CsvCustomBindByName;
 import ru.sfedu.Kursovaya.utils.CSVConverters.EnemyPlanetTransformer;
 import ru.sfedu.Kursovaya.utils.CSVConverters.PlayerPlanetTransformer;
 import ru.sfedu.Kursovaya.utils.CSVConverters.ResourcesTransformer;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Objects;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Game {

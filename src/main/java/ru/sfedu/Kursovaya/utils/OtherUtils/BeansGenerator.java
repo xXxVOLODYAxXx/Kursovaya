@@ -5,7 +5,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.*;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.CSVDataProvider;
 
 import java.io.IOException;
 

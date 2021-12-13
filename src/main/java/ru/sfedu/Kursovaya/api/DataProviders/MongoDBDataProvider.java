@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils.DataProviders;
+package ru.sfedu.Kursovaya.api.DataProviders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClient;

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class JDBCH2Utils {
     private static final Logger log = LogManager.getLogger(JDBCH2Utils.class);
+
     public static Connection getConnection() {
         Connection connection = null;
         try {

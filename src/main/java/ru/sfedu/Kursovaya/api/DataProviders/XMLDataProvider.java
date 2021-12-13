@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils.DataProviders;
+package ru.sfedu.Kursovaya.api.DataProviders;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
@@ -20,6 +20,9 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class XMLDataProvider extends AbstractDataProvider {
+
+    
+
     public XMLDataProvider() throws IOException, JAXBException {}
     MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
     private FileReader fileReader=null;
@@ -27,24 +30,27 @@ public class XMLDataProvider extends AbstractDataProvider {
     private final JAXBContext jaxbContext = JAXBContext.newInstance(XMLList.class);
     private final Marshaller Marshaller = jaxbContext.createMarshaller();
     private final Unmarshaller Unmarshaller = jaxbContext.createUnmarshaller();
-
     private final String PATH_TO_XML= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_XML);
     private final String XML_FILE_EXTENSION=ConfigurationUtil.getConfigurationEntry(Constants.XML_FILE_EXTENSION);
 
-    public void initDataSource(String string) throws IOException {
-        string = PATH_TO_XML + string + XML_FILE_EXTENSION;
+    private void initDataSource(String string) throws IOException, JAXBException {
+        String str=string;
+        string = PATH_TO_XML + string  +XML_FILE_EXTENSION;
         File file = new File(string);
         if (!file.exists()) {
+            XMLList xmlList = new XMLList();
             Path dirPath = Paths.get(PATH_TO_XML);
             Files.createDirectories(dirPath);
             file.createNewFile();
+            Marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            Marshaller.marshal(xmlList,initFile(str));
         }
     }
-    private void initReader (String string) throws IOException {
+    private void initReader (String string) throws IOException, JAXBException {
         initDataSource(string);
         this.fileReader=new FileReader(PATH_TO_XML+string+XML_FILE_EXTENSION);
     }
-    private File initFile(String string) throws IOException {
+    private File initFile(String string) throws IOException, JAXBException {
         initDataSource(string);
         String PATH= PATH_TO_XML+string+XML_FILE_EXTENSION;
         return new File(PATH);
@@ -192,20 +198,6 @@ public class XMLDataProvider extends AbstractDataProvider {
         unitsToXML(unitList);
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
     }
-    public Unit getUnitById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Unit> unitList=unitsFromXML();
-        Unit unit=unitList.stream().filter(x-> id.equals(x.getUnitId())).findAny().orElse(null);
-        if(unit==null){
-            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
-            log.info("ERROR:Unit does not exist");
-            return unit;
-        } else {
-            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
-            return unit;
-        }
-    }
     public void deleteUnitById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName=getMethodName();
         String className=getClassName();
@@ -216,7 +208,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             unitsToXML(unitList);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
-        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException | NullPointerException e){
             log.info(e);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
@@ -258,20 +250,6 @@ public class XMLDataProvider extends AbstractDataProvider {
         buildingsToXML(buildingList);
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
     }
-    public Building getBuildingById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Building> buildingList=buildingsFromXML();
-        Building building=buildingList.stream().filter(x-> id.equals(x.getBuildingId())).findAny().orElse(null);
-        if(building==null){
-            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
-            log.info("ERROR:Building does not exist");
-            return building;
-        } else {
-            saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
-            return building;
-        }
-    }
     public void deleteBuildingById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName=getMethodName();
         String className=getClassName();
@@ -282,7 +260,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             buildingsToXML(buildingList);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
-        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException | NullPointerException e){
             log.info(e);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
@@ -348,7 +326,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             playerPlanetToXML(playerPlanetList);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet,Constants.PLAYER_PLANET,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
-        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException | NullPointerException e){
             log.info(e);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
@@ -414,7 +392,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             enemyPlanetToXML(enemyPlanetList);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet,Constants.ENEMY_PLANET,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
-        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        catch (NoSuchElementException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException | NullPointerException e){
             log.info(e);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
         }
@@ -591,15 +569,15 @@ public class XMLDataProvider extends AbstractDataProvider {
     public Game getGameById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName=getMethodName();
         String className=getClassName();
-        List<Game> gameList=gameFromXML();
-        Game game=gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().orElse(null);
-        if(game==null){
-            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
-            log.info("ERROR:Game does not exist");
-            return game;
-        } else {
+        try {
+            List<Game> gameList=gameFromXML();
+            Game game=gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().orElse(null);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
             return game;
+        }catch (NullPointerException e){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_XML_TEST_SERVER);
+            log.info("ERROR:Game does not exist");
+            return null;
         }
     }
     public void deleteGameById(Long id) throws JAXBException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -637,50 +615,67 @@ public class XMLDataProvider extends AbstractDataProvider {
     /**CRUD
      * CORE*/
     @Override
-    public Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
+    public Game createUniverse(Game game,Resources resources,Army army) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
         if (game.getGameId()==null || army.getArmyId() == null || resources.getResourcesId() == null){
-            log.info("Wrong parameters");
+            log.info(Constants.WRONG_PARAMETER);
             return null;
         } else {
             createGame(game);
             createResources(resources);
             createArmy(army);
+            /**
+             log.info(Constants.YOUR_RESOURCES);
+             log.info(Constants.FOOD+game.getResources().getFood());
+             log.info(Constants.METAL+game.getResources().getMetal());
+             log.info(Constants.GOLD+game.getResources().getGold());
+             log.info(Constants.YOUR_ARMY_POWER);
+             log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+             log.info(Constants.YOUR_PLANETS);
+             game.getPlayerPlanetList().forEach(x->{
+             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+             });
+             log.info(Constants.ENEMY_PLANETS);
+             game.getEnemyPlanetList().forEach(x->{
+             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+             });
+             */
             return game;
         }
     }
     @Override
-    public Boolean deleteUniverse(Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    public Boolean deleteUniverse(Long gameId)  {
         try {
             getGameById(gameId).getGameId();
             deleteGameById(gameId);
             deleteArmyById(gameId);
             deleteResourcesById(gameId);
+            log.info(Constants.UNIVERSE_DELETED);
             return true;
-        } catch (NullPointerException | JAXBException e){
-            log.error("Nothing to delete");
+        } catch (NullPointerException | JAXBException | IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+            log.error(Constants.WRONG_PARAMETER);
             return false;
         }
     }
     @Override
-    public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public EnemyPlanet getEnemyPower(Long planetId,Long gameId) {
         try {
             return getGameById(gameId)
                     .getEnemyPlanetList()
                     .get(Math.toIntExact(planetId)-1);
-        } catch (NullPointerException | JAXBException e){
-            log.info("You conquered all planets");
+        } catch (NullPointerException | JAXBException | IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+            log.info(Constants.WRONG_PARAMETER);
             return null;
         }
     }
     @Override
-    public ArmyInfo getArmyPower(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public ArmyInfo getArmyPower(Long gameId) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
         try {
             return getGameById(gameId)
                     .getResources()
                     .getArmy()
                     .getArmyInfo();
-        }catch (NullPointerException | JAXBException e){
-            log.info("Your army is dead");
+        }catch (NullPointerException e){
+            log.info(Constants.YOUR_ARMY_IS_DEAD);
             return null;
         }
     }
@@ -697,7 +692,7 @@ public class XMLDataProvider extends AbstractDataProvider {
                     enemyPlanet.setEnemyHealthPoints(enemyPlanet.getEnemyHealthPoints()-armyInfo.getArmyAttackPoints());
                 } else {
                     deleteUniverse(gameId);
-                    log.info("Game over");
+                    log.info(Constants.GAME_OVER);
                     return result = false;
                 }}
             List<EnemyPlanet> enemyPlanetList = game.getEnemyPlanetList();
@@ -706,8 +701,8 @@ public class XMLDataProvider extends AbstractDataProvider {
             PlayerPlanet playerPlanet = new PlayerPlanet();
             playerPlanet.setPlanetId(enemyPlanet.getPlanetId());
             playerPlanet.setPlanetName(enemyPlanet.getPlanetName());
-            playerPlanet.setPlanetType("PLAYER");
-            playerPlanet.setBuildingLimit(10);
+            playerPlanet.setPlanetType(Constants.PLAYER);
+            playerPlanet.setBuildingLimit(Constants.DEFAULT_BUILDING_LIMIT);
             List<PlayerPlanet> playerPlanetList = game.getPlayerPlanetList();
             playerPlanetList.add(playerPlanet);
             game.setPlayerPlanetList(playerPlanetList);
@@ -718,10 +713,10 @@ public class XMLDataProvider extends AbstractDataProvider {
                     .getResources());
             updateGameById(game);
             result=true;
-            return result;
-        }catch (NullPointerException | JAXBException e){
-            log.info("EnemyPlanet does not exist");
+        }catch (NullPointerException e){
+            log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
             result=false;
+        } finally {
             return result;
         }
 
@@ -730,16 +725,18 @@ public class XMLDataProvider extends AbstractDataProvider {
     @Override
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
         Game game = getGameById(gameId);
+        try {
         Unit unit = getUnitById(unitId);
-        try {game
-                .getResources()
-                .getArmy()
-                .getArmyInfo()
-                .setArmyHealthPoints(game
-                        .getResources()
-                        .getArmy()
-                        .getArmyInfo()
-                        .getArmyHealthPoints() + unit.getUnitHealthPoints());
+
+            game
+                    .getResources()
+                    .getArmy()
+                    .getArmyInfo()
+                    .setArmyHealthPoints(game
+                            .getResources()
+                            .getArmy()
+                            .getArmyInfo()
+                            .getArmyHealthPoints() + unit.getUnitHealthPoints());
             game
                     .getResources()
                     .getArmy()
@@ -758,8 +755,23 @@ public class XMLDataProvider extends AbstractDataProvider {
                     .getResources()
                     .getArmy()
                     .setUnits(unitList);
+            game
+                    .getResources()
+                    .setGold(game
+                            .getResources()
+                            .getGold()-unit.getGoldRequired());
+            game
+                    .getResources()
+                    .setFood(game
+                            .getResources()
+                            .getFood()-unit.getFoodRequired());
+            game
+                    .getResources()
+                    .setMetal(game
+                            .getResources()
+                            .getMetal()-unit.getMetalRequired());
         }catch (NullPointerException e){
-            log.error("ERROR");
+            log.error(Constants.WRONG_PARAMETER);
         }finally {
             return game;
         }
@@ -824,7 +836,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             }}
     }
     @Override
-    public Game removeBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
+    public Game removeBuilding(Long buildingId,Long gameId) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
         Game game = getGameById(gameId);
         try {
             List<Building> buildingList = game
@@ -836,38 +848,72 @@ public class XMLDataProvider extends AbstractDataProvider {
                     .getResources()
                     .setBuildingList(buildingList);
         } catch (IndexOutOfBoundsException | NullPointerException e){
-            log.info("BuildingList is empty");
+            log.debug(Constants.BUILDING_LIST+Constants.IS_EMPTY);
         }
 
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public Game manageResources(Long gameId,int operation,Long id) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
         Game game=new Game();
         try {
             switch (operation) {
                 case (2) -> game = addBuilding(id, gameId);
                 case (3) -> game = removeBuilding(id, gameId);
                 case (4) -> game = hireUnit(id, gameId);
-                default -> log.error("Wrong id");
+                default -> log.error(Constants.WRONG_PARAMETER);
             }
             updateGameById(game);
             updateResourcesById(game.getResources());
             updateArmyById(game.getResources().getArmy());
-        } catch (NullPointerException | JAXBException e){
-            log.error("Game does not exist");
+        } catch (NullPointerException e){
+            log.error(Constants.GAME+Constants.DO_NOT_EXIST);
         }
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public Game manageResources(Long gameId,int operation) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         Game game=new Game();
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {
-            log.error("Wrong operation");
+            log.error(Constants.WRONG_PARAMETER);
         }
         return game;
+    }
+    @Override
+    public Building getBuildingById(Long id) throws JAXBException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Building> buildingList = getBuildingList();
+        Building building=buildingList.stream()
+                .filter(x-> id.equals(x.getBuildingId()))
+                .findAny()
+                .orElse(null);
+        if(building == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.BUILDING+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
+        }
+        return building;
+    }
+    @Override
+    public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Unit> unitList = getUnitList();
+        Unit unit=unitList.stream()
+                .filter(x-> id.equals(x.getUnitId()))
+                .findAny()
+                .orElse(null);
+        if(unit == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.UNIT+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
+        }
+        return unit;
     }
 
 }

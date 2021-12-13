@@ -1,4 +1,4 @@
-package ru.sfedu.Kursovaya.utils.DataProviders;
+package ru.sfedu.Kursovaya.api.DataProviders;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -18,17 +18,17 @@ import ru.sfedu.Kursovaya.Beans.*;
 import java.util.stream.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.sfedu.Kursovaya.utils.OtherUtils.BeansGenerator;
 import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 public class CSVDataProvider extends AbstractDataProvider {
+
+
     public CSVDataProvider() throws IOException {}
     private final String PATHTOCSV= ConfigurationUtil.getConfigurationEntry(Constants.PATH_TO_CSV);
     private final String CSVEXTENSION=ConfigurationUtil.getConfigurationEntry(Constants.CSV_FILE_EXTENSION);
     private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
     MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
-    /**ЧИТАЕМ и ПИШЕМ*/
     private CSVReader reader;
     private CSVWriter writer;
     private void initReader(String string) throws IOException {
@@ -43,7 +43,7 @@ public class CSVDataProvider extends AbstractDataProvider {
         if (reader!=null){this.reader.close();}
         if(writer!=null){this.writer.close();}
     }
-    public void initDataSource(String string) throws IOException {
+    private void initDataSource(String string) throws IOException {
         string = PATHTOCSV+string+CSVEXTENSION;
         File file = new File(string);
         if (!file.exists()) {
@@ -52,7 +52,15 @@ public class CSVDataProvider extends AbstractDataProvider {
             file.createNewFile();
         }
     }
-    private void writeUnits (List<Unit> ulist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+
+    private <T> void  write(List<T> list,String string) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        this.initWriter(string);
+        StatefulBeanToCsv<T> statefulBeanToCSV=new StatefulBeanToCsvBuilder<T>(this.writer).withApplyQuotesToAll(false).build();
+        statefulBeanToCSV.write(list);
+        this.close();
+    }
+    /**NONGENERICWRITERS
+     * private void writeUnits (List<Unit> ulist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         this.initWriter(Constants.FILE_NAME_UNIT);
         StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Unit>(this.writer).withApplyQuotesToAll(false).build();
         statefulBeanToCSV.write(ulist);
@@ -94,7 +102,8 @@ public class CSVDataProvider extends AbstractDataProvider {
         StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
         statefulBeanToCSV.write(glist);
         this.close();
-    }
+    }*/
+
     private List<Unit> sortUnitList(List<Unit> unitList) {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
         return unitList;
@@ -121,8 +130,6 @@ public class CSVDataProvider extends AbstractDataProvider {
         } catch (NullPointerException e){} finally {
             return rlist;
         }
-
-
     }
     private List<Game> sortGameList(List<Game> glist) {
         try {
@@ -131,6 +138,7 @@ public class CSVDataProvider extends AbstractDataProvider {
             return glist;
         }
     }
+
     private String getClassName(){
         return Thread.currentThread().getStackTrace()[2].getClassName();
     }
@@ -147,64 +155,50 @@ public class CSVDataProvider extends AbstractDataProvider {
         return unitlist;
     }
     public void createUnit(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Unit> unitList=getUnitList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Unit> unitList = getUnitList();
         unitList.add(unit);
-        unitList=sortUnitList(unitList);
-        this.writeUnits(unitList);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
-    }
-    public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Unit> unitList=getUnitList();
-        Unit unit=unitList.stream().filter(x-> id.equals(x.getUnitId())).findAny().orElse(null);
-        if(unit==null){
-            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:Unit does not exist");
-            return unit;
-        } else {
-            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
-            return unit;
-        }
+        unitList = sortUnitList(unitList);
+        this.write(unitList,Constants.FILE_NAME_UNIT);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit, Constants.UNIT, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public void deleteUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Unit> unitList=getUnitList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Unit> unitList = getUnitList();
         try {
             Unit unit = unitList.stream().filter(x-> id.equals(x.getUnitId())).findAny().get();
             unitList = unitList.stream().filter(x-> !id.equals(x.getUnitId())).collect(Collectors.toList());
-            this.writeUnits(unitList);
+            this.write(unitList,Constants.FILE_NAME_UNIT);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.UNIT+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearUnits() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<Unit> unitList=getUnitList();
-        unitList=unitList.stream().filter(x->null==x.getUnitId()).collect(Collectors.toList());
-        this.writeUnits(unitList);
-    }
     public void updateUnitById(Unit unit) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Unit> unitList=getUnitList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Unit> unitList = getUnitList();
         try{
-            unit.getUnitId().equals(unitList.stream().filter(x -> unit.getUnitId().equals(x.getUnitId())).findFirst().get().getUnitId());
-            unitList=unitList.stream().filter(x-> !unit.getUnitId().equals(x.getUnitId())).collect(Collectors.toList());
-            writeUnits(unitList);
+            unit.getUnitId()
+                    .equals(unitList
+                            .stream()
+                            .filter(x -> unit.getUnitId().equals(x.getUnitId()))
+                    .findFirst()
+                    .get()
+                    .getUnitId());
+            unitList = unitList.stream().filter(x-> !unit.getUnitId().equals(x.getUnitId())).collect(Collectors.toList());
+            write(unitList,Constants.FILE_NAME_UNIT);
             unitList.add(unit);
-            unitList=sortUnitList(unitList);
-            writeUnits(unitList);
+            unitList = sortUnitList(unitList);
+            write(unitList,Constants.FILE_NAME_UNIT);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("Unit does not exist");
+            log.info(Constants.UNIT+Constants.DO_NOT_EXIST);
         }
     }
     /**BUILDING*/
@@ -216,64 +210,50 @@ public class CSVDataProvider extends AbstractDataProvider {
         return buildingList;
     }
     public void createBuilding(Building building) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Building> buildingList=getBuildingList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Building> buildingList = getBuildingList();
         buildingList.add(building);
-        buildingList=sortBuildingList(buildingList);
-        this.writeBuildings(buildingList);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
-    }
-    public Building getBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Building> buildingList=getBuildingList();
-        Building building=buildingList.stream().filter(x-> id.equals(x.getBuildingId())).findAny().orElse(null);
-        if(building==null){
-            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:Building does not exist");
-            return building;
-        } else {
-            saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
-            return building;
-        }
+        buildingList = sortBuildingList(buildingList);
+        this.write(buildingList,Constants.FILE_NAME_BUILDING);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(building, Constants.BUILDING, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public void deleteBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Building> buildingList=getBuildingList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Building> buildingList = getBuildingList();
         try {
             Building building = buildingList.stream().filter(x-> id.equals(x.getBuildingId())).findAny().get();
             buildingList = buildingList.stream().filter(x-> !id.equals(x.getBuildingId())).collect(Collectors.toList());
-            this.writeBuildings(buildingList);
+            this.write(buildingList,Constants.FILE_NAME_BUILDING);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.BUILDING+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearBuildings() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<Building> buildingList=getBuildingList();
-        buildingList=buildingList.stream().filter(x->null==x.getBuildingId()).collect(Collectors.toList());
-        this.writeBuildings(buildingList);
-    }
     public void updateBuildingById(Building building) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Building> buildingList=getBuildingList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Building> buildingList = getBuildingList();
         try{
-            building.getBuildingId().equals(buildingList.stream().filter(x -> building.getBuildingId().equals(x.getBuildingId())).findFirst().get().getBuildingId());
-            buildingList=buildingList.stream().filter(x-> !building.getBuildingId().equals(x.getBuildingId())).collect(Collectors.toList());
-            writeBuildings(buildingList);
+            building.getBuildingId()
+                    .equals(buildingList
+                            .stream()
+                            .filter(x -> building.getBuildingId().equals(x.getBuildingId()))
+                            .findFirst()
+                            .get()
+                            .getBuildingId());
+            buildingList = buildingList.stream().filter(x-> !building.getBuildingId().equals(x.getBuildingId())).collect(Collectors.toList());
+            write(buildingList,Constants.FILE_NAME_BUILDING);
             buildingList.add(building);
-            buildingList=sortBuildingList(buildingList);
-            writeBuildings(buildingList);
+            buildingList = sortBuildingList(buildingList);
+            write(buildingList,Constants.FILE_NAME_BUILDING);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("Building does not exist");
+            log.info(Constants.BUILDING+Constants.DO_NOT_EXIST);
         }
     }
     /**PLAYERPLANET*/
@@ -285,23 +265,25 @@ public class CSVDataProvider extends AbstractDataProvider {
         return playerPlanetList;
     }
     public void createPlayerPlanet(PlayerPlanet playerPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
-        playerPlanetlist.add(playerPlanet);
-        playerPlanetlist=sortPlayerPlanetList(playerPlanetlist);
-        this.writePlayerPlanets(playerPlanetlist);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet,Constants.PLAYER_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<PlayerPlanet> playerPlanetList = getPlayerPlanetList();
+        playerPlanetList.add(playerPlanet);
+        playerPlanetList = sortPlayerPlanetList(playerPlanetList);
+        this.write(playerPlanetList,Constants.FILE_NAME_PLAYER_PLANET);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet, Constants.PLAYER_PLANET, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public PlayerPlanet getPlayerPlanetById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
-        PlayerPlanet playerPlanet=playerPlanetlist.stream().filter(x-> id.equals(x.getPlanetId())).findAny().orElse(null);
-        if(playerPlanet==null){
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<PlayerPlanet> playerPlanetList = getPlayerPlanetList();
+        PlayerPlanet playerPlanet=playerPlanetList.stream()
+                .filter(x-> id.equals(x.getPlanetId()))
+                .findAny()
+                .orElse(null);
+        if(playerPlanet == null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:PlayerPlanet does not exist");
+            log.info(Constants.PLAYER_PLANET+Constants.DO_NOT_EXIST);
             return playerPlanet;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet,Constants.PLAYER_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
@@ -309,40 +291,41 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     public void deletePlayerPlanetById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<PlayerPlanet> playerPlanetList = getPlayerPlanetList();
         try {
-            PlayerPlanet playerPlanet = playerPlanetlist.stream().filter(x-> id.equals(x.getPlanetId())).findAny().get();
-            playerPlanetlist = playerPlanetlist.stream().filter(x-> !id.equals(x.getPlanetId())).collect(Collectors.toList());
-            this.writePlayerPlanets(playerPlanetlist);
+            PlayerPlanet playerPlanet = playerPlanetList.stream().filter(x-> id.equals(x.getPlanetId())).findAny().get();
+            playerPlanetList = playerPlanetList.stream().filter(x-> !id.equals(x.getPlanetId())).collect(Collectors.toList());
+            this.write(playerPlanetList,Constants.FILE_NAME_PLAYER_PLANET);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet,Constants.PLAYER_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.PLAYER_PLANET+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearPlayerPlanets() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
-        playerPlanetlist=playerPlanetlist.stream().filter(x->null==x.getPlanetId()).collect(Collectors.toList());
-        this.writePlayerPlanets(playerPlanetlist);
-    }
     public void updatePlayerPlanetById(PlayerPlanet playerPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<PlayerPlanet> playerPlanetlist=getPlayerPlanetList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<PlayerPlanet> playerPlanetList = getPlayerPlanetList();
         try{
-            playerPlanet.getPlanetId().equals(playerPlanetlist.stream().filter(x -> playerPlanet.getPlanetId().equals(x.getPlanetId())).findFirst().get().getPlanetId());
-            playerPlanetlist=playerPlanetlist.stream().filter(x-> !playerPlanet.getPlanetId().equals(x.getPlanetId())).collect(Collectors.toList());
-            writePlayerPlanets(playerPlanetlist);
-            playerPlanetlist.add(playerPlanet);
-            playerPlanetlist=sortPlayerPlanetList(playerPlanetlist);
-            writePlayerPlanets(playerPlanetlist);
+            playerPlanet.getPlanetId()
+                    .equals(playerPlanetList
+                            .stream()
+                            .filter(x -> playerPlanet.getPlanetId().equals(x.getPlanetId()))
+                            .findFirst()
+                            .get()
+                            .getPlanetId());
+            playerPlanetList = playerPlanetList.stream().filter(x-> !playerPlanet.getPlanetId().equals(x.getPlanetId())).collect(Collectors.toList());
+            write(playerPlanetList,Constants.FILE_NAME_PLAYER_PLANET);
+            playerPlanetList.add(playerPlanet);
+            playerPlanetList = sortPlayerPlanetList(playerPlanetList);
+            write(playerPlanetList,Constants.FILE_NAME_PLAYER_PLANET);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet,Constants.PLAYER_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("PlayerPlanet does not exist");
+            log.info(Constants.PLAYER_PLANET+Constants.DO_NOT_EXIST);
         }
     }
     /**ENEMYPLANET*/
@@ -354,23 +337,25 @@ public class CSVDataProvider extends AbstractDataProvider {
         return enemyPlanetList;
     }
     public void createEnemyPlanet(EnemyPlanet enemyPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
-        enemyPlanetlist.add(enemyPlanet);
-        enemyPlanetlist=sortEnemyPlanetList(enemyPlanetlist);
-        this.writeEnemyPlanets(enemyPlanetlist);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet,Constants.ENEMY_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<EnemyPlanet> enemyPlanetList = getEnemyPlanetList();
+        enemyPlanetList.add(enemyPlanet);
+        enemyPlanetList = sortEnemyPlanetList(enemyPlanetList);
+        this.write(enemyPlanetList,Constants.FILE_NAME_ENEMY_PLANET);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet, Constants.ENEMY_PLANET, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public EnemyPlanet getEnemyPlanetById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
-        EnemyPlanet enemyPlanet=enemyPlanetlist.stream().filter(x-> id.equals(x.getPlanetId())).findAny().orElse(null);
-        if(enemyPlanet==null){
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<EnemyPlanet> enemyPlanetList = getEnemyPlanetList();
+        EnemyPlanet enemyPlanet=enemyPlanetList.stream()
+                .filter(x-> id.equals(x.getPlanetId()))
+                .findAny()
+                .orElse(null);
+        if(enemyPlanet == null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:EnemyPlanet does not exist");
+            log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
             return enemyPlanet;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet,Constants.ENEMY_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
@@ -378,69 +363,71 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     public void deleteEnemyPlanetById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<EnemyPlanet> enemyPlanetList = getEnemyPlanetList();
         try {
-            EnemyPlanet enemyPlanet = enemyPlanetlist.stream().filter(x-> id.equals(x.getPlanetId())).findAny().get();
-            enemyPlanetlist = enemyPlanetlist.stream().filter(x-> !id.equals(x.getPlanetId())).collect(Collectors.toList());
-            this.writeEnemyPlanets(enemyPlanetlist);
+            EnemyPlanet enemyPlanet = enemyPlanetList.stream().filter(x-> id.equals(x.getPlanetId())).findAny().get();
+            enemyPlanetList = enemyPlanetList.stream().filter(x-> !id.equals(x.getPlanetId())).collect(Collectors.toList());
+            this.write(enemyPlanetList,Constants.FILE_NAME_ENEMY_PLANET);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet,Constants.ENEMY_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearEnemyPlanets() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
-        enemyPlanetlist=enemyPlanetlist.stream().filter(x->null==x.getPlanetId()).collect(Collectors.toList());
-        this.writeEnemyPlanets(enemyPlanetlist);
-    }
     public void updateEnemyPlanetById(EnemyPlanet enemyPlanet) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<EnemyPlanet> enemyPlanetlist=getEnemyPlanetList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<EnemyPlanet> enemyPlanetList = getEnemyPlanetList();
         try{
-            enemyPlanet.getPlanetId().equals(enemyPlanetlist.stream().filter(x -> enemyPlanet.getPlanetId().equals(x.getPlanetId())).findFirst().get().getPlanetId());
-            enemyPlanetlist=enemyPlanetlist.stream().filter(x-> !enemyPlanet.getPlanetId().equals(x.getPlanetId())).collect(Collectors.toList());
-            writeEnemyPlanets(enemyPlanetlist);
-            enemyPlanetlist.add(enemyPlanet);
-            enemyPlanetlist=sortEnemyPlanetList(enemyPlanetlist);
-            writeEnemyPlanets(enemyPlanetlist);
+            enemyPlanet.getPlanetId()
+                    .equals(enemyPlanetList
+                            .stream()
+                            .filter(x -> enemyPlanet.getPlanetId().equals(x.getPlanetId()))
+                            .findFirst()
+                            .get()
+                            .getPlanetId());
+            enemyPlanetList = enemyPlanetList.stream().filter(x-> !enemyPlanet.getPlanetId().equals(x.getPlanetId())).collect(Collectors.toList());
+            write(enemyPlanetList,Constants.FILE_NAME_ENEMY_PLANET);
+            enemyPlanetList.add(enemyPlanet);
+            enemyPlanetList = sortEnemyPlanetList(enemyPlanetList);
+            write(enemyPlanetList,Constants.FILE_NAME_ENEMY_PLANET);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet,Constants.ENEMY_PLANET,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("EnemyPlanet does not exist");
+            log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
         }
     }
     /**ARMY*/
     public List<Army> getArmyList() throws IOException {
         this.initReader(Constants.FILE_NAME_ARMY);
         CsvToBean<Army> csvToBean=new CsvToBeanBuilder<Army>(this.reader).withType(Army.class).build();
-        List<Army> armylist=csvToBean.parse();
-        armylist=sortArmyList(armylist);
-        return armylist;
+        List<Army> armyList=csvToBean.parse();
+        armyList=sortArmyList(armyList);
+        return armyList;
     }
     public void createArmy(Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Army> armylist=getArmyList();
-        log.info(armylist);
-        armylist.add(army);
-        armylist=sortArmyList(armylist);
-        writeArmy(armylist);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(army,Constants.ARMY,className,methodName),Constants.MONGODB_TEST_SERVER);
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Army> armyList = getArmyList();
+        armyList.add(army);
+        armyList = sortArmyList(armyList);
+        this.write(armyList,Constants.FILE_NAME_ARMY);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(army, Constants.ARMY, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public Army getArmyById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Army> armylist=getArmyList();
-        Army army=armylist.stream().filter(x-> id.equals(x.getArmyId())).findAny().orElse(null);
-        if(army==null){
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Army> armyList = getArmyList();
+        Army army=armyList.stream()
+                .filter(x-> id.equals(x.getArmyId()))
+                .findAny()
+                .orElse(null);
+        if(army == null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:Army does not exist");
+            log.info(Constants.ARMY+Constants.DO_NOT_EXIST);
             return army;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(army,Constants.ARMY,className,methodName),Constants.MONGODB_TEST_SERVER);
@@ -448,40 +435,41 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     public void deleteArmyById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Army> armylist=getArmyList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Army> armyList = getArmyList();
         try {
-            Army army = armylist.stream().filter(x-> id.equals(x.getArmyId())).findAny().get();
-            armylist = armylist.stream().filter(x-> !id.equals(x.getArmyId())).collect(Collectors.toList());
-            this.writeArmy(armylist);
+            Army army = armyList.stream().filter(x-> id.equals(x.getArmyId())).findAny().get();
+            armyList = armyList.stream().filter(x-> !id.equals(x.getArmyId())).collect(Collectors.toList());
+            this.write(armyList,Constants.FILE_NAME_ARMY);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(army,Constants.ARMY,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.ARMY+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearArmys() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<Army> armylist=getArmyList();
-        armylist=armylist.stream().filter(x->null==x.getArmyId()).collect(Collectors.toList());
-        this.writeArmy(armylist);
-    }
     public void updateArmyById(Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Army> armylist=getArmyList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Army> armyList = getArmyList();
         try{
-            army.getArmyId().equals(armylist.stream().filter(x -> army.getArmyId().equals(x.getArmyId())).findFirst().get().getArmyId());
-            armylist=armylist.stream().filter(x-> !army.getArmyId().equals(x.getArmyId())).collect(Collectors.toList());
-            writeArmy(armylist);
-            armylist.add(army);
-            armylist=sortArmyList(armylist);
-            writeArmy(armylist);
+            army.getArmyId()
+                    .equals(armyList
+                            .stream()
+                            .filter(x -> army.getArmyId().equals(x.getArmyId()))
+                            .findFirst()
+                            .get()
+                            .getArmyId());
+            armyList = armyList.stream().filter(x-> !army.getArmyId().equals(x.getArmyId())).collect(Collectors.toList());
+            write(armyList,Constants.FILE_NAME_ARMY);
+            armyList.add(army);
+            armyList = sortArmyList(armyList);
+            write(armyList,Constants.FILE_NAME_ARMY);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(army,Constants.ARMY,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("Army does not exist");
+            log.info(Constants.ARMY+Constants.DO_NOT_EXIST);
         }
     }
     /**RESOURCES*/
@@ -493,23 +481,25 @@ public class CSVDataProvider extends AbstractDataProvider {
         return resourcesList;
     }
     public void createResources(Resources resources) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Resources> resourcesList=getResourcesList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Resources> resourcesList = getResourcesList();
         resourcesList.add(resources);
-        resourcesList=sortResourcesList(resourcesList);
-        this.writeResources(resourcesList);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources,Constants.RESOURCES,className,methodName),Constants.MONGODB_TEST_SERVER);
+        resourcesList = sortResourcesList(resourcesList);
+        this.write(resourcesList,Constants.FILE_NAME_RESOURCES);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources, Constants.RESOURCES, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public Resources getResourcesById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Resources> resourcesList=getResourcesList();
-        Resources resources=resourcesList.stream().filter(x-> id.equals(x.getResourcesId())).findAny().orElse(null);
-        if(resources==null){
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Resources> resourcesList = getResourcesList();
+        Resources resources=resourcesList.stream()
+                .filter(x-> id.equals(x.getResourcesId()))
+                .findAny()
+                .orElse(null);
+        if(resources == null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("ERROR:Resources does not exist");
+            log.info(Constants.RESOURCES+Constants.DO_NOT_EXIST);
             return resources;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources,Constants.RESOURCES,className,methodName),Constants.MONGODB_TEST_SERVER);
@@ -517,40 +507,41 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     public void deleteResourcesById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Resources> resourcesList=getResourcesList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Resources> resourcesList = getResourcesList();
         try {
             Resources resources = resourcesList.stream().filter(x-> id.equals(x.getResourcesId())).findAny().get();
             resourcesList = resourcesList.stream().filter(x-> !id.equals(x.getResourcesId())).collect(Collectors.toList());
-            this.writeResources(resourcesList);
+            this.write(resourcesList,Constants.FILE_NAME_RESOURCES);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources,Constants.RESOURCES,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
         catch (NoSuchElementException e){
-            log.info(e);
+            log.info(Constants.RESOURCES+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
     }
-    public void clearResourcess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<Resources> resourcesList=getResourcesList();
-        resourcesList=resourcesList.stream().filter(x->null==x.getResourcesId()).collect(Collectors.toList());
-        this.writeResources(resourcesList);
-    }
     public void updateResourcesById(Resources resources) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Resources> resourcesList=getResourcesList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Resources> resourcesList = getResourcesList();
         try{
-            resources.getResourcesId().equals(resourcesList.stream().filter(x -> resources.getResourcesId().equals(x.getResourcesId())).findFirst().get().getResourcesId());
-            resourcesList=resourcesList.stream().filter(x-> !resources.getResourcesId().equals(x.getResourcesId())).collect(Collectors.toList());
-            writeResources(resourcesList);
+            resources.getResourcesId()
+                    .equals(resourcesList
+                            .stream()
+                            .filter(x -> resources.getResourcesId().equals(x.getResourcesId()))
+                            .findFirst()
+                            .get()
+                            .getResourcesId());
+            resourcesList = resourcesList.stream().filter(x-> !resources.getResourcesId().equals(x.getResourcesId())).collect(Collectors.toList());
+            write(resourcesList,Constants.FILE_NAME_RESOURCES);
             resourcesList.add(resources);
-            resourcesList=sortResourcesList(resourcesList);
-            writeResources(resourcesList);
+            resourcesList = sortResourcesList(resourcesList);
+            write(resourcesList,Constants.FILE_NAME_RESOURCES);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources,Constants.RESOURCES,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("Resources does not exist");
+            log.info(Constants.RESOURCES+Constants.DO_NOT_EXIST);
         }
     }
     /**GAME*/
@@ -562,23 +553,25 @@ public class CSVDataProvider extends AbstractDataProvider {
         return gameList;
     }
     public void createGame(Game game) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Game> gameList=getGameList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Game> gameList = getGameList();
         gameList.add(game);
-        gameList=sortGameList(gameList);
-        this.writeGame(gameList);
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName),Constants.MONGODB_TEST_SERVER);
+        gameList = sortGameList(gameList);
+        this.write(gameList,Constants.FILE_NAME_GAME);
+        saveToLog(mongoDBDataProvider.initHistoryContentTrue(game, Constants.GAME, className, methodName), Constants.MONGODB_TEST_SERVER);
     }
     public Game getGameById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Game> gameList=getGameList();
-        Game game=gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().orElse(null);
-        if(game==null){
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Game> gameList = getGameList();
+        Game game=gameList.stream()
+                .filter(x-> id.equals(x.getGameId()))
+                .findAny()
+                .orElse(null);
+        if(game == null){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.error("Game does not exist");
+            log.info(Constants.GAME+Constants.DO_NOT_EXIST);
             return game;
         } else {
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName),Constants.MONGODB_TEST_SERVER);
@@ -586,67 +579,64 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     public void deleteGameById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Game> gameList=getGameList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Game> gameList = getGameList();
         try {
             Game game = gameList.stream().filter(x-> id.equals(x.getGameId())).findAny().get();
             gameList = gameList.stream().filter(x-> !id.equals(x.getGameId())).collect(Collectors.toList());
-            this.writeGame(gameList);
+            this.write(gameList,Constants.FILE_NAME_GAME);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName),Constants.MONGODB_TEST_SERVER);
-        } catch (NoSuchElementException e){
-            log.info(e);
+        }
+        catch (NoSuchElementException e){
+            log.info(Constants.GAME+Constants.DO_NOT_EXIST);
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
-    }
-    public void clearGames() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        List<Game> gameList=getGameList();
-        gameList=gameList.stream().filter(x->null==x.getGameId()).collect(Collectors.toList());
-        this.writeGame(gameList);
     }
     public void updateGameById(Game game) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        String methodName=getMethodName();
-        String className=getClassName();
-        List<Game> gameList=getGameList();
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Game> gameList = getGameList();
         try{
             game.getGameId().equals(gameList.stream().filter(x -> game.getGameId().equals(x.getGameId())).findFirst().get().getGameId());
-            gameList=gameList.stream().filter(x-> !game.getGameId().equals(x.getGameId())).collect(Collectors.toList());
-            writeGame(gameList);
+            gameList = gameList.stream().filter(x-> !game.getGameId().equals(x.getGameId())).collect(Collectors.toList());
+            write(gameList,Constants.FILE_NAME_GAME);
             gameList.add(game);
-            gameList=sortGameList(gameList);
-            writeGame(gameList);
+            gameList = sortGameList(gameList);
+            write(gameList,Constants.FILE_NAME_GAME);
             saveToLog(mongoDBDataProvider.initHistoryContentTrue(game,Constants.GAME,className,methodName),Constants.MONGODB_TEST_SERVER);
         } catch (NoSuchElementException e){
             saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
-            log.info("Game does not exist");
+            log.info(Constants.GAME+Constants.DO_NOT_EXIST);
         }
     }
-
     /**CRUD
      * CORE*/
     @Override
     public Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         if (game.getGameId()==null || army.getArmyId() == null || resources.getResourcesId() == null){
-            log.info("Wrong parameters");
+            log.info(Constants.WRONG_PARAMETER);
             return null;
         } else {
         createGame(game);
         createResources(resources);
         createArmy(army);
-        log.info("Your resources:");
-        log.info("Food:"+game.getResources().getFood());
-        log.info("Metal:"+game.getResources().getMetal());
-        log.info("Gold:"+game.getResources().getGold());
-        log.info("Your army power:");
-        log.info("Health:"+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+" Attack:"+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
-        log.info("Your planets:");
+        /**
+        log.info(Constants.YOUR_RESOURCES);
+        log.info(Constants.FOOD+game.getResources().getFood());
+        log.info(Constants.METAL+game.getResources().getMetal());
+        log.info(Constants.GOLD+game.getResources().getGold());
+        log.info(Constants.YOUR_ARMY_POWER);
+        log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+        log.info(Constants.YOUR_PLANETS);
         game.getPlayerPlanetList().forEach(x->{
-            log.info("Id:"+x.getPlanetId()+" Planet name:"+x.getPlanetName()+" Building limit:"+x.getBuildingLimit());
+            log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
         });
-        log.info("Enemy planets:");
+        log.info(Constants.ENEMY_PLANETS);
         game.getEnemyPlanetList().forEach(x->{
-            log.info("Id:"+x.getPlanetId()+" Planet name:"+x.getPlanetName());
+            log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
         });
+        */
         return game;
         }
     }
@@ -657,10 +647,10 @@ public class CSVDataProvider extends AbstractDataProvider {
             deleteGameById(gameId);
             deleteArmyById(gameId);
             deleteResourcesById(gameId);
-            log.info("Universe deleted");
+            log.info(Constants.UNIVERSE_DELETED);
             return true;
         } catch (NullPointerException e){
-            log.error("Nothing to delete");
+            log.error(Constants.WRONG_PARAMETER);
             return false;
         }
     }
@@ -671,7 +661,7 @@ public class CSVDataProvider extends AbstractDataProvider {
                     .getEnemyPlanetList()
                     .get(Math.toIntExact(planetId)-1);
         } catch (NullPointerException e){
-            log.info("You conquered all planets");
+            log.info(Constants.WRONG_PARAMETER);
             return null;
         }
     }
@@ -683,7 +673,7 @@ public class CSVDataProvider extends AbstractDataProvider {
                     .getArmy()
                     .getArmyInfo();
         }catch (NullPointerException e){
-            log.info("Your army is dead");
+            log.info(Constants.YOUR_ARMY_IS_DEAD);
             return null;
         }
     }
@@ -700,7 +690,7 @@ public class CSVDataProvider extends AbstractDataProvider {
                     enemyPlanet.setEnemyHealthPoints(enemyPlanet.getEnemyHealthPoints()-armyInfo.getArmyAttackPoints());
                 } else {
                     deleteUniverse(gameId);
-                    log.info("Game over");
+                    log.info(Constants.GAME_OVER);
                     return result = false;
                 }}
             List<EnemyPlanet> enemyPlanetList = game.getEnemyPlanetList();
@@ -709,8 +699,8 @@ public class CSVDataProvider extends AbstractDataProvider {
             PlayerPlanet playerPlanet = new PlayerPlanet();
             playerPlanet.setPlanetId(enemyPlanet.getPlanetId());
             playerPlanet.setPlanetName(enemyPlanet.getPlanetName());
-            playerPlanet.setPlanetType("PLAYER");
-            playerPlanet.setBuildingLimit(10);
+            playerPlanet.setPlanetType(Constants.PLAYER);
+            playerPlanet.setBuildingLimit(Constants.DEFAULT_BUILDING_LIMIT);
             List<PlayerPlanet> playerPlanetList = game.getPlayerPlanetList();
             playerPlanetList.add(playerPlanet);
             game.setPlayerPlanetList(playerPlanetList);
@@ -722,7 +712,7 @@ public class CSVDataProvider extends AbstractDataProvider {
             updateGameById(game);
             result=true;
         }catch (NullPointerException e){
-            log.info("EnemyPlanet does not exist");
+            log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
             result=false;
         } finally {
             return result;
@@ -734,7 +724,8 @@ public class CSVDataProvider extends AbstractDataProvider {
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         Game game = getGameById(gameId);
         Unit unit = getUnitById(unitId);
-        try {game
+        try {
+            game
                 .getResources()
                 .getArmy()
                 .getArmyInfo()
@@ -743,26 +734,41 @@ public class CSVDataProvider extends AbstractDataProvider {
                         .getArmy()
                         .getArmyInfo()
                         .getArmyHealthPoints() + unit.getUnitHealthPoints());
-        game
-                .getResources()
-                .getArmy()
-                .getArmyInfo()
-                .setArmyAttackPoints(game
-                        .getResources()
-                        .getArmy()
-                        .getArmyInfo()
-                        .getArmyAttackPoints() + unit.getUnitAttackPoints());
-        List<Unit> unitList = game
-                .getResources()
-                .getArmy()
-                .getUnits();
-        unitList.add(unit);
-        game
+            game
+                    .getResources()
+                    .getArmy()
+                    .getArmyInfo()
+                    .setArmyAttackPoints(game
+                            .getResources()
+                            .getArmy()
+                            .getArmyInfo()
+                            .getArmyAttackPoints() + unit.getUnitAttackPoints());
+            List<Unit> unitList = game
+                    .getResources()
+                    .getArmy()
+                    .getUnits();
+            unitList.add(unit);
+            game
                 .getResources()
                 .getArmy()
                 .setUnits(unitList);
+            game
+                    .getResources()
+                    .setGold(game
+                            .getResources()
+                            .getGold()-unit.getGoldRequired());
+            game
+                    .getResources()
+                    .setFood(game
+                            .getResources()
+                            .getFood()-unit.getFoodRequired());
+            game
+                    .getResources()
+                    .setMetal(game
+                            .getResources()
+                            .getMetal()-unit.getMetalRequired());
         }catch (NullPointerException e){
-            log.error("Wrong parameters");
+            log.error(Constants.WRONG_PARAMETER);
         }finally {
             return game;
         }
@@ -839,7 +845,7 @@ public class CSVDataProvider extends AbstractDataProvider {
                     .getResources()
                     .setBuildingList(buildingList);
         } catch (IndexOutOfBoundsException | NullPointerException e){
-            log.info("BuildingList is empty");
+            log.debug(Constants.BUILDING_LIST+Constants.IS_EMPTY);
         }
 
         return game;
@@ -852,13 +858,13 @@ public class CSVDataProvider extends AbstractDataProvider {
             case (2) -> game = addBuilding(id, gameId);
             case (3) -> game = removeBuilding(id, gameId);
             case (4) -> game = hireUnit(id, gameId);
-            default -> log.error("Wrong id");
+            default -> log.error(Constants.WRONG_PARAMETER);
         }
             updateGameById(game);
             updateResourcesById(game.getResources());
             updateArmyById(game.getResources().getArmy());
         } catch (NullPointerException e){
-            log.error("Game does not exist");
+            log.error(Constants.GAME+Constants.DO_NOT_EXIST);
         }
         return game;
     }
@@ -868,9 +874,43 @@ public class CSVDataProvider extends AbstractDataProvider {
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {
-            log.error("Wrong operation");
+            log.error(Constants.WRONG_PARAMETER);
         }
         return game;
+    }
+    @Override
+    public Building getBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Building> buildingList = getBuildingList();
+        Building building=buildingList.stream()
+                .filter(x-> id.equals(x.getBuildingId()))
+                .findAny()
+                .orElse(null);
+        if(building == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.BUILDING+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
+        }
+        return building;
+    }
+    @Override
+    public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        String methodName = getMethodName();
+        String className = getClassName();
+        List<Unit> unitList = getUnitList();
+        Unit unit=unitList.stream()
+                .filter(x-> id.equals(x.getUnitId()))
+                .findAny()
+                .orElse(null);
+        if(unit == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.UNIT+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
+        }
+        return unit;
     }
 }
 

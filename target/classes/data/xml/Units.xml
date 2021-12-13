@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xmlList>
     <Unit>
-        <id>1</id>
+        <id>3</id>
+        <unitType>MARKSMAN</unitType>
+        <unitAttackPoints>2</unitAttackPoints>
+        <unitHealthPoints>1</unitHealthPoints>
+        <goldRequired>1</goldRequired>
+        <metalRequired>1</metalRequired>
+        <foodRequired>1</foodRequired>
+    </Unit>
+    <Unit>
+        <id>3</id>
         <unitType>MARKSMAN</unitType>
         <unitAttackPoints>2</unitAttackPoints>
         <unitHealthPoints>1</unitHealthPoints>

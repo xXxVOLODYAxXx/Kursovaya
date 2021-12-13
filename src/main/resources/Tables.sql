@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS UNIT (unitId BIGINT, unitType varchar(65535), unitAttackPoints BIGINT, unitHealthPoints BIGINT, goldRequired BIGINT, foodRequired BIGINT, metalRequired BIGINT);
+CREATE TABLE IF NOT EXISTS BUILDING (buildingId BIGINT, type varchar(65535), foodBuff BIGINT, metalBuff BIGINT, goldBuff BIGINT, foodRequired BIGINT, metalRequired BIGINT, goldRequired BIGINT);
+CREATE TABLE IF NOT EXISTS PLAYERPLANET (planetId BIGINT, planetName varchar(65535), type varchar(65535), buildingLimit BIGINT);
+CREATE TABLE IF NOT EXISTS ENEMYPLANET (planetId BIGINT, planetName varchar(65535), type varchar(65535), enemyHealthPoints BIGINT, enemyAttackPoints BIGINT);
+CREATE TABLE IF NOT EXISTS GAME (gameId BIGINT, gameName varchar(65535));
+CREATE TABLE IF NOT EXISTS GAME_PLAYERPLANET (gameId BIGINT, planetId BIGINT, FOREIGN KEY(gameId) references GAME(gameId) ON DELETE CASCADE, FOREIGN KEY(planetId) references PLAYERPLANET(planetId)ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS GAME_ENEMYPLANET (gameId BIGINT, planetId BIGINT, FOREIGN KEY(gameId) references GAME(gameId) ON DELETE CASCADE, FOREIGN KEY(planetId) references ENEMYPLANET(planetId)ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS RESOURCES (resourcesId BIGINT, food BIGINT, metal BIGINT, gold BIGINT, operation BIGINT, gameId BIGINT,FOREIGN KEY(gameId) references GAME(gameId) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS RESOURCES_BUILDING (resourcesId BIGINT, buildingId BIGINT, FOREIGN KEY(resourcesId) references RESOURCES(resourcesId) ON DELETE CASCADE, FOREIGN KEY(buildingId) references BUILDING(buildingId) ON DELETE CASCADE, buildingCount BIGINT);
+CREATE TABLE IF NOT EXISTS ARMY (armyId BIGINT, resourcesId BIGINT, FOREIGN KEY(resourcesId) references RESOURCES(resourcesId) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS ARMY_UNIT (armyId BIGINT, unitId BIGINT, FOREIGN KEY(armyId) references ARMY(armyId) ON DELETE CASCADE, FOREIGN KEY(unitId) references UNIT(unitId) ON DELETE CASCADE, unitCount BIGINT);
+CREATE TABLE IF NOT EXISTS ARMYINFO (armyId BIGINT, FOREIGN KEY(armyId) references ARMY(armyId) ON DELETE CASCADE, armyHealthPoints BIGINT, armyAttackPoints BIGINT);

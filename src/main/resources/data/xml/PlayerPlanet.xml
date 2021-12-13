@@ -6,4 +6,10 @@
         <type>PLAYER</type>
         <buildingLimit>10</buildingLimit>
     </PlayerPlanet>
+    <PlayerPlanet>
+        <id>1</id>
+        <planetName>A</planetName>
+        <type>PLAYER</type>
+        <buildingLimit>10</buildingLimit>
+    </PlayerPlanet>
 </xmlList>

@@ -1,7 +1,10 @@
-package ru.sfedu.Kursovaya.utils.DataProviders;
+package ru.sfedu.Kursovaya.api.DataProviders;
+
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.sfedu.Kursovaya.Beans.Army;

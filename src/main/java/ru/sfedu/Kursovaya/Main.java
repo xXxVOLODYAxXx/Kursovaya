@@ -3,14 +3,13 @@ package ru.sfedu.Kursovaya;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.Army;
-import ru.sfedu.Kursovaya.Beans.ArmyInfo;
 import ru.sfedu.Kursovaya.Beans.Game;
 import ru.sfedu.Kursovaya.Beans.Resources;
-import ru.sfedu.Kursovaya.utils.DataProviders.AbstractDataProvider;
-import ru.sfedu.Kursovaya.utils.DataProviders.XMLDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.AbstractDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.XMLDataProvider;
 import ru.sfedu.Kursovaya.utils.OtherUtils.BeansGenerator;
 import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.CSVDataProvider;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;

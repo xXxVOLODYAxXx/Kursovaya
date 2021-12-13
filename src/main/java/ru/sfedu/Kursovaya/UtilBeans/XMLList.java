@@ -57,7 +57,7 @@ public class XMLList {
         this.playerPlanetList = playerPlanetList;
     }
     public List<Unit> getUnits(){
-        return unitList;
+        return this.unitList;
     }
     public List<Building> getBuildings(){
         return buildingList;

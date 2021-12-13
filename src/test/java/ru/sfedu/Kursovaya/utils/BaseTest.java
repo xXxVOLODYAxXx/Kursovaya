@@ -3,12 +3,13 @@ package ru.sfedu.Kursovaya.utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
 import ru.sfedu.Kursovaya.Beans.*;
 import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
 import ru.sfedu.Kursovaya.UtilBeans.XMLList;
-import ru.sfedu.Kursovaya.utils.DataProviders.CSVDataProvider;
-import ru.sfedu.Kursovaya.utils.DataProviders.JDBCDataProvider;
-import ru.sfedu.Kursovaya.utils.DataProviders.XMLDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.CSVDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.JDBCDataProvider;
+import ru.sfedu.Kursovaya.api.DataProviders.XMLDataProvider;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class BaseTest {
         return playerPlanet;
     }
     public EnemyPlanet initEnemyPlanet(){
-        enemyPlanet.setPlanetId(1L);
+        enemyPlanet.setPlanetId(2L);
         enemyPlanet.setPlanetName("B");
         enemyPlanet.setPlanetType("ENEMY");
         enemyPlanet.setEnemyAttackPoints(50);
@@ -118,9 +119,7 @@ public class BaseTest {
         game.setGameId(1L);
         game.setGameName("A");
         enemyPlanetList.add(initEnemyPlanet());
-        enemyPlanetList.add(initEnemyPlanet());
         game.setEnemyPlanetList(enemyPlanetList);
-        playerPlanetList.add(initPlayerPlanet());
         playerPlanetList.add(initPlayerPlanet());
         game.setPlayerPlanetList(playerPlanetList);
         game.setResources(initResources());
@@ -158,7 +157,7 @@ public class BaseTest {
         log.info(enemyPlanet.getEnemyAttackPoints());
         log.info(enemyPlanet.getEnemyHealthPoints());
     }
-    @Test
+
     public void readEnemyPlanet(EnemyPlanet enemyPlanet){
         try {
             log.info(enemyPlanet.getPlanetName());
@@ -183,12 +182,12 @@ public class BaseTest {
         log.info(armyInfo.getArmyAttackPoints());
         log.info(armyInfo.getArmyHealthPoints());
     }
-    @Test
+
     public void readArmyInfo(ArmyInfo armyInfo){
         try {
             log.info(armyInfo.getArmyAttackPoints());
             log.info(armyInfo.getArmyHealthPoints());
-        }catch (NullPointerException e) {}
+        }catch (NullPointerException | ParameterResolutionException ignored){}
 
     }
     @Test
@@ -198,7 +197,7 @@ public class BaseTest {
         log.info(army.getArmyInfo());
         log.info(army.getUnits());
     }
-    @Test
+
     public void readArmy(Army army){
         log.info("ARMY");
         log.info(army.getArmyId());
@@ -216,8 +215,9 @@ public class BaseTest {
         log.info(resources.getMetal());
         log.info(resources.getOperation());
     }
-    @Test
+
     public void readResources(Resources resources){
+        try {
         log.info("RESOURCES");
         log.info(resources.getResourcesId());
         log.info(resources.getArmy());
@@ -226,6 +226,7 @@ public class BaseTest {
         log.info(resources.getGold());
         log.info(resources.getMetal());
         log.info(resources.getOperation());
+        } catch (NullPointerException | ParameterResolutionException ignored){}
     }
     @Test
     public void readGame(){
@@ -236,7 +237,7 @@ public class BaseTest {
         log.info(game.getPlayerPlanetList());
         log.info(game.getResources());
     }
-    @Test
+
     public void readGame(Game game){
         try {
             log.info("GAME");
@@ -245,9 +246,7 @@ public class BaseTest {
             log.info(game.getEnemyPlanetList());
             log.info(game.getPlayerPlanetList());
             log.info(game.getResources());
-        } catch (NullPointerException e){
-            log.debug("aADADSDdasdadadadЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ");
-        }
+        } catch (NullPointerException | ParameterResolutionException ignored){}
 
     }
 
