@@ -3,6 +3,7 @@ package ru.sfedu.Kursovaya.Beans;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import ru.sfedu.Kursovaya.utils.CSVConverters.EnemyPlanetTransformer;
+import ru.sfedu.Kursovaya.utils.CSVConverters.PlanetTransformer;
 import ru.sfedu.Kursovaya.utils.CSVConverters.PlayerPlanetTransformer;
 import ru.sfedu.Kursovaya.utils.CSVConverters.ResourcesTransformer;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,6 +23,9 @@ public class Game {
     private List<EnemyPlanet> enemyPlanetList;
     @CsvCustomBindByName(required = false, converter = PlayerPlanetTransformer.class)
     private List<PlayerPlanet> playerPlanetList;
+    /**
+    @CsvCustomBindByName(required = false, converter = PlanetTransformer.class)
+    private List<Planet> planetList;*/
     @CsvCustomBindByName(required = false, converter = ResourcesTransformer.class)
     private Resources resources;
 
@@ -33,12 +37,14 @@ public class Game {
     public String getGameName() {
         return this.gameName;
     }
+
     public List<EnemyPlanet> getEnemyPlanetList() {
         return this.enemyPlanetList;
     }
     public List<PlayerPlanet> getPlayerPlanetList() {
         return this.playerPlanetList;
     }
+
     public Resources getResources() {
         return this.resources;
     }
@@ -48,6 +54,7 @@ public class Game {
     public void setGameName(String gameName) {
         this.gameName = gameName;
     }
+
     public void setEnemyPlanetList(List<EnemyPlanet> enemyPlanetList) {
         this.enemyPlanetList = enemyPlanetList;
     }
@@ -57,11 +64,27 @@ public class Game {
     public void setResources(Resources resources) {
         this.resources = resources;
     }
+    /**
+    public List<Planet> getPlanetList() {
+        return this.planetList;
+    }
+
+    public void setPlanetList(List<Planet> planetList) {
+        this.planetList = planetList;
+    }*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Objects.equals(id, game.id) && Objects.equals(gameName, game.gameName) && Objects.equals(enemyPlanetList, game.enemyPlanetList) && Objects.equals(playerPlanetList, game.playerPlanetList) && Objects.equals(resources, game.resources);
+    }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, gameName, enemyPlanetList, playerPlanetList, resources);
     }
+
     @Override
     public String toString() {
         return "Game{" +
@@ -71,12 +94,5 @@ public class Game {
                 ", playerPlanetList=" + playerPlanetList +
                 ", resources=" + resources +
                 '}';
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(id, game.id) && Objects.equals(gameName, game.gameName) && Objects.equals(enemyPlanetList, game.enemyPlanetList) && Objects.equals(playerPlanetList, game.playerPlanetList) && Objects.equals(resources, game.resources);
     }
 }

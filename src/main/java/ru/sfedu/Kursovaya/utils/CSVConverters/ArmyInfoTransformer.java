@@ -17,7 +17,7 @@ public class ArmyInfoTransformer extends AbstractBeanField {
             armyInfo.setArmyAttackPoints(Integer.parseInt(data[0]));
             armyInfo.setArmyHealthPoints(Integer.parseInt(data[1]));
         } catch (NullPointerException e){
-            log.error(Constants.ARMYINFO+Constants.DO_NOT_EXIST);
+            //log.error(Constants.ARMYINFO+Constants.DO_NOT_EXIST);
         } finally {
             return armyInfo;
         }

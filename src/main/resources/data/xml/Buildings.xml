@@ -10,14 +10,4 @@
         <metalRequired>5</metalRequired>
         <goldRequired>5</goldRequired>
     </Building>
-    <Building>
-        <id>1</id>
-        <buildingType>FARM</buildingType>
-        <foodBuff>10</foodBuff>
-        <metalBuff>0</metalBuff>
-        <goldBuff>0</goldBuff>
-        <foodRequired>0</foodRequired>
-        <metalRequired>5</metalRequired>
-        <goldRequired>5</goldRequired>
-    </Building>
 </xmlList>

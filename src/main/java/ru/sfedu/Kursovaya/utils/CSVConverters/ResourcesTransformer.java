@@ -27,7 +27,7 @@ public class ResourcesTransformer extends AbstractBeanField {
             resources.setBuildingList((List<Building>) buildingTransformer.convert(parsedData[5]));
             resources.setOperation(Integer.parseInt(parsedData[6]));
         }catch (NumberFormatException e){
-            log.error(Constants.RESOURCES+Constants.DO_NOT_EXIST);
+            //log.error(Constants.RESOURCES+Constants.DO_NOT_EXIST);
         }finally {
             return resources;
         }

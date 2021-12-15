@@ -6,8 +6,10 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.bson.Document;
 import org.joda.time.DateTime;
 import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class MongoDBDataProvider {
-    private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
+    //private static final Logger log = LogManager.getLogger(MongoDBDataProvider.class).atLevel(Level.OFF);
     private MongoClient client;
     private MongoDatabase database;
 
@@ -66,7 +68,7 @@ public class MongoDBDataProvider {
             this.client = new MongoClient(new MongoClientURI(ConfigurationUtil.getConfigurationEntry(Constants.MONGODB)));
             this.database = client.getDatabase(string);
         } catch (IOException e){
-            log.error(e);
+            //log.error(e);
         }
 
     }

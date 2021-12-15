@@ -23,8 +23,10 @@ class JDBCDataProviderCoreTest extends BaseTest {
     public JDBCDataProviderCoreTest() throws IOException, JAXBException {
         super();
     }
+
     @Test
     void createUniverseSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
+
         game=initGame();
         unit=initUnit();
         building=initBuilding();
@@ -43,7 +45,7 @@ class JDBCDataProviderCoreTest extends BaseTest {
         assertEquals(game, j.getGameById(game.getGameId()));
         assertEquals(army, j.getArmyById(army.getArmyId()));
         assertEquals(resources, j.getResourcesById(resources.getResourcesId()));
-
+        j.dropTables();
     }
     @Test
     void createUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
@@ -67,6 +69,7 @@ class JDBCDataProviderCoreTest extends BaseTest {
         j.insertPlayerPlanet(playerPlanet);
         j.createUniverse(game,resources,army);
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
     void deleteUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
@@ -94,11 +97,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         readEnemyPlanet(j.getEnemyPower(1L,1L));
+        j.dropTables();
     }
     @Test
-    void getEnemyPowerFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void getEnemyPowerFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.getEnemyPower(1L,1L));
+        j.dropTables();
     }
     @Test
     void getArmyPowerSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -121,10 +126,12 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         readArmyInfo(j.getArmyPower(1L));
+        j.dropTables();
     }
     @Test
-    void getArmyPowerFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void getArmyPowerFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Assertions.assertNull(j.getArmyPower(2L));
+        j.dropTables();
     }
     @Test
     void attackPlanetSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
@@ -147,11 +154,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         log.info(j.attackPlanet(1L,1L));
+        j.dropTables();
 
     }
     @Test
     void attackPlanetFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
-        Assertions.assertNull(j.attackPlanet(1L,1L));
+        Assertions.assertFalse(j.attackPlanet(1L,1L));
+        j.dropTables();
     }
     @Test
     void hireUnitSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
@@ -171,16 +180,18 @@ class JDBCDataProviderCoreTest extends BaseTest {
         j.insertPlayerPlanet(playerPlanet);
         j.createUniverse(game,resources,army);
         Assertions.assertEquals(game, j.getGameById(game.getGameId()));
-        Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
-        Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
+        Assertions.assertEquals(army, j.getArmyById(army.getArmyId()));
+        Assertions.assertEquals(resources, j.getResourcesById(resources.getResourcesId()));
         readGame(game);
         readGame(j.hireUnit(1L,1L));
-        Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(j.hireUnit(1L, 1L).getResources().getArmy().getUnits()) );
+        assertNotEquals(game.getResources().getArmy().getUnits(), j.hireUnit(3L, 1L).getResources().getArmy().getUnits());
+        j.dropTables();
     }
     @Test
     void hireUnitFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.hireUnit(1L,1L).getGameId());
+        j.dropTables();
     }
     @Test
     void getBuildingsInfoSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -204,11 +215,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         log.info(j.getBuildingsInfo(1L));
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
-    void getBuildingsInfoFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void getBuildingsInfoFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.getBuildingsInfo(1L));
+        j.dropTables();
     }
     @Test
     void addBuildingSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -234,11 +247,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         readGame(j.addBuilding(1L,1L));
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.addBuilding(1L, 1L).getResources().getBuildingList()) );
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
     void addBuildingFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.addBuilding(1L,1L));
+        j.dropTables();
     }
     @Test
     void removeBuildingSuccess() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -263,15 +278,18 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.addBuilding(1L, 1L).getResources().getBuildingList()) );
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.removeBuilding(1L, 1L).getResources().getBuildingList()) );
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
     void removeBuildingFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.removeBuilding(1L,1L).getGameId());
+        j.dropTables();
     }
     @Test
-    void manageResources1Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void manageResources1Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         log.info(j.manageResources(1L,1));
+        j.dropTables();
     }
     @Test
     void manageResources1Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -295,6 +313,7 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         log.info(j.manageResources(1L,1));
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
     void testManageResources2Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -320,11 +339,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         readGame(j.manageResources(1L,2,1L));
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.manageResources(1L,2,1L).getResources().getBuildingList()) );
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
-    void testManageResources2Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void testManageResources2Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.manageResources(1L,2,1L));
+        j.dropTables();
     }
     @Test
     void testManageResources3Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -350,11 +371,13 @@ class JDBCDataProviderCoreTest extends BaseTest {
         j.manageResources(1L, 3, 1L).getResources().getBuildingList();
         assertEquals(game.getResources().getBuildingList(),j.getGameById(1L).getResources().getBuildingList() );
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
-    void testManageResources3Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void testManageResources3Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.manageResources(1L,3,1L).getGameId());
+        j.dropTables();
     }
     @Test
     void testManageResources4Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
@@ -378,12 +401,14 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
         readGame(game);
         readGame(j.manageResources(1L,4,1L));
-        Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(j.manageResources(1L,4,1L).getResources().getArmy().getUnits()) );
+        Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(j.manageResources(1L,4,3L).getResources().getArmy().getUnits()) );
         j.deleteUniverse(1L);
+        j.dropTables();
     }
     @Test
-    void testManageResources4Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    void testManageResources4Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         j.deleteUniverse(1L);
         Assertions.assertNull(j.manageResources(1L,4,1L).getGameId());
+        j.dropTables();
     }
 }

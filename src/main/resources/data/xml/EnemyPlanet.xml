@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xmlList>
     <EnemyPlanet>
-        <id>2</id>
-        <planetName>B</planetName>
-        <type>ENEMY</type>
-        <enemyHealthPoints>50</enemyHealthPoints>
-        <enemyAttackPoints>50</enemyAttackPoints>
-    </EnemyPlanet>
-    <EnemyPlanet>
-        <id>2</id>
+        <id>1</id>
         <planetName>B</planetName>
         <type>ENEMY</type>
         <enemyHealthPoints>50</enemyHealthPoints>

@@ -8,6 +8,7 @@ import ru.sfedu.Kursovaya.utils.CSVConverters.BuildingTransformer;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @XmlRootElement
@@ -24,7 +25,7 @@ public class Resources {
     @CsvCustomBindByName(required = false, converter = ArmyTransformer.class)
     private Army army;
     @CsvCustomBindByName(required = false, converter = BuildingTransformer.class)
-    private List<Building> buildingList;
+    private List<Building> buildingList=new ArrayList<>();
     @CsvBindByName
     private int operation;
 

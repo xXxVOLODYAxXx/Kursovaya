@@ -8,6 +8,7 @@ import ru.sfedu.Kursovaya.utils.CSVConverters.UnitTransformer;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @XmlRootElement
@@ -16,7 +17,7 @@ public class Army {
     @CsvBindByName
     private Long id;
     @CsvCustomBindByName(required = false, converter = UnitTransformer.class)
-    private List<Unit> units;
+    private List<Unit> units = new ArrayList<>();
     @CsvCustomBindByName(required = false, converter = ArmyInfoTransformer.class)
     private ArmyInfo armyInfo;
 

@@ -31,7 +31,7 @@ public class EnemyPlanetTransformer extends AbstractBeanField {
             enemyPlanetList.add(enemyPlanet);
         });
         } catch (NumberFormatException e){
-            log.error(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
+            //log.error(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
         } finally {
             return enemyPlanetList;
         }

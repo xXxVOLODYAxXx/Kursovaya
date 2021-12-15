@@ -4,6 +4,8 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
+import org.h2.jdbc.JdbcSQLNonTransientConnectionException;
 import ru.sfedu.Kursovaya.Beans.*;
 import ru.sfedu.Kursovaya.utils.OtherUtils.ConfigurationUtil;
 import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
@@ -57,7 +59,31 @@ public class JDBCDataProvider extends AbstractDataProvider{
         statement.executeUpdate(query);
         closeConnection();
     }
-
+    public void dropTables() throws SQLException {
+        initConnection();
+        statement.executeUpdate(Constants.DROP_ALL_TABLES);
+        closeConnection();
+    }
+    public void dropGamePlanets() throws SQLException {
+        initConnection();
+        statement.executeUpdate(Constants.DROP_ALL_GAME_PLANETS);
+        closeConnection();
+    }
+    public void dropResourcesBuilding() throws SQLException {
+        initConnection();
+        statement.executeUpdate(Constants.DROP_RESOURCES_BUILDINGS);
+        closeConnection();
+    }
+    public void dropArmyUnits() throws SQLException {
+        initConnection();
+        statement.executeUpdate(Constants.DROP_ARMY_UNITS);
+        closeConnection();
+    }
+    public void dropDefault() throws SQLException {
+        initConnection();
+        statement.executeUpdate(Constants.DROP_DEFAULT);
+        closeConnection();
+    }
     public List<Unit> getUnitListFromResultSet(ResultSet resultSet) throws SQLException, IOException {
         initDataSource();
         initConnection();
@@ -68,9 +94,9 @@ public class JDBCDataProvider extends AbstractDataProvider{
             unit.setUnitType(resultSet.getString(2));
             unit.setUnitAttackPoints(resultSet.getInt(3));
             unit.setUnitHealthPoints(resultSet.getInt(4));
-            unit.setGoldRequired(5);
-            unit.setMetalRequired(6);
-            unit.setFoodRequired(7);
+            unit.setGoldRequired(resultSet.getInt(5));
+            unit.setMetalRequired(resultSet.getInt(6));
+            unit.setFoodRequired(resultSet.getInt(7));
             unitList.add(unit);
         }
         closeConnection();
@@ -178,47 +204,57 @@ public class JDBCDataProvider extends AbstractDataProvider{
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_UNIT);
-        return getUnitListFromResultSet(rs);
+        List<Unit> unitList=getUnitListFromResultSet(rs);
+        closeConnection();
+        return unitList;
     }
     public List<Building> getBuildingList() throws SQLException, IOException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_BUILDING);
-        return getBuildingListFromResultSet(rs);
+        List<Building> buildingList=getBuildingListFromResultSet(rs);
+        closeConnection();
+        return buildingList;
     }
     public List<EnemyPlanet> getEnemyPlanetList() throws SQLException, IOException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_ENEMY_PLANET);
-        return getEnemyPlanetListFromResultSet(rs);
+        List<EnemyPlanet> enemyPlanetList = getEnemyPlanetListFromResultSet(rs);
+        closeConnection();
+        return enemyPlanetList;
     }
     public List<PlayerPlanet> getPlayerPlanetList() throws SQLException, IOException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_PLAYER_PLANET);
-
-        return getPlayerPlanetListFromResultSet(rs);
+        List<PlayerPlanet> playerPlanetList = getPlayerPlanetListFromResultSet(rs);
+        closeConnection();
+        return playerPlanetList;
     }
     public List<Army> getArmyList() throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_ARMY);
+        List<Army> armyList = getArmyListFromResultSet(rs);
         closeConnection();
-        return getArmyListFromResultSet(rs);
+        return armyList;
     }
     public List<Resources> getResourcesList() throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_RESOURCES);
+        List<Resources> resources=getResourcesListFromResultSet(rs);
         closeConnection();
-        return getResourcesListFromResultSet(rs);
+        return resources;
     }
     public List<Game> getGameList() throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         initDataSource();
         initConnection();
         ResultSet rs = statement.executeQuery(Constants.SELECT_GAME);
+        List<Game> gameList=getGameListFromResultSet(rs);
         closeConnection();
-        return getGameListFromResultSet(rs);
+        return gameList;
     }
 
     public ArmyInfo getArmyInfoId(Long id) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -276,7 +312,7 @@ public class JDBCDataProvider extends AbstractDataProvider{
         ResultSet resultSet = statement.executeQuery(String.format(Constants.SELECT_RESOURCES_BUILDING_BY_ID,id));
         while (resultSet.next()){
             int count=resultSet.getInt(3);
-            log.info(count);
+            //log.info(count);
             while (count>0){
                 buildingList.add(getBuildingById(resultSet.getLong(2)));
                 count--;
@@ -390,25 +426,33 @@ public class JDBCDataProvider extends AbstractDataProvider{
         String className = getClassName();
         initDataSource();
         initConnection();
-        statement.executeUpdate(String.format(Constants.CREATE_UNIT,
-                unit.getUnitId(),
-                "'"+unit.getUnitType()+"'",
-                unit.getUnitAttackPoints(),
-                unit.getUnitHealthPoints(),
-                unit.getGoldRequired(),
-                unit.getFoodRequired(),
-                unit.getMetalRequired()));
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
+        try {
+            statement.executeUpdate(String.format(Constants.CREATE_UNIT,
+                    unit.getUnitId(),
+                    unit.getUnitType(),
+                    unit.getUnitAttackPoints(),
+                    unit.getUnitHealthPoints(),
+                    unit.getGoldRequired(),
+                    unit.getFoodRequired(),
+                    unit.getMetalRequired()));
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        } catch (JdbcSQLIntegrityConstraintViolationException e){
+
+        } finally {
+            closeConnection();
+        }
+
+
     }
     public void insertBuilding(Building building) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName = getMethodName();
         String className = getClassName();
         initDataSource();
         initConnection();
+        try {
         statement.executeUpdate(String.format(Constants.CREATE_BUILDING,
                 building.getBuildingId(),
-                "'"+building.getBuildingType()+"'",
+                building.getBuildingType(),
                 building.getFoodBuff(),
                 building.getMetalBuff(),
                 building.getGoldBuff(),
@@ -416,34 +460,47 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 building.getMetalRequired(),
                 building.getGoldRequired()));
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(building, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
+        } catch (JdbcSQLIntegrityConstraintViolationException e){
+
+        } finally {
+            closeConnection();
+        }
     }
     public void insertEnemyPlanet(EnemyPlanet enemyPlanet) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName = getMethodName();
         String className = getClassName();
         initDataSource();
         initConnection();
+        try {
         statement.executeUpdate(String.format(Constants.CREATE_ENEMY_PLANET,
                 enemyPlanet.getPlanetId(),
-                "'"+enemyPlanet.getPlanetName()+"'",
-                "'"+enemyPlanet.getPlanetType()+"'",
+                enemyPlanet.getPlanetName(),
+                enemyPlanet.getPlanetType(),
                 enemyPlanet.getEnemyHealthPoints(),
                 enemyPlanet.getEnemyAttackPoints()));
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(enemyPlanet, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+    } catch (JdbcSQLIntegrityConstraintViolationException e){
+
+    } finally {
         closeConnection();
+    }
     }
     public void insertPlayerPlanet(PlayerPlanet playerPlanet) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName = getMethodName();
         String className = getClassName();
         initDataSource();
         initConnection();
-        statement.executeUpdate(String.format(Constants.CREATE_PLAYER_PLANET,
-                playerPlanet.getPlanetId(),
-                "'"+playerPlanet.getPlanetName()+"'",
-                "'"+playerPlanet.getPlanetType()+"'",
-                playerPlanet.getBuildingLimit()));
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        try {
+            statement.executeUpdate(String.format(Constants.CREATE_PLAYER_PLANET,
+                    playerPlanet.getPlanetId(),
+                    playerPlanet.getPlanetName(),
+                    playerPlanet.getPlanetType(),
+                    playerPlanet.getBuildingLimit()));
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(playerPlanet, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        } catch (JdbcSQLIntegrityConstraintViolationException e){
+        } finally {
         closeConnection();
+        }
     }
     public void insertArmyInfo(ArmyInfo armyinfo, Long armyId) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName = getMethodName();
@@ -461,20 +518,15 @@ public class JDBCDataProvider extends AbstractDataProvider{
         initDataSource();
         initConnection();
         List<Unit> unitList=getUnitList();
+        initConnection();
         unitList.forEach(n->{
             try {
                 int count= Collections.frequency(armyUnitList.stream().map(Unit::getUnitId).collect(Collectors.toList()), n.getUnitId());
-                log.info(count);
-                initConnection();
                 statement.executeUpdate(String.format(Constants.CREATE_ARMY_UNIT,
                         armyId,
                         n.getUnitId(),
                         count));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-
+            } catch (SQLException | NullPointerException e) {}});
         closeConnection();
     }
     public void insertArmy(Army army) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -482,28 +534,34 @@ public class JDBCDataProvider extends AbstractDataProvider{
         String className = getClassName();
         initDataSource();
         initConnection();
-        statement.executeUpdate(String.format(Constants.CREATE_ARMY,army.getArmyId(),army.getArmyId()));
-        insertArmyInfo(army.getArmyInfo(), army.getArmyId());
-        insertArmyUnit(army.getUnits(),army.getArmyId());
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(army, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
+        try {
+            statement.executeUpdate(String.format(Constants.CREATE_ARMY,army.getArmyId(),army.getArmyId()));
+            insertArmyInfo(army.getArmyInfo(), army.getArmyId());
+            insertArmyUnit(army.getUnits(),army.getArmyId());
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(army, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        } catch (JdbcSQLIntegrityConstraintViolationException | NullPointerException e){
+
+        } finally {
+            closeConnection();
+        }
+
+
     }
     public void insertResourcesBuilding(List<Building> resourcesBuildingList,Long resourcesId) throws SQLException, IOException {
         initDataSource();
         initConnection();
         List<Building> buildingList=getBuildingList();
+        initConnection();
         buildingList.forEach(n->{
             try {
                 int count= Collections.frequency(resourcesBuildingList.stream().map(Building::getBuildingId).collect(Collectors.toList()), n.getBuildingId());
-                initConnection();
                 statement.executeUpdate(String.format(Constants.CREATE_RESOURCES_BUILDING,
                         resourcesId,
                         n.getBuildingId(),
                         count));
-            } catch (SQLException e) {
+            } catch (SQLException | NullPointerException e) {
                 e.printStackTrace();
-            }
-        });
+            }});
         closeConnection();
     }
     public void insertResources(Resources resources) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -511,25 +569,32 @@ public class JDBCDataProvider extends AbstractDataProvider{
         String className = getClassName();
         initDataSource();
         initConnection();
-        statement.executeUpdate(String.format(Constants.CREATE_RESOURCES,
-                resources.getResourcesId(),
-                resources.getFood(),
-                resources.getMetal(),
-                resources.getGold(),
-                resources.getOperation(),
-                resources.getResourcesId()));
-        insertResourcesBuilding(resources.getBuildingList(),resources.getResourcesId());
-        insertArmy(resources.getArmy());
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
+        try {
+            statement.executeUpdate(String.format(Constants.CREATE_RESOURCES,
+                    resources.getResourcesId(),
+                    resources.getFood(),
+                    resources.getMetal(),
+                    resources.getGold(),
+                    resources.getOperation(),
+                    resources.getResourcesId()));
+            insertResourcesBuilding(resources.getBuildingList(),resources.getResourcesId());
+            insertArmy(resources.getArmy());
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        } catch (JdbcSQLIntegrityConstraintViolationException e){
+
+        } finally {
+            closeConnection();
+        }
+
+
     }
     public void insertGameEnemyPlanet(List<EnemyPlanet> gameEnemyPlanetList,Long gameId) throws SQLException, IOException {
-        String methodName = getMethodName();
-        String className = getClassName();
         initDataSource();
         initConnection();
         List<EnemyPlanet> enemyPlanetList=getEnemyPlanetList();
-        enemyPlanetList.forEach(n->{
+        List<Long> planetIds = enemyPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<EnemyPlanet> filteredEnemyPlanets = gameEnemyPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
             try {
                 initConnection();
                 statement.executeUpdate(String.format(Constants.CREATE_GAME_ENEMY_PLANET,
@@ -542,12 +607,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
         closeConnection();
     }
     public void insertGamePlayerPlanet(List<PlayerPlanet> gamePlayerPlanetList,Long gameId) throws SQLException, IOException {
-        String methodName = getMethodName();
-        String className = getClassName();
         initDataSource();
         initConnection();
-        List<PlayerPlanet> enemyPlanetList=getPlayerPlanetList();
-        enemyPlanetList.forEach(n->{
+        List<PlayerPlanet> playerPlanetList=getPlayerPlanetList();
+        List<Long> planetIds = playerPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<PlayerPlanet> filteredEnemyPlanets = gamePlayerPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
             try {
                 initConnection();
                 statement.executeUpdate(String.format(Constants.CREATE_GAME_PLAYER_PLANET,
@@ -564,14 +629,19 @@ public class JDBCDataProvider extends AbstractDataProvider{
         String className = getClassName();
         initDataSource();
         initConnection();
-        statement.executeUpdate(String.format(Constants.CREATE_GAME,
-                game.getGameId(),
-                "'"+game.getGameName()+"'"));
-        insertResources(game.getResources());
-        insertGameEnemyPlanet(game.getEnemyPlanetList(),game.getGameId());
-        insertGamePlayerPlanet(game.getPlayerPlanetList(),game.getGameId());
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(game, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
+        try {
+            statement.executeUpdate(String.format(Constants.CREATE_GAME,
+                    game.getGameId(),
+                    game.getGameName()));
+            insertResources(game.getResources());
+            insertGameEnemyPlanet(game.getEnemyPlanetList(),game.getGameId());
+            insertGamePlayerPlanet(game.getPlayerPlanetList(),game.getGameId());
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(game, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
+        } catch (JdbcSQLIntegrityConstraintViolationException e) {
+
+        } finally {
+            closeConnection();
+        }
     }
 
     public void deleteUnit(Unit unit) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -637,7 +707,73 @@ public class JDBCDataProvider extends AbstractDataProvider{
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(game, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
         closeConnection();
     }
-
+    public void deleteGamePlayerPlanets(List<PlayerPlanet> gamePlayerPlanetList,Long gameId) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+        initDataSource();
+        initConnection();
+        List<PlayerPlanet> playerPlanetList=getPlayerPlanetList();
+        List<Long> planetIds = playerPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<PlayerPlanet> filteredEnemyPlanets = gamePlayerPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
+            try {
+                initConnection();
+                statement.executeUpdate(String.format(Constants.DELETE_GAME_PLAYER_PLANETS,
+                        gameId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        closeConnection();
+    }
+    public void deleteGameEnemyPlanet(List<EnemyPlanet> gameEnemyPlanetList,Long gameId) throws SQLException, IOException {
+        initDataSource();
+        initConnection();
+        List<EnemyPlanet> enemyPlanetList=getEnemyPlanetList();
+        List<Long> planetIds = enemyPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<EnemyPlanet> filteredEnemyPlanets = gameEnemyPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
+            try {
+                initConnection();
+                statement.executeUpdate(String.format(Constants.DELETE_GAME_ENEMY_PLANETS,
+                        gameId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        closeConnection();
+    }
+    public void deleteResourcesBuildings(List<Building> resourcesBuildingList,Long resourcesId) throws SQLException, IOException {
+        initDataSource();
+        initConnection();
+        List<Building> buildingList=getBuildingList();
+        List<Long> buildingIds = buildingList.stream().map(Building::getBuildingId).collect(Collectors.toList());
+        List<Building> filteredBuildings = resourcesBuildingList.stream().filter(p -> buildingIds.contains(p.getBuildingId())).collect(Collectors.toList());
+        filteredBuildings.forEach(n->{
+            try {
+                initConnection();
+                statement.executeUpdate(String.format(Constants.DELETE_RESOURCES_BUILDING,
+                        resourcesId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        closeConnection();
+    }
+    public void deleteArmyUnits(List<Unit> armyUnitsList,Long armyId) throws SQLException, IOException {
+        initDataSource();
+        initConnection();
+        List<Long> unitIds = armyUnitsList.stream().map(Unit::getUnitId).collect(Collectors.toList());
+        unitIds.forEach(n->{
+            try {
+                initConnection();
+                //log.info("fsdfsdfsdfsdf"+armyId);
+                statement.executeUpdate(String.format(Constants.DELETE_ARMY_UNIT,
+                        armyId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        closeConnection();
+    }
     public void updateUnit(Unit unit) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         String methodName = getMethodName();
         String className = getClassName();
@@ -717,7 +853,7 @@ public class JDBCDataProvider extends AbstractDataProvider{
         unitList.forEach(n->{
             try {
                 int count= Collections.frequency(armyUnitList.stream().map(Unit::getUnitId).collect(Collectors.toList()), n.getUnitId());
-                log.info(count);
+                //log.info(count);
                 initConnection();
                 statement.executeUpdate(String.format(Constants.UPDATE_ARMY_UNIT,
                         n.getUnitId(),
@@ -736,7 +872,9 @@ public class JDBCDataProvider extends AbstractDataProvider{
         initDataSource();
         initConnection();
         updateArmyInfo(army.getArmyInfo(), army.getArmyId());
-        updateArmyUnit(army.getUnits(),army.getArmyId());
+        //dropArmyUnits();
+        deleteArmyUnits(army.getUnits(),army.getArmyId());
+        insertArmyUnit(army.getUnits(),army.getArmyId());
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(army, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
         closeConnection();
     }
@@ -771,18 +909,20 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 resources.getResourcesId(),
                 resources.getResourcesId()
         ));
-        updateResourcesBuilding(resources.getBuildingList(),resources.getResourcesId());
+        //dropResourcesBuilding();
+        deleteResourcesBuildings(resources.getBuildingList(),resources.getResourcesId());
+        insertResourcesBuilding(resources.getBuildingList(),resources.getResourcesId());
         updateArmy(resources.getArmy());
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(resources, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
         closeConnection();
     }
     public void updateGameEnemyPlanet(List<EnemyPlanet> gameEnemyPlanetList,Long gameId) throws SQLException, IOException {
-        String methodName = getMethodName();
-        String className = getClassName();
         initDataSource();
         initConnection();
         List<EnemyPlanet> enemyPlanetList=getEnemyPlanetList();
-        enemyPlanetList.forEach(n->{
+        List<Long> planetIds = enemyPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<EnemyPlanet> filteredEnemyPlanets = gameEnemyPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
             try {
                 initConnection();
                 statement.executeUpdate(String.format(Constants.UPDATE_GAME_ENEMY_PLANET,
@@ -800,8 +940,10 @@ public class JDBCDataProvider extends AbstractDataProvider{
         String className = getClassName();
         initDataSource();
         initConnection();
-        List<PlayerPlanet> enemyPlanetList=getPlayerPlanetList();
-        enemyPlanetList.forEach(n->{
+        List<PlayerPlanet> playerPlanetList=getPlayerPlanetList();
+        List<Long> planetIds = playerPlanetList.stream().map(Planet::getPlanetId).collect(Collectors.toList());
+        List<PlayerPlanet> filteredEnemyPlanets = gamePlayerPlanetList.stream().filter(p -> planetIds.contains(p.getPlanetId())).collect(Collectors.toList());
+        filteredEnemyPlanets.forEach(n->{
             try {
                 initConnection();
                 statement.executeUpdate(String.format(Constants.UPDATE_GAME_PLAYER_PLANET,
@@ -824,8 +966,11 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 game.getGameId()
         ));
         updateResources(game.getResources());
-        updateGameEnemyPlanet(game.getEnemyPlanetList(),game.getGameId());
-        updateGamePlayerPlanet(game.getPlayerPlanetList(),game.getGameId());
+        //dropGamePlanets();
+        deleteGamePlayerPlanets(game.getPlayerPlanetList(),game.getGameId());
+        deleteGameEnemyPlanet(game.getEnemyPlanetList(),game.getGameId());
+        insertGameEnemyPlanet(game.getEnemyPlanetList(),game.getGameId());
+        insertGamePlayerPlanet(game.getPlayerPlanetList(),game.getGameId());
         saveToLog(mongoDBDataProvider.initHistoryContentTrue(game, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
         closeConnection();
     }
@@ -838,30 +983,19 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return null;
         } else {
             insertGame(game);
-            /**
-             log.info(Constants.YOUR_RESOURCES);
-             log.info(Constants.FOOD+game.getResources().getFood());
-             log.info(Constants.METAL+game.getResources().getMetal());
-             log.info(Constants.GOLD+game.getResources().getGold());
-             log.info(Constants.YOUR_ARMY_POWER);
-             log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
-             log.info(Constants.YOUR_PLANETS);
-             game.getPlayerPlanetList().forEach(x->{
-             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
-             });
-             log.info(Constants.ENEMY_PLANETS);
-             game.getEnemyPlanetList().forEach(x->{
-             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
-             });
-             */
+            insertResources(resources);
+            insertArmy(army);
             return game;
         }
     }
     @Override
     public Boolean deleteUniverse(Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         try {
-            getGameById(gameId).getGameId();
-            deleteGame(getGameById(gameId));
+            Game game=getGameById(gameId);
+            game.getGameId();
+            deleteGame(game);
+            deleteArmy(game.getResources().getArmy());
+            deleteResources(game.getResources());
             log.info(Constants.UNIVERSE_DELETED);
             return true;
         } catch (NullPointerException | SQLException e){
@@ -910,7 +1044,6 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 }}
             List<EnemyPlanet> enemyPlanetList = game.getEnemyPlanetList();
             enemyPlanetList.remove(Math.toIntExact(planetId)-1);
-            game.setEnemyPlanetList(enemyPlanetList);
             PlayerPlanet playerPlanet = new PlayerPlanet();
             playerPlanet.setPlanetId(enemyPlanet.getPlanetId());
             playerPlanet.setPlanetName(enemyPlanet.getPlanetName());
@@ -918,8 +1051,24 @@ public class JDBCDataProvider extends AbstractDataProvider{
             playerPlanet.setBuildingLimit(Constants.DEFAULT_BUILDING_LIMIT);
             List<PlayerPlanet> playerPlanetList = game.getPlayerPlanetList();
             playerPlanetList.add(playerPlanet);
+            game.setEnemyPlanetList(enemyPlanetList);
             game.setPlayerPlanetList(playerPlanetList);
             updateGame(game);
+            log.info(Constants.VICTORY);
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
             result=true;
         }catch (NullPointerException e){
             log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
@@ -927,13 +1076,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
         } finally {
             return result;
         }
-
-
     }
     @Override
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game = getGameById(gameId);
         Unit unit = getUnitById(unitId);
+        //log.info(unit);
         try {
             game
                     .getResources()
@@ -953,15 +1101,10 @@ public class JDBCDataProvider extends AbstractDataProvider{
                             .getArmy()
                             .getArmyInfo()
                             .getArmyAttackPoints() + unit.getUnitAttackPoints());
-            List<Unit> unitList = game
-                    .getResources()
-                    .getArmy()
-                    .getUnits();
-            unitList.add(unit);
             game
                     .getResources()
                     .getArmy()
-                    .setUnits(unitList);
+                    .getUnits().add(unit);
             game
                     .getResources()
                     .setGold(game
@@ -985,10 +1128,9 @@ public class JDBCDataProvider extends AbstractDataProvider{
     }
     @Override
     public List<Building> getBuildingsInfo(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        try {
-            return getGameById(gameId)
-                    .getResources()
-                    .getBuildingList();
+        try {return getGameById(gameId)
+                .getResources()
+                .getBuildingList();
         }catch (NullPointerException | SQLException e){
             return null;
         }
@@ -1004,11 +1146,9 @@ public class JDBCDataProvider extends AbstractDataProvider{
             if (building==null){
                 return game;
             } else {
-                List<Building> buildingList=game.getResources().getBuildingList();
-                buildingList.add(building);
                 game
                         .getResources()
-                        .setBuildingList(buildingList);
+                        .getBuildingList().add(building);
                 game
                         .getResources()
                         .setGold(game
@@ -1061,8 +1201,8 @@ public class JDBCDataProvider extends AbstractDataProvider{
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        Game game=new Game();
+    public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
+        Game game=getGameById(gameId);
         try {
             switch (operation) {
                 case (2) -> game = addBuilding(id, gameId);
@@ -1071,14 +1211,31 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 default -> log.error(Constants.WRONG_PARAMETER);
             }
             updateGame(game);
+            updateResources(game.getResources());
+            updateArmy(game.getResources().getArmy());
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
         } catch (NullPointerException | SQLException e){
             log.error(Constants.GAME+Constants.DO_NOT_EXIST);
         }
+
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        Game game=new Game();
+    public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
+        Game game=getGameById(gameId);
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {
@@ -1087,47 +1244,37 @@ public class JDBCDataProvider extends AbstractDataProvider{
         return game;
     }
     @Override
-    public Unit getUnitById(Long id) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public Building getBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         String methodName = getMethodName();
         String className = getClassName();
-        initDataSource();
-        initConnection();
-        Unit unit=new Unit();
-        initConnection();
-        ResultSet resultSet = statement.executeQuery(String.format(Constants.SELECT_UNIT_BY_ID,id));
-        if (resultSet.next()){
-            unit.setUnitId(resultSet.getLong(1));
-            unit.setUnitType(resultSet.getString(2));
-            unit.setUnitAttackPoints(resultSet.getInt(3));
-            unit.setUnitHealthPoints(resultSet.getInt(4));
-            unit.setGoldRequired(resultSet.getInt(5));
-            unit.setMetalRequired(resultSet.getInt(6));
-            unit.setFoodRequired(resultSet.getInt(7));
+        List<Building> buildingList = getBuildingList();
+        Building building=buildingList.stream()
+                .filter(x-> id.equals(x.getBuildingId()))
+                .findAny()
+                .orElse(null);
+        if(building == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.BUILDING+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(building,Constants.BUILDING,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
-        return unit;
+        return building;
     }
     @Override
-    public Building getBuildingById(Long id) throws SQLException, IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+    public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         String methodName = getMethodName();
         String className = getClassName();
-        initDataSource();
-        initConnection();
-        ResultSet resultSet = statement.executeQuery(String.format(Constants.SELECT_BUILDING_BY_ID,id));
-        Building building = new Building();
-        if(resultSet.next()){
-            building.setBuildingId(resultSet.getLong(1));
-            building.setBuildingType(resultSet.getString(2));
-            building.setFoodBuff(resultSet.getInt(3));
-            building.setMetalBuff(resultSet.getInt(4));
-            building.setGoldBuff(resultSet.getInt(5));
-            building.setFoodRequired(resultSet.getInt(6));
-            building.setMetalRequired(resultSet.getInt(7));
-            building.setGoldRequired(resultSet.getInt(8));
+        List<Unit> unitList = getUnitList();
+        Unit unit=unitList.stream()
+                .filter(x-> id.equals(x.getUnitId()))
+                .findAny()
+                .orElse(null);
+        if(unit == null){
+            saveToLog(mongoDBDataProvider.initHistoryContentFalse(Constants.NULL,className,methodName),Constants.MONGODB_TEST_SERVER);
+            log.info(Constants.UNIT+Constants.DO_NOT_EXIST);
+        } else {
+            saveToLog(mongoDBDataProvider.initHistoryContentTrue(unit,Constants.UNIT,className,methodName),Constants.MONGODB_TEST_SERVER);
         }
-        saveToLog(mongoDBDataProvider.initHistoryContentTrue(building, Constants.ARMYINFO, className, methodName), Constants.MONGODB_TEST_SERVER);
-        closeConnection();
-        return building;
+        return unit;
     }
 }

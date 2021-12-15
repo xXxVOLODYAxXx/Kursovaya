@@ -34,6 +34,7 @@ public class Constants {
     public static final String IS_EMPTY=" is empty";
 
     public static final String PLAYER="PLAYER";
+    public static final String ENEMY="ENEMY";
     public static final String SYSTEM="System";
     public static final String UNIT="Unit";
     public static final String BUILDING="Building";
@@ -64,16 +65,16 @@ public class Constants {
 
     public static final String CREATE_UNIT="INSERT INTO unit"
             + "  (unitid, unitType, unitAttackPoints, unitHealthPoints, goldRequired, foodRequired, metalRequired) VALUES "
-            + " (%d, %s, %d, %d, %d, %d, %d);";
+            + " (%d, '%s', %d, %d, %d, %d, %d);";
     public static final String CREATE_BUILDING="INSERT INTO building"
             + "  (BUILDINGID,TYPE,FOODBUFF,METALBUFF,GOLDBUFF,FOODREQUIRED ,METALREQUIRED,GOLDREQUIRED  ) VALUES "
-            + " (%d, %s, %d, %d, %d, %d, %d, %d);";
+            + " (%d, '%s', %d, %d, %d, %d, %d, %d);";
     public static final String CREATE_ENEMY_PLANET="INSERT INTO ENEMYPLANET "
             + "  (PLANETID ,PLANETNAME ,TYPE ,ENEMYHEALTHPOINTS ,ENEMYATTACKPOINTS ) VALUES "
-            + " (%d, %s, %s, %d, %d);";
+            + " (%d, '%s', '%s', %d, %d);";
     public static final String CREATE_PLAYER_PLANET="INSERT INTO PLAYERPLANET "
             + "  (PLANETID ,PLANETNAME ,TYPE ,BUILDINGLIMIT ) VALUES "
-            + " (%d, %s, %s, %d);";
+            + " (%d, '%s', '%s', %d);";
     public static final String CREATE_ARMY="INSERT INTO ARMY "
             + " (ARMYID,RESOURCESID) VALUES "
             + " (%d,%d);";
@@ -91,9 +92,9 @@ public class Constants {
             + " (%d ,%d ,%d);";
     public static final String CREATE_GAME="INSERT INTO GAME"
             + "  (GAMEID ,GAMENAME) VALUES "
-            + " (%d ,%s);";
+            + " (%d ,'%s');";
     public static final String CREATE_GAME_ENEMY_PLANET="INSERT INTO GAME_ENEMYPLANET"
-            + "  (GAMEID ,PLANETID ) VALUES "
+            + " (GAMEID ,PLANETID ) VALUES "
             + " (%d ,%d );";
     public static final String CREATE_GAME_PLAYER_PLANET="INSERT INTO GAME_PLAYERPLANET"
             + "  (GAMEID ,PLANETID ) VALUES "
@@ -106,6 +107,10 @@ public class Constants {
     public static final String DELETE_ARMY="DELETE FROM ARMY WHERE ARMYID=%d;";
     public static final String DELETE_RESOURCES="DELETE FROM RESOURCES WHERE RESOURCESID=%d;";
     public static final String DELETE_GAME="DELETE FROM GAME WHERE GAMEID=%d;";
+    public static final String DELETE_GAME_PLAYER_PLANETS="DELETE FROM GAME_PLAYERPLANET WHERE GAMEID=%d;";
+    public static final String DELETE_GAME_ENEMY_PLANETS="DELETE FROM GAME_ENEMYPLANET WHERE GAMEID=%d;";
+    public static final String DELETE_ARMY_UNIT="DELETE FROM ARMY_UNIT WHERE ARMYID=%d;";
+    public static final String DELETE_RESOURCES_BUILDING="DELETE FROM RESOURCES_BUILDING WHERE RESOURCESID=%d;";
 
     public static final String SELECT_UNIT_BY_ID="SELECT * FROM unit WHERE UNITID=%d;";
     public static final String SELECT_BUILDING_BY_ID="SELECT * FROM building WHERE BUILDINGID=%d;";
@@ -119,6 +124,12 @@ public class Constants {
     public static final String SELECT_GAME_BY_ID="SELECT * FROM GAME WHERE GAMEID=%d;";
     public static final String SELECT_GAME_ENEMY_PLANET_BY_ID="SELECT * FROM GAME_ENEMYPLANET WHERE GAMEID=%d;";
     public static final String SELECT_GAME_PLAYER_PLANET_BY_ID="SELECT * FROM GAME_PLAYERPLANET WHERE GAMEID=%d;";
+
+    public static final String DROP_ALL_TABLES="drop table ARMY ,ARMYINFO ,ARMY_UNIT ,BUILDING ,ENEMYPLANET ,GAME ,GAME_ENEMYPLANET ,GAME_PLAYERPLANET ,PLAYERPLANET ,RESOURCES ,RESOURCES_BUILDING ,UNIT";
+    public static final String DROP_DEFAULT="drop table BUILDING ,ENEMYPLANET ,PLAYERPLANET ,UNIT ";
+    public static final String DROP_ALL_GAME_PLANETS="drop table GAME_ENEMYPLANET ,GAME_PLAYERPLANET ";
+    public static final String DROP_RESOURCES_BUILDINGS="drop table RESOURCES_BUILDING ";
+    public static final String DROP_ARMY_UNITS="drop table ARMY_UNIT ";
 
     public static final String SELECT_UNIT="SELECT * FROM unit;";
     public static final String SELECT_BUILDING="SELECT * FROM building;";
@@ -176,7 +187,7 @@ public class Constants {
             "BUILDINGCOUNT = %d" +
             "WHERE RESOURCESID = %d;";
     public static final String UPDATE_GAME="UPDATE GAME SET " +
-            "GAMENAME = %s" +
+            "GAMENAME = '%s'" +
             "WHERE GAMEID = %d;";
     public static final String UPDATE_GAME_ENEMY_PLANET="UPDATE GAME_ENEMYPLANET SET " +
             "PLANETID = %d" +
@@ -221,4 +232,5 @@ public class Constants {
     public static final String BUILDING_LIMIT=" Building limit:";
     public static final String ENEMY_PLANETS="Enemy planets:";
     public static final String BUILDING_LIST="Building list ";
+    public static final String VICTORY="Victory";
 }

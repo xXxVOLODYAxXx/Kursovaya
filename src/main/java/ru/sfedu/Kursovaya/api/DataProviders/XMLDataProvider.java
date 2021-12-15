@@ -26,7 +26,7 @@ public class XMLDataProvider extends AbstractDataProvider {
     public XMLDataProvider() throws IOException, JAXBException {}
     MongoDBDataProvider mongoDBDataProvider=new MongoDBDataProvider();
     private FileReader fileReader=null;
-    private static final Logger log = LogManager.getLogger(CSVDataProvider.class);
+    private static final Logger log = LogManager.getLogger(XMLDataProvider.class);
     private final JAXBContext jaxbContext = JAXBContext.newInstance(XMLList.class);
     private final Marshaller Marshaller = jaxbContext.createMarshaller();
     private final Unmarshaller Unmarshaller = jaxbContext.createUnmarshaller();
@@ -615,7 +615,7 @@ public class XMLDataProvider extends AbstractDataProvider {
     /**CRUD
      * CORE*/
     @Override
-    public Game createUniverse(Game game,Resources resources,Army army) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
+    public Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
         if (game.getGameId()==null || army.getArmyId() == null || resources.getResourcesId() == null){
             log.info(Constants.WRONG_PARAMETER);
             return null;
@@ -623,27 +623,11 @@ public class XMLDataProvider extends AbstractDataProvider {
             createGame(game);
             createResources(resources);
             createArmy(army);
-            /**
-             log.info(Constants.YOUR_RESOURCES);
-             log.info(Constants.FOOD+game.getResources().getFood());
-             log.info(Constants.METAL+game.getResources().getMetal());
-             log.info(Constants.GOLD+game.getResources().getGold());
-             log.info(Constants.YOUR_ARMY_POWER);
-             log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
-             log.info(Constants.YOUR_PLANETS);
-             game.getPlayerPlanetList().forEach(x->{
-             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
-             });
-             log.info(Constants.ENEMY_PLANETS);
-             game.getEnemyPlanetList().forEach(x->{
-             log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
-             });
-             */
             return game;
         }
     }
     @Override
-    public Boolean deleteUniverse(Long gameId)  {
+    public Boolean deleteUniverse(Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         try {
             getGameById(gameId).getGameId();
             deleteGameById(gameId);
@@ -651,30 +635,30 @@ public class XMLDataProvider extends AbstractDataProvider {
             deleteResourcesById(gameId);
             log.info(Constants.UNIVERSE_DELETED);
             return true;
-        } catch (NullPointerException | JAXBException | IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        } catch (NullPointerException | JAXBException e){
             log.error(Constants.WRONG_PARAMETER);
             return false;
         }
     }
     @Override
-    public EnemyPlanet getEnemyPower(Long planetId,Long gameId) {
+    public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try {
             return getGameById(gameId)
                     .getEnemyPlanetList()
                     .get(Math.toIntExact(planetId)-1);
-        } catch (NullPointerException | JAXBException | IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e){
+        } catch (NullPointerException | JAXBException e){
             log.info(Constants.WRONG_PARAMETER);
             return null;
         }
     }
     @Override
-    public ArmyInfo getArmyPower(Long gameId) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
+    public ArmyInfo getArmyPower(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try {
             return getGameById(gameId)
                     .getResources()
                     .getArmy()
                     .getArmyInfo();
-        }catch (NullPointerException e){
+        }catch (NullPointerException | JAXBException e){
             log.info(Constants.YOUR_ARMY_IS_DEAD);
             return null;
         }
@@ -712,6 +696,21 @@ public class XMLDataProvider extends AbstractDataProvider {
             updateResourcesById(game
                     .getResources());
             updateGameById(game);
+            log.info(Constants.VICTORY);
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
             result=true;
         }catch (NullPointerException e){
             log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
@@ -719,15 +718,14 @@ public class XMLDataProvider extends AbstractDataProvider {
         } finally {
             return result;
         }
-
-
     }
     @Override
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
         Game game = getGameById(gameId);
-        try {
         Unit unit = getUnitById(unitId);
-
+        try {
+            List<Unit> unitList=game.getResources().getArmy().getUnits();
+            unitList.add(unit);
             game
                     .getResources()
                     .getArmy()
@@ -746,11 +744,6 @@ public class XMLDataProvider extends AbstractDataProvider {
                             .getArmy()
                             .getArmyInfo()
                             .getArmyAttackPoints() + unit.getUnitAttackPoints());
-            List<Unit> unitList = game
-                    .getResources()
-                    .getArmy()
-                    .getUnits();
-            unitList.add(unit);
             game
                     .getResources()
                     .getArmy()
@@ -778,10 +771,9 @@ public class XMLDataProvider extends AbstractDataProvider {
     }
     @Override
     public List<Building> getBuildingsInfo(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        try {
-            return getGameById(gameId)
-                    .getResources()
-                    .getBuildingList();
+        try {return getGameById(gameId)
+                .getResources()
+                .getBuildingList();
         }catch (NullPointerException | JAXBException e){
             return null;
         }
@@ -836,7 +828,7 @@ public class XMLDataProvider extends AbstractDataProvider {
             }}
     }
     @Override
-    public Game removeBuilding(Long buildingId,Long gameId) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
+    public Game removeBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
         Game game = getGameById(gameId);
         try {
             List<Building> buildingList = game
@@ -854,8 +846,8 @@ public class XMLDataProvider extends AbstractDataProvider {
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation,Long id) throws CsvRequiredFieldEmptyException, JAXBException, CsvDataTypeMismatchException, IOException {
-        Game game=new Game();
+    public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
+        Game game=getGameById(gameId);
         try {
             switch (operation) {
                 case (2) -> game = addBuilding(id, gameId);
@@ -866,14 +858,29 @@ public class XMLDataProvider extends AbstractDataProvider {
             updateGameById(game);
             updateResourcesById(game.getResources());
             updateArmyById(game.getResources().getArmy());
-        } catch (NullPointerException e){
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
+        } catch (NullPointerException | JAXBException e){
             log.error(Constants.GAME+Constants.DO_NOT_EXIST);
         }
+
         return game;
     }
     @Override
-    public Game manageResources(Long gameId,int operation) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        Game game=new Game();
+    public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
+        Game game=getGameById(gameId);
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {
@@ -882,7 +889,7 @@ public class XMLDataProvider extends AbstractDataProvider {
         return game;
     }
     @Override
-    public Building getBuildingById(Long id) throws JAXBException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+    public Building getBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException {
         String methodName = getMethodName();
         String className = getClassName();
         List<Building> buildingList = getBuildingList();
@@ -915,5 +922,4 @@ public class XMLDataProvider extends AbstractDataProvider {
         }
         return unit;
     }
-
 }

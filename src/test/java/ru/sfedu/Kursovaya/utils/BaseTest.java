@@ -83,7 +83,7 @@ public class BaseTest {
         return playerPlanet;
     }
     public EnemyPlanet initEnemyPlanet(){
-        enemyPlanet.setPlanetId(2L);
+        enemyPlanet.setPlanetId(1L);
         enemyPlanet.setPlanetName("B");
         enemyPlanet.setPlanetType("ENEMY");
         enemyPlanet.setEnemyAttackPoints(50);

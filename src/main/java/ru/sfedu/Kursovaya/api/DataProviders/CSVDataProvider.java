@@ -329,6 +329,15 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     /**ENEMYPLANET*/
+    /**
+    public Object getPlanetById(Long planetId,Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        Game game=getGameById(gameId);
+        if(game.getPlanetList().get(Math.toIntExact(planetId)-1).getPlanetType()==Constants.PLAYER){
+            return getPlayerPlanetById(planetId);
+        } else if(game.getPlanetList().get(Math.toIntExact(planetId)-1).getPlanetType()==Constants.ENEMY){
+            return getEnemyPlanetById(planetId);
+        } else {return null;}
+    }*/
     public List<EnemyPlanet> getEnemyPlanetList() throws IOException {
         this.initReader(Constants.FILE_NAME_ENEMY_PLANET);
         CsvToBean<EnemyPlanet> csvToBean=new CsvToBeanBuilder<EnemyPlanet>(this.reader).withType(EnemyPlanet.class).build();
@@ -621,22 +630,6 @@ public class CSVDataProvider extends AbstractDataProvider {
         createGame(game);
         createResources(resources);
         createArmy(army);
-        /**
-        log.info(Constants.YOUR_RESOURCES);
-        log.info(Constants.FOOD+game.getResources().getFood());
-        log.info(Constants.METAL+game.getResources().getMetal());
-        log.info(Constants.GOLD+game.getResources().getGold());
-        log.info(Constants.YOUR_ARMY_POWER);
-        log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
-        log.info(Constants.YOUR_PLANETS);
-        game.getPlayerPlanetList().forEach(x->{
-            log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
-        });
-        log.info(Constants.ENEMY_PLANETS);
-        game.getEnemyPlanetList().forEach(x->{
-            log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
-        });
-        */
         return game;
         }
     }
@@ -710,6 +703,21 @@ public class CSVDataProvider extends AbstractDataProvider {
             updateResourcesById(game
                     .getResources());
             updateGameById(game);
+            log.info(Constants.VICTORY);
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
             result=true;
         }catch (NullPointerException e){
             log.info(Constants.ENEMY_PLANET+Constants.DO_NOT_EXIST);
@@ -717,8 +725,6 @@ public class CSVDataProvider extends AbstractDataProvider {
         } finally {
             return result;
         }
-
-
     }
     @Override
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -775,8 +781,7 @@ public class CSVDataProvider extends AbstractDataProvider {
     }
     @Override
     public List<Building> getBuildingsInfo(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        try {
-            return getGameById(gameId)
+        try {return getGameById(gameId)
                     .getResources()
                     .getBuildingList();
         }catch (NullPointerException e){
@@ -852,7 +857,7 @@ public class CSVDataProvider extends AbstractDataProvider {
     }
     @Override
     public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        Game game=new Game();
+        Game game=getGameById(gameId);
         try {
         switch (operation) {
             case (2) -> game = addBuilding(id, gameId);
@@ -863,14 +868,29 @@ public class CSVDataProvider extends AbstractDataProvider {
             updateGameById(game);
             updateResourcesById(game.getResources());
             updateArmyById(game.getResources().getArmy());
+            log.info(Constants.YOUR_RESOURCES);
+            log.info(Constants.FOOD+game.getResources().getFood());
+            log.info(Constants.METAL+game.getResources().getMetal());
+            log.info(Constants.GOLD+game.getResources().getGold());
+            log.info(Constants.YOUR_ARMY_POWER);
+            log.info(Constants.HEALTH+game.getResources().getArmy().getArmyInfo().getArmyHealthPoints()+Constants.ATTACK+game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+            log.info(Constants.YOUR_PLANETS);
+            game.getPlayerPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName()+Constants.BUILDING_LIMIT+x.getBuildingLimit());
+            });
+            log.info(Constants.ENEMY_PLANETS);
+            game.getEnemyPlanetList().forEach(x->{
+                log.info(Constants.ID+x.getPlanetId()+Constants.PLANET_NAME+x.getPlanetName());
+            });
         } catch (NullPointerException e){
             log.error(Constants.GAME+Constants.DO_NOT_EXIST);
         }
+
         return game;
     }
     @Override
     public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
-        Game game=new Game();
+        Game game=getGameById(gameId);
         if (operation == 1) {
             log.info(getBuildingsInfo(gameId));
         } else {

@@ -17,6 +17,7 @@ C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\api\DataP
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\api\DataProviders\MongoDBDataProvider.java
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\Beans\Planet.java
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\utils\CSVConverters\PlayerPlanetTransformer.java
+C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\utils\CSVConverters\PlanetTransformer.java
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\api\DataProviders\JDBCDataProvider.java
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\UtilBeans\HistoryContent.java
 C:\Users\sidor\IdeaProjects\Kursovaya\src\main\java\ru\sfedu\Kursovaya\utils\CSVConverters\UnitTransformer.java
