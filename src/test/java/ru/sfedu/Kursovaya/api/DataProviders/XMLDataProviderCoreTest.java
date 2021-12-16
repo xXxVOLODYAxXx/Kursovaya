@@ -67,11 +67,13 @@ class XMLDataProviderCoreTest extends BaseTest {
         x.createPlayerPlanet(playerPlanet);
         x.createUniverse(game,resources,army);
         x.deleteUniverse(1L);
+        Assertions.assertNull(x.getGameById(1L));
     }
     @Test
-    void deleteUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    void deleteUniverseFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, JAXBException {
         x.deleteUniverse(1L);
         x.deleteUniverse(1L);
+        Assertions.assertNull(x.getGameById(1L));
     }
     @Test
     void getEnemyPowerSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException, JAXBException {
@@ -93,7 +95,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(x.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(x.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(x.getResourcesById(resources.getResourcesId())));
-        readEnemyPlanet(x.getEnemyPower(1L,1L));
+        Assertions.assertTrue(enemyPlanet.equals(x.getEnemyPower(1L,1L)));
     }
     @Test
     void getEnemyPowerFault() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
@@ -120,7 +122,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(x.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(x.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(x.getResourcesById(resources.getResourcesId())));
-        readArmyInfo(x.getArmyPower(1L));
+        Assertions.assertTrue(game.getResources().getArmy().getArmyInfo().equals(x.getArmyPower(1L)));
     }
     @Test
     void getArmyPowerFault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
@@ -146,7 +148,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(x.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(x.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(x.getResourcesById(resources.getResourcesId())));
-        log.info(x.attackPlanet(1L,1L));
+        Assertions.assertTrue(x.attackPlanet(1L,1L));
 
     }
     @Test
@@ -156,7 +158,7 @@ class XMLDataProviderCoreTest extends BaseTest {
     }
     @Test
     void hireUnitSuccess() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException, SQLException, JAXBException {
-          game=initGame();
+        game=initGame();
         unit=initUnit();
         building=initBuilding();
         playerPlanet=initPlayerPlanet();
@@ -175,11 +177,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertEquals(army, x.getArmyById(army.getArmyId()));
         Assertions.assertEquals(resources, x.getResourcesById(resources.getResourcesId()));
         readGame(game);
-        //readGame(x.hireUnit(1L,1L));
-
-        x.hireUnit(3L, 1L);
-        x.hireUnit(3L, 1L);
-        x.hireUnit(3L, 1L);
+        readGame(x.hireUnit(1L,1L));
         assertNotEquals(game.getResources().getArmy().getUnits(), x.hireUnit(3L, 1L).getResources().getArmy().getUnits());
     }
     @Test
@@ -207,7 +205,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(x.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(x.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(x.getResourcesById(resources.getResourcesId())));
-        log.info(x.getBuildingsInfo(1L));
+        Assertions.assertTrue(game.getResources().getBuildingList().equals(x.getBuildingsInfo(1L)));
         x.deleteUniverse(1L);
     }
     @Test
@@ -276,7 +274,9 @@ class XMLDataProviderCoreTest extends BaseTest {
     }
     @Test
     void manageResources1Fault() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException, JAXBException {
-        log.info(x.manageResources(1L,1));
+        x.deleteUniverse(1L);
+        Assertions.assertNull(x.manageResources(1L,1));
+
     }
     @Test
     void manageResources1Success() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException, JAXBException {
@@ -298,7 +298,7 @@ class XMLDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(x.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(x.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(x.getResourcesById(resources.getResourcesId())));
-        log.info(x.manageResources(1L,1));
+        assertEquals(game.getResources().getBuildingList(), x.manageResources(1L, 1).getResources().getBuildingList());
         x.deleteUniverse(1L);
     }
     @Test

@@ -976,6 +976,14 @@ public class JDBCDataProvider extends AbstractDataProvider{
     }
     /**CRUD
      * CORE*/
+    /**
+     * Создать игру,ресурсы,армию
+     * Create game,resources,army
+     * @param game Game
+     * @param resources Resources
+     * @param army Army
+     * @return Game
+     */
     @Override
     public Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         if (game.getGameId()==null || army.getArmyId() == null || resources.getResourcesId() == null){
@@ -988,6 +996,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return game;
         }
     }
+    /**
+     * Удалить игру,ресурсы,армию из файла
+     * Remove game,resources,army from file
+     * @param gameId Long
+     * @return Boolean
+     */
     @Override
     public Boolean deleteUniverse(Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         try {
@@ -1003,6 +1017,13 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return false;
         }
     }
+    /**
+     * Получить вражескую планету по id
+     * Get enemy planet by id
+     * @param planetId Long
+     * @param gameId Long
+     * @return EnemyPlanet
+     */
     @Override
     public EnemyPlanet getEnemyPower(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try {
@@ -1014,6 +1035,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return null;
         }
     }
+    /**
+     * Получить информацию об армии по id
+     * Get army info by id
+     * @param gameId Long
+     * @return ArmyInfo
+     */
     @Override
     public ArmyInfo getArmyPower(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try {
@@ -1026,6 +1053,17 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return null;
         }
     }
+    /**
+     * Атаковать планету по id
+     * Если армия умирает:вы проиграете и данные быдут удалены
+     * Если выиграете:вражеская планета станет вашей
+     * Attack planet by id
+     * if your army dies: you will lose and all data will be deleted
+     * if you win: enemy planet will become yours
+     * @param planetId Long
+     * @param gameId Long
+     * @return Boolean
+     */
     @Override
     public Boolean attackPlanet(Long planetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Boolean result = null;
@@ -1077,6 +1115,13 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return result;
         }
     }
+    /**
+     * Добавить юнита из файла в список юнитов
+     * Add unit from file to army unit list
+     * @param unitId Long
+     * @param gameId Long
+     * @return Game
+     */
     @Override
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game = getGameById(gameId);
@@ -1126,6 +1171,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
             return game;
         }
     }
+    /**
+     * Получчить список зданий
+     * Get building list
+     * @param gameId Long
+     * @return List<Building>
+     */
     @Override
     public List<Building> getBuildingsInfo(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         try {return getGameById(gameId)
@@ -1136,6 +1187,13 @@ public class JDBCDataProvider extends AbstractDataProvider{
         }
 
     }
+    /**
+     * Добавить здание из файла в список зданий
+     * Add building from file to resources building list
+     * @param buildingId Long
+     * @param gameId Long
+     * @return Game
+     */
     @Override
     public Game addBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game=getGameById(gameId);
@@ -1182,6 +1240,13 @@ public class JDBCDataProvider extends AbstractDataProvider{
                 return game;
             }}
     }
+    /**
+     * Убрать здание из скписка зданий
+     * Remove building from resources building list
+     * @param buildingId long
+     * @param gameId Long
+     * @return Game
+     */
     @Override
     public Game removeBuilding(Long buildingId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game = getGameById(gameId);
@@ -1200,6 +1265,22 @@ public class JDBCDataProvider extends AbstractDataProvider{
 
         return game;
     }
+    /**
+     * Если
+     * operation==2 -> Добавить здание из файла в список зданий
+     * operation==3 -> Убрать здание из скписка зданий
+     * operation==4 -> Добавить юнита из файла в список юнитов
+     * И обновить игру,ресурсы,армию
+     * If
+     * operation==2 -> Add building from file to resources building list
+     * operation==3 -> Remove building from resources building list
+     * operation==4 -> Add unit from file to army unit list
+     * And update game,resources,army
+     * @param gameId Long
+     * @param operation int
+     * @param id Long
+     * @return Game
+     */
     @Override
     public Game manageResources(Long gameId,int operation,Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game=getGameById(gameId);
@@ -1233,6 +1314,15 @@ public class JDBCDataProvider extends AbstractDataProvider{
 
         return game;
     }
+    /**
+     * Если
+     * operation==1 -> Получчить список зданий
+     * If
+     * operation==1 -> Get building list
+     * @param gameId Long
+     * @param operation int
+     * @return Game
+     */
     @Override
     public Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game=getGameById(gameId);
@@ -1243,6 +1333,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
         }
         return game;
     }
+    /**
+     * Получить здание из файла по id
+     * Get building from file by id
+     * @param id Long
+     * @return Game
+     */
     @Override
     public Building getBuildingById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         String methodName = getMethodName();
@@ -1260,6 +1356,12 @@ public class JDBCDataProvider extends AbstractDataProvider{
         }
         return building;
     }
+    /**
+     * Получить юнита из файла по id
+     * Get unit from file by id
+     * @param id Long
+     * @return Game
+     */
     @Override
     public Unit getUnitById(Long id) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         String methodName = getMethodName();
