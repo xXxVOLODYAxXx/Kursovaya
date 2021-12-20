@@ -1,12 +1,10 @@
 package ru.sfedu.Kursovaya.api.DataProviders;
 
+
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ru.sfedu.Kursovaya.Beans.*;
 import ru.sfedu.Kursovaya.UtilBeans.HistoryContent;
-
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,8 +29,8 @@ public abstract class AbstractDataProvider  {
     public abstract Game createUniverse(Game game,Resources resources,Army army) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException, SQLException;
 
     /**
-     * Удалить игру,ресурсы,армию из файла
-     * Remove game,resources,army from file
+     * Удалить игру,ресурсы,армию
+     * Remove game,resources,army
      * @param id Long
      * @return Boolean
      */
@@ -69,7 +67,7 @@ public abstract class AbstractDataProvider  {
     public abstract Boolean attackPlanet(Long enemyPlanetId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException, SQLException;
 
     /**
-     * Добавить юнита из файла в список юнитов
+     * Добавить юнита в список юнитов
      * Add unit from file to army unit list
      * @param unitId Long
      * @param gameId Long
@@ -86,7 +84,7 @@ public abstract class AbstractDataProvider  {
     public abstract List<Building> getBuildingsInfo(Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException;
 
     /**
-     * Добавить здание из файла в список зданий
+     * Добавить здание в список зданий
      * Add building from file to resources building list
      * @param buildingId Long
      * @param gameId Long
@@ -105,14 +103,14 @@ public abstract class AbstractDataProvider  {
 
     /**
      * Если
-     * operation==2 -> Добавить здание из файла в список зданий
+     * operation==2 -> Добавить здание в список зданий
      * operation==3 -> Убрать здание из скписка зданий
-     * operation==4 -> Добавить юнита из файла в список юнитов
+     * operation==4 -> Добавить юнита в список юнитов
      * И обновить игру,ресурсы,армию
      * If
-     * operation==2 -> Add building from file to resources building list
+     * operation==2 -> Add building to resources building list
      * operation==3 -> Remove building from resources building list
-     * operation==4 -> Add unit from file to army unit list
+     * operation==4 -> Add unit to army unit list
      * And update game,resources,army
      * @param gameId Long
      * @param operation int
@@ -133,8 +131,8 @@ public abstract class AbstractDataProvider  {
     public abstract Game manageResources(Long gameId,int operation) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, JAXBException, SQLException;
 
     /**
-     * Получить здание из файла по id
-     * Get building from file by id
+     * Получить здание по id
+     * Get building by id
      * @param id Long
      * @return Game
      */

@@ -34,7 +34,6 @@ public class BaseTest {
     public List<Unit> unitList=new ArrayList<Unit>();
     public List<EnemyPlanet> enemyPlanetList=new ArrayList<EnemyPlanet>();
     public List<PlayerPlanet> playerPlanetList=new ArrayList<PlayerPlanet>();
-    XMLList xl = new XMLList();
     public XMLDataProvider x = new XMLDataProvider();
     public CSVDataProvider c = new CSVDataProvider();
     public JDBCDataProvider j = new JDBCDataProvider();
@@ -128,124 +127,124 @@ public class BaseTest {
     @Test
     public void readUnit(){
         initUnit();
-        log.info(unit.getUnitId());
-        log.info(unit.getUnitType());
-        log.info(unit.getUnitAttackPoints());
-        log.info(unit.getUnitHealthPoints());
-        log.info(unit.getFoodRequired());
-        log.info(unit.getGoldRequired());
-        log.info(unit.getMetalRequired());
+        log.debug(unit.getUnitId());
+        log.debug(unit.getUnitType());
+        log.debug(unit.getUnitAttackPoints());
+        log.debug(unit.getUnitHealthPoints());
+        log.debug(unit.getFoodRequired());
+        log.debug(unit.getGoldRequired());
+        log.debug(unit.getMetalRequired());
     }
     @Test
     public void readBuilding(){
         initBuilding();
-        log.info(building.getBuildingId());
-        log.info(building.getBuildingType());
-        log.info(building.getFoodRequired());
-        log.info(building.getGoldRequired());
-        log.info(building.getMetalRequired());
-        log.info(building.getFoodBuff());
-        log.info(building.getGoldBuff());
-        log.info(building.getMetalBuff());
+        log.debug(building.getBuildingId());
+        log.debug(building.getBuildingType());
+        log.debug(building.getFoodRequired());
+        log.debug(building.getGoldRequired());
+        log.debug(building.getMetalRequired());
+        log.debug(building.getFoodBuff());
+        log.debug(building.getGoldBuff());
+        log.debug(building.getMetalBuff());
     }
     @Test
     public void readEnemyPlanet(){
         initEnemyPlanet();
-        log.info(enemyPlanet.getPlanetId());
-        log.info(enemyPlanet.getPlanetName());
-        log.info(enemyPlanet.getPlanetType());
-        log.info(enemyPlanet.getEnemyAttackPoints());
-        log.info(enemyPlanet.getEnemyHealthPoints());
+        log.debug(enemyPlanet.getPlanetId());
+        log.debug(enemyPlanet.getPlanetName());
+        log.debug(enemyPlanet.getPlanetType());
+        log.debug(enemyPlanet.getEnemyAttackPoints());
+        log.debug(enemyPlanet.getEnemyHealthPoints());
     }
 
     public void readEnemyPlanet(EnemyPlanet enemyPlanet){
         try {
-            log.info(enemyPlanet.getPlanetName());
-            log.info(enemyPlanet.getPlanetType());
-            log.info(enemyPlanet.getEnemyAttackPoints());
-            log.info(enemyPlanet.getEnemyHealthPoints());
-            log.info(enemyPlanet.getPlanetId());
+            log.debug(enemyPlanet.getPlanetName());
+            log.debug(enemyPlanet.getPlanetType());
+            log.debug(enemyPlanet.getEnemyAttackPoints());
+            log.debug(enemyPlanet.getEnemyHealthPoints());
+            log.debug(enemyPlanet.getPlanetId());
         } catch (NullPointerException e) {}
 
     }
     @Test
     public void readPlayerPlanet(){
         initPlayerPlanet();
-        log.info(playerPlanet.getPlanetId());
-        log.info(playerPlanet.getPlanetName());
-        log.info(playerPlanet.getPlanetType());
-        log.info(playerPlanet.getBuildingLimit());
+        log.debug(playerPlanet.getPlanetId());
+        log.debug(playerPlanet.getPlanetName());
+        log.debug(playerPlanet.getPlanetType());
+        log.debug(playerPlanet.getBuildingLimit());
     }
     @Test
     public void readArmyInfo(){
         initArmyInfo();
-        log.info(armyInfo.getArmyAttackPoints());
-        log.info(armyInfo.getArmyHealthPoints());
+        log.debug(armyInfo.getArmyAttackPoints());
+        log.debug(armyInfo.getArmyHealthPoints());
     }
 
     public void readArmyInfo(ArmyInfo armyInfo){
         try {
-            log.info(armyInfo.getArmyAttackPoints());
-            log.info(armyInfo.getArmyHealthPoints());
+            log.debug(armyInfo.getArmyAttackPoints());
+            log.debug(armyInfo.getArmyHealthPoints());
         }catch (NullPointerException | ParameterResolutionException ignored){}
 
     }
     @Test
     public void readArmy(){
         initArmy();
-        log.info(army.getArmyId());
-        log.info(army.getArmyInfo());
-        log.info(army.getUnits());
+        log.debug(army.getArmyId());
+        log.debug(army.getArmyInfo());
+        log.debug(army.getUnits());
     }
 
     public void readArmy(Army army){
-        log.info("ARMY");
-        log.info(army.getArmyId());
-        log.info(army.getArmyInfo());
-        log.info(army.getUnits());
+        log.debug("ARMY");
+        log.debug(army.getArmyId());
+        log.debug(army.getArmyInfo());
+        log.debug(army.getUnits());
     }
     @Test
     public void readResources(){
         initResources();
-        log.info(resources.getResourcesId());
-        log.info(resources.getArmy());
-        log.info(resources.getBuildingList());
-        log.info(resources.getFood());
-        log.info(resources.getGold());
-        log.info(resources.getMetal());
-        log.info(resources.getOperation());
+        log.debug(resources.getResourcesId());
+        log.debug(resources.getArmy());
+        log.debug(resources.getBuildingList());
+        log.debug(resources.getFood());
+        log.debug(resources.getGold());
+        log.debug(resources.getMetal());
+        log.debug(resources.getOperation());
     }
 
     public void readResources(Resources resources){
         try {
-        log.info("RESOURCES");
-        log.info(resources.getResourcesId());
-        log.info(resources.getArmy());
-        log.info(resources.getBuildingList());
-        log.info(resources.getFood());
-        log.info(resources.getGold());
-        log.info(resources.getMetal());
-        log.info(resources.getOperation());
+        log.debug("RESOURCES");
+        log.debug(resources.getResourcesId());
+        log.debug(resources.getArmy());
+        log.debug(resources.getBuildingList());
+        log.debug(resources.getFood());
+        log.debug(resources.getGold());
+        log.debug(resources.getMetal());
+        log.debug(resources.getOperation());
         } catch (NullPointerException | ParameterResolutionException ignored){}
     }
     @Test
     public void readGame(){
         initGame();
-        log.info(game.getGameId());
-        log.info(game.getGameName());
-        log.info(game.getEnemyPlanetList());
-        log.info(game.getPlayerPlanetList());
-        log.info(game.getResources());
+        log.debug(game.getGameId());
+        log.debug(game.getGameName());
+        log.debug(game.getEnemyPlanetList());
+        log.debug(game.getPlayerPlanetList());
+        log.debug(game.getResources());
     }
 
     public void readGame(Game game){
         try {
-            log.info("GAME");
-            log.info(game.getGameId());
-            log.info(game.getGameName());
-            log.info(game.getEnemyPlanetList());
-            log.info(game.getPlayerPlanetList());
-            log.info(game.getResources());
+            log.debug("GAME");
+            log.debug(game.getGameId());
+            log.debug(game.getGameName());
+            log.debug(game.getEnemyPlanetList());
+            log.debug(game.getPlayerPlanetList());
+            log.debug(game.getResources());
         } catch (NullPointerException | ParameterResolutionException ignored){}
 
     }

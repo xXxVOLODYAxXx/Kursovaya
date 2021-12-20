@@ -11,12 +11,11 @@ import ru.sfedu.Kursovaya.api.DataProviders.XMLDataProvider;
 import ru.sfedu.Kursovaya.utils.OtherUtils.BeansGenerator;
 import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 import ru.sfedu.Kursovaya.api.DataProviders.CSVDataProvider;
-
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
-import java.util.logging.Level;
+
 
 
 public class Main {
@@ -76,6 +75,8 @@ public class Main {
                         log.info(Constants.ID + x.getPlanetId() + Constants.PLANET_NAME + x.getPlanetName());
                     });
 
+                } else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
@@ -83,6 +84,8 @@ public class Main {
                 if (args.length > 2) {
                     dataProvider.deleteUniverse(Long.parseLong(args[2]));
                     log.info(Constants.UNIVERSE_DELETED);
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
@@ -91,6 +94,8 @@ public class Main {
                     game.getResources().getArmy().setArmyInfo(dataProvider.getArmyPower(Long.parseLong(args[2])));
                     log.info(Constants.HEALTH + game.getResources().getArmy().getArmyInfo().getArmyHealthPoints());
                     log.info(Constants.ATTACK + game.getResources().getArmy().getArmyInfo().getArmyAttackPoints());
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
@@ -99,12 +104,16 @@ public class Main {
                     game.getEnemyPlanetList().add(dataProvider.getEnemyPower(Long.parseLong(args[2]), Long.parseLong(args[3])));
                     log.info(Constants.HEALTH + game.getEnemyPlanetList().get(Integer.parseInt(args[2])).getEnemyHealthPoints());
                     log.info(Constants.ATTACK + game.getEnemyPlanetList().get(Integer.parseInt(args[2])).getEnemyAttackPoints());
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
             case Constants.ATTACK_PLANET:{
                 if (args.length > 3) {
                     Boolean result = dataProvider.attackPlanet(Long.parseLong(args[2]), Long.parseLong(args[3]));
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
@@ -116,28 +125,38 @@ public class Main {
                     dataProvider.manageResources(Long.parseLong(args[2]),Integer.parseInt(args[3]));
                 }
                 break;
+            }else {
+                log.info(Constants.FEW_ARGUMENTS);
             }}
             case Constants.ADD_BUILDING:{
                 if (args.length > 3) {
                     dataProvider.addBuilding(Long.parseLong(args[2]), Long.parseLong(args[3]));
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
             case Constants.REMOVE_BUILDING:{
                 if (args.length > 3) {
                     dataProvider.removeBuilding(Long.parseLong(args[2]), Long.parseLong(args[3]));
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
             case Constants.HIRE_UNIT:{
                 if (args.length > 3) {
                     dataProvider.hireUnit(Long.parseLong(args[2]), Long.parseLong(args[3]));
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }
             case Constants.GET_BUILDINGS_INFO:{
                 if (args.length > 3) {
                     dataProvider.getBuildingsInfo(Long.parseLong(args[2]));
+                }else {
+                    log.info(Constants.FEW_ARGUMENTS);
                 }
                 break;
             }

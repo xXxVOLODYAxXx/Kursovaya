@@ -233,4 +233,10 @@ public class Constants {
     public static final String ENEMY_PLANETS="Enemy planets:";
     public static final String BUILDING_LIST="Building list ";
     public static final String VICTORY="Victory";
+
+    public static final String MONGODB_SUCCESSFUL_CONNECTION="Connected successfully to server.";
+    public static final String MONGODB_FAULT_CONNECTION="MongoDB is not connected";
+    public static final int MONGODB_TIMEOUT=250;
+    public static final String MONGODB_CLOSE="MongoDB:Nothing to close";
+    public static final String MONGO_PING="ping";
 }

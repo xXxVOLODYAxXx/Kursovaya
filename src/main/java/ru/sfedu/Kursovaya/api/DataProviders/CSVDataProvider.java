@@ -59,50 +59,6 @@ public class CSVDataProvider extends AbstractDataProvider {
         statefulBeanToCSV.write(list);
         this.close();
     }
-    /**NONGENERICWRITERS
-     * private void writeUnits (List<Unit> ulist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_UNIT);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Unit>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(ulist);
-        this.close();
-    }
-    private void writeBuildings (List<Building> blist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_BUILDING);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Building>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(blist);
-        this.close();
-    }
-    private void writePlayerPlanets (List<PlayerPlanet> pplist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_PLAYER_PLANET);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<PlayerPlanet>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(pplist);
-        this.close();
-    }
-    private void writeEnemyPlanets (List<EnemyPlanet> eplist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_ENEMY_PLANET);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<EnemyPlanet>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(eplist);
-        this.close();
-    }
-    private void writeArmy (List<Army> alist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_ARMY);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
-        log.info(alist);
-        statefulBeanToCSV.write(alist);
-        this.close();
-    }
-    private void writeResources (List<Resources> rlist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_RESOURCES);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(rlist);
-        this.close();
-    }
-    private void writeGame (List<Game> glist) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        this.initWriter(Constants.FILE_NAME_GAME);
-        StatefulBeanToCsv statefulBeanToCSV=new StatefulBeanToCsvBuilder<Army>(this.writer).withApplyQuotesToAll(false).build();
-        statefulBeanToCSV.write(glist);
-        this.close();
-    }*/
 
     private List<Unit> sortUnitList(List<Unit> unitList) {
         unitList=unitList.stream().sorted((o1, o2)->o1.getUnitId().compareTo(o2.getUnitId())).collect(Collectors.toList());
@@ -329,15 +285,6 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     /**ENEMYPLANET*/
-    /**
-    public Object getPlanetById(Long planetId,Long gameId) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
-        Game game=getGameById(gameId);
-        if(game.getPlanetList().get(Math.toIntExact(planetId)-1).getPlanetType()==Constants.PLAYER){
-            return getPlayerPlanetById(planetId);
-        } else if(game.getPlanetList().get(Math.toIntExact(planetId)-1).getPlanetType()==Constants.ENEMY){
-            return getEnemyPlanetById(planetId);
-        } else {return null;}
-    }*/
     public List<EnemyPlanet> getEnemyPlanetList() throws IOException {
         this.initReader(Constants.FILE_NAME_ENEMY_PLANET);
         CsvToBean<EnemyPlanet> csvToBean=new CsvToBeanBuilder<EnemyPlanet>(this.reader).withType(EnemyPlanet.class).build();
@@ -642,8 +589,8 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     /**
-     * Удалить игру,ресурсы,армию из файла
-     * Remove game,resources,army from file
+     * Удалить игру,ресурсы,армию
+     * Remove game,resources,army
      * @param gameId Long
      * @return Boolean
      */
@@ -765,8 +712,8 @@ public class CSVDataProvider extends AbstractDataProvider {
         }
     }
     /**
-     * Добавить юнита из файла в список юнитов
-     * Add unit from file to army unit list
+     * Добавить юнита в список юнитов
+     * Add unit to army unit list
      * @param unitId Long
      * @param gameId Long
      * @return Game
@@ -841,8 +788,8 @@ public class CSVDataProvider extends AbstractDataProvider {
 
     }
     /**
-     * Добавить здание из файла в список зданий
-     * Add building from file to resources building list
+     * Добавить здание в список зданий
+     * Add building to resources building list
      * @param buildingId Long
      * @param gameId Long
      * @return Game
@@ -922,14 +869,14 @@ public class CSVDataProvider extends AbstractDataProvider {
     }
     /**
      * Если
-     * operation==2 -> Добавить здание из файла в список зданий
+     * operation==2 -> Добавить здание в список зданий
      * operation==3 -> Убрать здание из скписка зданий
-     * operation==4 -> Добавить юнита из файла в список юнитов
+     * operation==4 -> Добавить юнита в список юнитов
      * И обновить игру,ресурсы,армию
      * If
-     * operation==2 -> Add building from file to resources building list
+     * operation==2 -> Add building to resources building list
      * operation==3 -> Remove building from resources building list
-     * operation==4 -> Add unit from file to army unit list
+     * operation==4 -> Add unit to army unit list
      * And update game,resources,army
      * @param gameId Long
      * @param operation int
@@ -989,8 +936,8 @@ public class CSVDataProvider extends AbstractDataProvider {
         return game;
     }
     /**
-     * Получить здание из файла по id
-     * Get building from file by id
+     * Получить здание по id
+     * Get building by id
      * @param id Long
      * @return Game
      */
@@ -1012,8 +959,8 @@ public class CSVDataProvider extends AbstractDataProvider {
         return building;
     }
     /**
-     * Получить юнита из файла по id
-     * Get unit from file by id
+     * Получить юнита по id
+     * Get unit by id
      * @param id Long
      * @return Game
      */

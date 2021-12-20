@@ -4,12 +4,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.sfedu.Kursovaya.Beans.Army;
-import ru.sfedu.Kursovaya.Beans.ArmyInfo;
-import ru.sfedu.Kursovaya.Beans.Game;
-import ru.sfedu.Kursovaya.Beans.Resources;
 import ru.sfedu.Kursovaya.utils.BaseTest;
-import ru.sfedu.Kursovaya.utils.OtherUtils.Constants;
 
 
 import javax.xml.bind.JAXBException;
@@ -177,8 +172,6 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertEquals(game, j.getGameById(game.getGameId()));
         Assertions.assertEquals(army, j.getArmyById(army.getArmyId()));
         Assertions.assertEquals(resources, j.getResourcesById(resources.getResourcesId()));
-        readGame(game);
-        readGame(j.hireUnit(1L,1L));
         assertNotEquals(game.getResources().getArmy().getUnits(), j.hireUnit(3L, 1L).getResources().getArmy().getUnits());
     }
     @Test
@@ -234,8 +227,6 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(j.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(j.addBuilding(1L,1L));
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.addBuilding(1L, 1L).getResources().getBuildingList()) );
         j.deleteUniverse(1L);
     }
@@ -322,8 +313,6 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(j.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(j.manageResources(1L,2,1L));
         Assertions.assertFalse(game.getResources().getBuildingList().equals(j.manageResources(1L,2,1L).getResources().getBuildingList()) );
         j.deleteUniverse(1L);
     }
@@ -382,8 +371,6 @@ class JDBCDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(j.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(j.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(j.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(j.manageResources(1L,4,1L));
         Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(j.manageResources(1L,4,3L).getResources().getArmy().getUnits()) );
         j.deleteUniverse(1L);
     }

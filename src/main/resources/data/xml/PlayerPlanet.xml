@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xmlList>
-    <PlayerPlanet>
-        <id>1</id>
-        <planetName>A</planetName>
-        <type>PLAYER</type>
-        <buildingLimit>10</buildingLimit>
-    </PlayerPlanet>
-</xmlList>

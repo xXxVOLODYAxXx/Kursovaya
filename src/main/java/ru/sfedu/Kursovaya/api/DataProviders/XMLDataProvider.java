@@ -635,8 +635,8 @@ public class XMLDataProvider extends AbstractDataProvider {
         }
     }
     /**
-     * Удалить игру,ресурсы,армию из файла
-     * Remove game,resources,army from file
+     * Удалить игру,ресурсы,армию
+     * Remove game,resources,army
      * @param gameId Long
      * @return Boolean
      */
@@ -758,8 +758,8 @@ public class XMLDataProvider extends AbstractDataProvider {
         }
     }
     /**
-     * Добавить юнита из файла в список юнитов
-     * Add unit from file to army unit list
+     * Добавить юнита в список юнитов
+     * Add unit to army unit list
      * @param unitId Long
      * @param gameId Long
      * @return Game
@@ -831,8 +831,8 @@ public class XMLDataProvider extends AbstractDataProvider {
 
     }
     /**
-     * Добавить здание из файла в список зданий
-     * Add building from file to resources building list
+     * Добавить здание в список зданий
+     * Add building to resources building list
      * @param buildingId Long
      * @param gameId Long
      * @return Game
@@ -912,14 +912,14 @@ public class XMLDataProvider extends AbstractDataProvider {
     }
     /**
      * Если
-     * operation==2 -> Добавить здание из файла в список зданий
+     * operation==2 -> Добавить здание в список зданий
      * operation==3 -> Убрать здание из скписка зданий
-     * operation==4 -> Добавить юнита из файла в список юнитов
+     * operation==4 -> Добавить юнита в список юнитов
      * И обновить игру,ресурсы,армию
      * If
-     * operation==2 -> Add building from file to resources building list
+     * operation==2 -> Add building to resources building list
      * operation==3 -> Remove building from resources building list
-     * operation==4 -> Add unit from file to army unit list
+     * operation==4 -> Add unit to army unit list
      * And update game,resources,army
      * @param gameId Long
      * @param operation int
@@ -979,8 +979,8 @@ public class XMLDataProvider extends AbstractDataProvider {
         return game;
     }
     /**
-     * Получить здание из файла по id
-     * Get building from file by id
+     * Получить здание по id
+     * Get building by id
      * @param id Long
      * @return Game
      */
@@ -1002,8 +1002,8 @@ public class XMLDataProvider extends AbstractDataProvider {
         return building;
     }
     /**
-     * Получить юнита из файла по id
-     * Get unit from file by id
+     * Получить юнита по id
+     * Get unit by id
      * @param id Long
      * @return Game
      */

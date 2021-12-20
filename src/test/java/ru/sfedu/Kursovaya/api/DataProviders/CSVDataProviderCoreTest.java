@@ -179,8 +179,6 @@ class CSVDataProviderCoreTest extends BaseTest {
         Assertions.assertEquals(game, c.getGameById(game.getGameId()));
         Assertions.assertEquals(army, c.getArmyById(army.getArmyId()));
         Assertions.assertEquals(resources, c.getResourcesById(resources.getResourcesId()));
-        readGame(game);
-        readGame(c.hireUnit(1L,1L));
         assertNotEquals(game.getResources().getArmy().getUnits(), c.hireUnit(3L, 1L).getResources().getArmy().getUnits());
     }
     @Test
@@ -236,8 +234,6 @@ class CSVDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(c.addBuilding(1L,1L));
         Assertions.assertFalse(game.getResources().getBuildingList().equals(c.addBuilding(1L, 1L).getResources().getBuildingList()) );
         c.deleteUniverse(1L);
     }
@@ -324,8 +320,7 @@ class CSVDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(c.manageResources(1L,2,1L));
+
         Assertions.assertFalse(game.getResources().getBuildingList().equals(c.manageResources(1L,2,1L).getResources().getBuildingList()) );
         c.deleteUniverse(1L);
     }
@@ -384,8 +379,6 @@ class CSVDataProviderCoreTest extends BaseTest {
         Assertions.assertTrue(game.equals(c.getGameById(game.getGameId())));
         Assertions.assertTrue(army.equals(c.getArmyById(army.getArmyId())));
         Assertions.assertTrue(resources.equals(c.getResourcesById(resources.getResourcesId())));
-        readGame(game);
-        readGame(c.manageResources(1L,4,1L));
         Assertions.assertFalse(game.getResources().getArmy().getUnits().equals(c.manageResources(1L,4,3L).getResources().getArmy().getUnits()) );
         c.deleteUniverse(1L);
     }
