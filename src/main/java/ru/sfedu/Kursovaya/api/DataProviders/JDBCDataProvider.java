@@ -55,7 +55,7 @@ public class JDBCDataProvider extends AbstractDataProvider{
         fileInputStream.close();
         String query = new String(data, StandardCharsets.UTF_8);
         initConnection();
-        //log.debug(query);
+        log.debug(query);
         statement.executeUpdate(query);
         closeConnection();
     }
@@ -312,7 +312,6 @@ public class JDBCDataProvider extends AbstractDataProvider{
         ResultSet resultSet = statement.executeQuery(String.format(Constants.SELECT_RESOURCES_BUILDING_BY_ID,id));
         while (resultSet.next()){
             int count=resultSet.getInt(3);
-            //log.info(count);
             while (count>0){
                 buildingList.add(getBuildingById(resultSet.getLong(2)));
                 count--;
@@ -765,7 +764,6 @@ public class JDBCDataProvider extends AbstractDataProvider{
         unitIds.forEach(n->{
             try {
                 initConnection();
-                //log.info("fsdfsdfsdfsdf"+armyId);
                 statement.executeUpdate(String.format(Constants.DELETE_ARMY_UNIT,
                         armyId));
             } catch (SQLException e) {
@@ -853,7 +851,6 @@ public class JDBCDataProvider extends AbstractDataProvider{
         unitList.forEach(n->{
             try {
                 int count= Collections.frequency(armyUnitList.stream().map(Unit::getUnitId).collect(Collectors.toList()), n.getUnitId());
-                //log.info(count);
                 initConnection();
                 statement.executeUpdate(String.format(Constants.UPDATE_ARMY_UNIT,
                         n.getUnitId(),
@@ -1126,7 +1123,7 @@ public class JDBCDataProvider extends AbstractDataProvider{
     public Game hireUnit(Long unitId,Long gameId) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, SQLException {
         Game game = getGameById(gameId);
         Unit unit = getUnitById(unitId);
-        //log.info(unit);
+        log.info(unit);
         try {
             game
                     .getResources()

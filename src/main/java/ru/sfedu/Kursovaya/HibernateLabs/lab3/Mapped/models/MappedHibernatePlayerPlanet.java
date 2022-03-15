@@ -1,0 +1,40 @@
+package ru.sfedu.Kursovaya.HibernateLabs.lab3.Mapped.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.util.Objects;
+
+@Entity
+public class MappedHibernatePlayerPlanet extends MappedHibernatePlanet {
+    @Column
+    private int buildingLimit;
+
+    public MappedHibernatePlayerPlanet() {}
+
+    public int getBuildingLimit() {
+        return this.buildingLimit;
+    }
+    public void setBuildingLimit(int buildingLimit) {
+        this.buildingLimit = buildingLimit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MappedHibernatePlayerPlanet that = (MappedHibernatePlayerPlanet) o;
+        return buildingLimit == that.buildingLimit;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), buildingLimit);
+    }
+    @Override
+    public String toString() {
+        return "HibernatePlayerPlanet{" +
+                super.toString() +
+                "buildingLimit=" + buildingLimit +
+                '}';
+    }
+}

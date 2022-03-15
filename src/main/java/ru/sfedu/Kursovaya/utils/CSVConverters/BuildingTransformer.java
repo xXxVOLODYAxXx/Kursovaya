@@ -34,7 +34,7 @@ public class BuildingTransformer extends AbstractBeanField {
                 buildingList.add(building);
             });
         } catch (NumberFormatException e){
-            //log.error(Constants.BUILDING+Constants.DO_NOT_EXIST);
+            log.error(Constants.BUILDING+Constants.DO_NOT_EXIST);
         } finally {
             return buildingList;
         }

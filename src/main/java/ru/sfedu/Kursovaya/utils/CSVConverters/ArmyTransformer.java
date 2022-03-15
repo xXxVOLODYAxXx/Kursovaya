@@ -25,7 +25,7 @@ public class ArmyTransformer extends AbstractBeanField {
             army.setUnits((List<Unit>) unitTransformer.convert(parsedData[1]));
             army.setArmyInfo((ArmyInfo) armyInfoTransformer.convert(parsedData[2]));
         } catch (NullPointerException e){
-            //log.error(Constants.ARMY+Constants.DO_NOT_EXIST);
+            log.error(Constants.ARMY+Constants.DO_NOT_EXIST);
         }finally {
             return army;
         }
