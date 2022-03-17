@@ -14,6 +14,9 @@ public class Constants {
     public static final String DETAILS = "Select pg_size_pretty(pg_database_size(datname)) from pg_database";
 
     public static final String QUERY = "FROM %s";
+    public static final String HGAME = "game";
+    public static final String GET_COUNT = "select count(*) from %s";
+    public static final String TIME_TAKEN = "Time: %ss";
     public static final String NO_ARGS = "No args given";
     public static final String TOO_FEW_ARGS = "Too few args";
     public static final String BAD_ARGS = "Wrong args given";
